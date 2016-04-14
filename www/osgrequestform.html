@@ -1,0 +1,174 @@
+<section data-role="page" id="osguestRequestPage" class="jqm-demos jqm-home">
+    <header data-role="header" id="pageheader" class="jqm-header">
+        <a href="#"><img src="img/Back_arrow.png"></a>
+        <p class="pagetitle">Travel & Accommodations</p>
+        <a href="#shaadiMenu" data-rel="popup" data-transition="slideup" class="menuicon ui-btn ui-btn-inline"></a>
+    </header>
+    <article data-role="content" id="pagecontent" class="jqm-content">
+        <div class="formstyels">
+            <h2>send request for Reservation</h2>
+            <div class="ui-grid">
+                <div class="ui-block" style="width:100%">
+                    <div class="ui-bar ui-bar">
+                        <label for="relation" class="select">Head Count</label>
+                        <select id="osgHeadCount" data-native-menu="false">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                            <option>10</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <!-- Outstation guest block start -->
+                <label class="customlable">Arrival Date & Time</label>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <div class="ui-bar ui-bar-a">
+                            <input type="date" id="osgArrivalDate" placeholder="Arrival Date">
+                        </div>
+                    </div>
+                    <div class="ui-block-b">
+                        <div class="ui-bar ui-bar-a">
+                            <input type="time" id="osgArrivalTime" placeholder="Arrival Time">
+                        </div>
+                    </div>
+                </div>
+                <div class="ui-grid">
+                    <div class="ui-block">
+                        <div class="ui-bar ui-bar">
+                            <label>Arriving By</label>
+                            <select id="osgArrivingBy" data-native-menu="false">
+                                <option value="moderesetter">Bus/Train/Flight</option>
+                                <option value="Bus">Bus</option>
+                                <option value="Train">Train</option>
+                                <option value="Flight">Flight</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <label for="text-basic" class="customlable">Pick Up Needed</label>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <div class="ui-bar ui-bar-a">
+                            <label class="rediostyle">
+                                <input name="nGPickupNeeded" value="true" type="radio"> Yes
+                            </label>
+                        </div>
+                    </div>
+                    <div class="ui-block-b">
+                        <div class="ui-bar ui-bar-a">
+                            <label class="rediostyle">
+                                <input name="nGPickupNeeded" value="false" type="radio"> No
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui-grid">
+                    <div class="ui-block">
+                        <div class="ui-bar ui-bar">
+                            <label>Arrival Location</label>
+                            <input id="osgLocation" type="text" placeholder="Arrival Location">
+                        </div>
+                    </div>
+                </div>
+                <label class="customlable">Departure Date & Time</label>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <div class="ui-bar ui-bar-a">
+                            <input type="date" id="osgDepartureDate" placeholder="Departure Date">
+                        </div>
+                    </div>
+                    <div class="ui-block-b">
+                        <div class="ui-bar ui-bar-a">
+                            <input type="time" id="osgDepartureTime" placeholder="Departure Time">
+                        </div>
+                    </div>
+                </div>
+                <div class="ui-grid">
+                    <div class="ui-block">
+                        <div class="ui-bar ui-bar">
+                            <label>Departing By</label>
+                            <select id="osgDepartingBy" data-native-menu="false">
+                                <option value="moderesetter">Bus/Train/Flight</option>
+                                <option value="Bus">Bus</option>
+                                <option value="Train">Train</option>
+                                <option value="Flight">Flight</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <label for="text-basic" class="customlable">Drop Needed</label>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <div class="ui-bar ui-bar-a">
+                            <label class="rediostyle">
+                                <input name="nGDropNeeded" value="true" type="radio"> Yes
+                            </label>
+                        </div>
+                    </div>
+                    <div class="ui-block-b">
+                        <div class="ui-bar ui-bar-a">
+                            <label class="rediostyle">
+                                <input name="nGDropNeeded" value="false" type="radio"> No
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <label class="customlable">Accommodation Offered</label>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <div class="ui-bar ui-bar-a">
+                            <label class="rediostyle">
+                                <input name="nGAccOffered" value="true" type="radio"> Yes
+                            </label>
+                        </div>
+                    </div>
+                    <div class="ui-block-b">
+                        <div class="ui-bar ui-bar-a">
+                            <label class="rediostyle">
+                                <input name="nGAccOffered" value="false" type="radio"> No
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <label class="customlable">Transport Offered</label>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <div class="ui-bar ui-bar-a">
+                            <label class="rediostyle">
+                                <input name="nGCabOffered" value="true" type="radio"> Yes
+                            </label>
+                        </div>
+                    </div>
+                    <div class="ui-block-b">
+                        <div class="ui-bar ui-bar-a">
+                            <label class="rediostyle">
+                                <input name="nGCabOffered" value="false" type="radio"> No
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <!-- Outstation guest block end -->
+            </div>
+        </div>
+        <a href="#" class="joinbtn subpagejoin ui-btn ui-mini" onclick="outstationMethods.validateOSGForm()">Submit Now</a>
+    </article>
+    <script type="text/javascript" src="js/outstation.js"></script>
+    <script type="text/javascript">
+    $("#osguestRequestPage").ready(function() {
+        $("#osgPhoneNumber").intlTelInput({
+            numberType: "MOBILE",
+            onlyCountries: ['in'],
+            utilsScript: "lib/libphonenumber/build/utils.js"
+        });
+    });
+    </script>
+</section>

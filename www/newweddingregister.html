@@ -1,0 +1,141 @@
+<section data-role="page" id="newWeddingRegistration" class="jqm-demos jqm-home">
+    <header data-role="header" id="pageheader" class="jqm-header">
+        <a href="socialweddings.html"><img src="img/Back_arrow.png"></a>
+        <p class="pagetitle">New Wedding</p>
+    </header>
+    <article data-role="content" id="pagecontent" class="jqm-content">
+        <div onclick="newWeddingMethods.addEventCoverPhoto();">
+            <div class="addphoto" id="weddingPicTemplate"></div>
+            <div id="coverPic" style="display:none">
+                <img style="width:100%;height:200px;" id="smallImage" src="" />
+            </div>
+        </div>
+        <div class="formstyels">
+            <label for="brideName" class="customlable">Enter Name</label>
+            <div class="ui-grid-a">
+                <!--Bride and Groom name start-->
+                <div class="ui-block-a">
+                    <div class="ui-bar ui-bar-a">
+                        <input id="brideName" type="text" placeholder="Bride Name">
+                    </div>
+                </div>
+                <div class="ui-block-b">
+                    <div class="ui-bar ui-bar-a">
+                        <input id="groomName" type="text" placeholder="Groom Name">
+                    </div>
+                </div>
+            </div>
+            <!--Bride and Groom name end-->
+            <div class="ui-grid">
+                <!--Host Relation ship start-->
+                <div class="ui-block" style="width:100%">
+                    <div class="ui-bar ui-bar">
+                        <label for="relation" class="select">I am</label>
+                        <select id="relation" data-native-menu="false">
+                            <option>--- Choose your Relation ---</option>
+                            <option>Bride</option>
+                            <option>Groom</option>
+                            <option>Parent of Bride</option>
+                            <option>Parent of Groom</option>
+                            <option>Relative of Bride</option>
+                            <option>Realtive of Groom</option>
+                        </select>
+                    </div>
+                </div>
+                <!-- <div class="ui-block-b" style="width:0%"></div> -->
+            </div>
+            <!--Host Relation ship end-->
+            <!--Host Gender end-->
+            <!--ToDo:Add proper checkbox for gender-->
+            <label class="customlable">Gender</label>
+            <div class="ui-grid-a">
+                <div class="ui-block-a">
+                    <!-- <div class="square-radio radius_radio-btn square-radio1" onclick="newWeddingMethods.selectYourGender(this,'Male')" id="yGenderMale">
+                        <div class="square-radio--content"><img src="./assets/img/Man_gray.png" alt="" class="gender-img" id="yMaleImg">
+                            <h4 class="gender-option_text">Male</h4>
+                        </div>
+                    </div> -->
+                    <div class="ui-bar ui-bar-a">
+                        <label class="rediostyle" for="yourGender">
+                            <input name="yourGender" value="Male" type="radio"> Male
+                        </label>
+                    </div>
+                </div>
+                <div class="ui-block-b">
+                    <!-- <div class="square-radio radius_radio-btn-f square-radio1" onclick="newWeddingMethods.selectYourGender(this,'Female')" id="yGenderFemale">
+                        <div class="square-radio--content">
+                            <img src="./assets/img/female.png" alt="" class="gender-img" id="yFemaleImg">
+                            <h4 class="gender-option_text">Female</h4>
+                        </div>
+                    </div> -->
+                    <div class="ui-bar ui-bar-a">
+                        <label class="rediostyle" for="yourGender">
+                            <input name="yourGender" value="Female" type="radio"> Female
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <!--Host Gender end-->
+            <!--Wedding Location Start-->
+            <div class="ui-grid">
+                <div class="ui-block">
+                    <div class="ui-bar ui-bar">
+                        <label for="city">Wedding Location</label>
+                        <input id="city" type="text" placeholder="City">
+                    </div>
+                </div>
+            </div>
+            <!--Wedding Location end-->
+            <!--Host name start-->
+            <div class="ui-grid">
+                <div class="ui-block">
+                    <div class="ui-bar ui-bar">
+                        <label for="hostname">Your name</label>
+                        <input id="hostname" type="text" placeholder="Enter Name">
+                    </div>
+                </div>
+            </div>
+            <!--Host name end-->
+            <!--Host email start-->
+            <div class="ui-grid">
+                <div class="ui-block">
+                    <div class="ui-bar ui-bar">
+                        <label for="email">Your email</label>
+                        <input id="email" type="email" placeholder="Enter Email">
+                    </div>
+                </div>
+            </div>
+            <!--Host email end-->
+            <!--Wedding Date start-->
+            <div class="ui-grid">
+                <div class="ui-block">
+                    <div class="ui-bar ui-bar">
+                        <label for="wedDateinput">Wedding Date</label>
+                        <input id="wedDateinput" type="date" placeholder="Enter Date">
+                    </div>
+                </div>
+            </div>
+            <!--Wedding Date end-->
+        </div>
+        <a href="#" id="newWeddingBtn" class="joinbtn subpagejoin ui-btn ui-mini" onclick="newWeddingMethods.validateNewWeddingFields();">New Wedding</a>
+    </article>
+    <script type="text/javascript" src="js/newwedding.js"></script>
+    <script type="text/javascript">
+    $("#newWeddingRegistration").ready(function() {
+        $("#brideName ,#groomName,#hostname").keyup(function(e) {
+            var str = $.trim($(this).val());
+            if (str != "") {
+                var regx = /^[A-Za-z]+$/;
+                if (!regx.test(str)) {
+                    str = str.replace(/[^a-zA-Z.]+/g, ''); // replace special characters with space
+                    $(this).val(str)
+                    cm.showToast("Only alphabets allowed !");
+                }
+            } else {
+                //empty value -- do something here
+                console.log("Only alphabets detected");
+            }
+        });
+    });
+    </script>
+</section>

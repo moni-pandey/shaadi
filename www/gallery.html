@@ -1,0 +1,68 @@
+<section data-role="page" id="galleryPage" class="albumsbg jqm-demos jqm-home">
+    <header data-role="header" id="pageheader" class="jqm-header">
+        <a href="#" onclick="history.back()"><img src="img/Back_arrow.png"></a>
+        <p class="pagetitle">Albums</p>
+        <a href="#shaadiMenu" data-rel="popup" data-transition="slideup" class="menuicon ui-btn ui-btn-inline"></a>
+    </header>
+    <article data-role="content" id="pagecontent" class="jqm-content">
+        <div class="foralbumpopup" data-role="popup" id="createAlbumPopup" data-overlay-theme="b" data-theme="b" data-dismissible="false" style="max-width:400px;">
+            <div data-role="header" data-theme="a">
+                <h1>Create Album</h1>
+            </div>
+            <div role="main" class="ui-content">
+                <input type="text" id="albumNameBox" placeholder="Album Name">
+                <a href="#" class="cancel ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">Cancel</a>
+                <a href="#" class="ok ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-transition="flow" onclick="galleryMethods.registerAlbum()">Create</a>
+            </div>
+        </div>
+        <div class="foralbumpopup" data-role="popup" id="renameAlbumPopup" data-overlay-theme="b" data-theme="b" data-dismissible="false" style="max-width:400px;">
+            <div data-role="header" data-theme="a">
+                <h1>Rename Album</h1>
+            </div>
+            <div role="main" class="ui-content">
+                <input type="text" id="editAlbumNameBox" placeholder="Album Name">
+                <a href="#" class="cancel ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">Cancel</a>
+                <a href="#" class="ok ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-transition="flow" onclick="galleryMethods.updateAlbumName()">Rename</a>
+            </div>
+        </div>
+        <div class="foralbumpopup" data-role="popup" id="deleteAlbumPopup" data-overlay-theme="b" data-theme="b" data-dismissible="false" style="max-width:400px;">
+            <div data-role="header" data-theme="a">
+                <h1>Delete selected Album?</h1>
+            </div>
+            <div role="main" class="ui-content">
+                <a href="#" class="cancel ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">Cancel</a>
+                <a href="#" class="ok ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-transition="flow" onclick="galleryMethods.deleteAlbum()">Ok</a>
+            </div>
+        </div>
+        <div id="galleryOptionBlock" class="topbartools albumtools belowheader" style="display:none;">
+            <ul>
+                <li onclick="galleryMethods.makeAlbumsPrivate()">
+                    <a href="#"><img src="img/lock.png" class="lock"> <span>Make it Private</span></a>
+                </li>
+                <li onclick="galleryMethods.showGalleryPopup('renameAlbumPopup')">
+                    <a href="#"><img src="img/pencil-white.png"> <span>Rename</span></a>
+                </li>
+                <li onclick="galleryMethods.showGalleryPopup('deleteAlbumPopup');">
+                    <a href="#"><img src="img/delete-icon.png"> <span>Delete</span></a>
+                </li>
+                <!-- <li onclick="galleryMethods.makeAlbumsPrivate()"><img src="img/lock.png"> <span>Make it Private</span></li>
+                <li onclick="galleryMethods.showGalleryPopup('renameAlbumPopup')"><img src="img/pencil-white.png"> <span>Rename</span></li>
+                <li onclick="galleryMethods.showGalleryPopup('deleteAlbumPopup');">
+                    <a href="#" data-position-to="window" data-transition="pop" class=""><img src="img/delete-icon.png"> <span>Delete</span></a>
+                </li> -->
+            </ul>
+        </div>
+        <div class="albums">
+            <!-- Container for Albums -->
+            <div id="galleryBlock" class="albums-con">
+            </div>
+        </div>
+    </article>
+    <script type="text/javascript" src="js/gallery.js"></script>
+    <script type="text/javascript">
+    $("#galleryPage").ready(function() {
+        galleryMethods.fetchAlbums();
+
+    });
+    </script>
+</section>

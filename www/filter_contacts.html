@@ -1,0 +1,64 @@
+<section data-role="page" id="filterContactsPage" class="filterbg jqm-demos jqm-home">
+    <header data-role="header" id="pageheader" class="jqm-header">
+        <a href="#" onclick="history.back()"><img src="img/Back_arrow.png"></a>
+        <p class="pagetitle">Import Contacts</p>
+        <div class="filter-lable">Select All
+            <input data-role="flipswitch" name="cSelectAll" id="cSelectAll" type="checkbox">
+        </div>
+    </header>
+    <article data-role="content" id="pagecontent" class="jqm-content" class="jqm-content">
+        <div class="filter-search">
+            <form>
+                <label>Type</label>
+                <div class="filter-lable">
+                    <div class="individual-1">Host
+                        <input data-role="flipswitch" id="cHost" type="checkbox">
+                    </div>
+                    <div class="individual-1">Guest
+                        <input data-role="flipswitch" id="cGuest" type="checkbox">
+                    </div>
+                    <input data-role="flipswitch" id="cHostAndGuest" type="checkbox">
+                </div>
+                <label>Invited By</label>
+                <div class="filter-lable">
+                    <div class="individual-1 bridelable">Bride
+                        <input data-role="flipswitch"  id="cBride" type="checkbox">
+                    </div>
+                    <div class="individual-1 groomlable">Groom
+                        <input data-role="flipswitch"  id="cGroom" type="checkbox">
+                    </div>
+                    <input data-role="flipswitch" id="cBrideAndGroom" type="checkbox">
+                </div>
+                <!-- <label>Status</label> -->
+                <div class="filter-lable"> <span>Status</span>
+                    <input data-role="flipswitch" id="cStatus" type="checkbox">
+                </div>
+                <br/>
+                <div class="filter-lable"> <span>Not Invited</span>
+                    <input data-role="flipswitch" id="cNotInvited" type="checkbox">
+                </div>
+                <div class="filter-lable"> <span>Invited</span>
+                    <input data-role="flipswitch" id="cInvited" type="checkbox">
+                </div>
+                <div class="filter-lable active"> <span>Registered</span>
+                    <input data-role="flipswitch" id="cRegistered" type="checkbox">
+                </div>
+                <div class="filter-lable"> <span>RSVP Yes</span>
+                    <input data-role="flipswitch" id="cAttending" type="checkbox">
+                </div>
+                <div class="filter-lable"> <span>RSVP Maybe</span>
+                    <input data-role="flipswitch" id="cMaybe" type="checkbox">
+                </div>
+                <div class="filter-lable"> <span>RSVP No</span>
+                    <input data-role="flipswitch" id="cNotAttending" type="checkbox">
+                </div>
+                <br/>
+                <div class="filter-lable"> <span>Whether Outstation</span>
+                    <input data-role="flipswitch" id="cOutstation" type="checkbox">
+                </div>
+            </form>
+        </div>
+        <button type="submit" class="filtersubmit" onclick="contactsMethods.searchContacts();">Search</button>
+    </article>
+    <script type="text/javascript" src="js/contacts.js"></script>
+</section>

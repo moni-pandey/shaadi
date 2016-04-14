@@ -1,0 +1,123 @@
+<section data-role="page" id="cabPage" class="jqm-demos jqm-home" style="background:#F4F4F4;">
+    <header data-role="header" id="pageheader" class="jqm-header">
+        <a href="#" onclick="history.back()"><img src="img/Back_arrow.png"></a>
+        <p class="pagetitle">Cab</p>
+        <a href="#shaadiMenu" data-rel="popup" data-transition="slideup" class="menuicon ui-btn ui-btn-inline"></a>
+        <div class="topbartools">
+            <ul>
+                <li class="place-icon" onclick="cabMethods.setAddCabMode()"><img src="img/add-hotels.png"></li>
+                <li class="share-icon" id="shareCabBtn" onclick="cabMethods.shareCabData()"><img src="img/share-icon.png"></li>
+                <!-- <li class="delete-icon"><img src="img/delete.png"></li> -->
+            </ul>
+        </div>
+    </header>
+    <article data-role="content" id="pagecontent" class="jqm-content">
+        <div class="accommodations cabpage">
+            <div id="cablist"></div>
+        </div>
+        <!-- Add Cab block start -->
+        <div id="addCabBlock" class="accommodations formstyels footerform" style="display:none">
+            <div class="acco-list">
+                <div class="adate">
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a">
+                            <div class="ui-bar ui-bar-a">
+                                <input id="cabStartDate" type="date" placeholder="Start Date">
+                            </div>
+                        </div>
+                        <div class="ui-block-b">
+                            <div class="ui-bar ui-bar-a">
+                                <input id="cabEndDate" type="date" placeholder="End Date">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="acabnumber">
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a">
+                            <div class="ui-bar ui-bar-a">
+                                <input id="carNumber" type="text" placeholder="Cab Number">
+                            </div>
+                        </div>
+                        <div class="ui-block-b">
+                            <div class="ui-bar ui-bar-a">
+                                <input id="carModel" type="text" placeholder="Cab Model">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="acolortype">
+                    <div class="ui-grid">
+                        <div class="ui-block">
+                            <div class="ui-bar ui-bar">
+                                <select name="select-choice-a" id="carColor" data-native-menu="false">
+                                    <option value="reseted">Color</option>
+                                    <option>Red</option>
+                                    <option>White</option>
+                                    <option>Black</option>
+                                    <option>Yellow</option>
+                                    <option>Blue</option>
+                                    <option>Green</option>
+                                    <option>Silver</option>
+                                    <option>Grey</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modify this to include a Male icon -->
+                <div class="adrivername">
+                    <div class="ui-grid">
+                        <div class="ui-block">
+                            <div class="ui-bar ui-bar">
+                                <input id="carDriverName" type="text" placeholder="Driver Name">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="adrivernumber">
+                    <div class="ui-grid">
+                        <div class="ui-block">
+                            <div class="ui-bar ui-bar">
+                                <input id="carDriverNum" type="tel" placeholder="Driver Number" style="padding-left:2em;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="atools">
+                    <div class="acancel-list" onclick="cabMethods.hideAddCabPopup();">Cancel</div>
+                    <div class="asave-list" onclick="cabMethods.validateCab();">Save</div>
+                </div>
+            </div>
+        </div>
+        <!-- Add Cab block end -->
+    </article>
+    <script type="text/javascript" src="js/cab.js"></script>
+    <script type="text/javascript">
+    $("#cabPage").ready(function() {
+        cabMethods.fetchCabList();
+        localStorage.cabDataForShare = "false"; // just clear the previously saved cab details
+        $("#carDriverName").keyup(function(e) {
+            var str = $.trim($(this).val());
+            if (str != "") {
+                var regx = /^[A-Za-z]+$/;
+                if (!regx.test(str)) {
+                    str = str.replace(/[^a-zA-Z.]+/g, ''); // replace special characters with space
+                    $(this).val(str);
+                    cm.showToast("Only alphabets allowed !");
+                }
+            } else {
+                //empty value -- do something here
+                console.log("Only alphabets detected");
+            }
+        });
+    });
+    $("#carDriverNum").intlTelInput({
+        numberType: "MOBILE",
+        initialCountry: "in",
+        // onlyCountries: ['in'],
+        // allowDropdown:false,
+        utilsScript: "lib/libphonenumber/build/utils.js"
+    });
+    </script>
+</section>

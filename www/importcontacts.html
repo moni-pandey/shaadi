@@ -1,0 +1,42 @@
+<section data-role="page" id="importContactPage" class="jqm-demos jqm-home">
+    <!-- <div data-role="popup" id="userTypePopup" data-overlay-theme="b" data-corners="false">
+        <p class="pop-up_create-new">Choose User Type</p>
+        <center>
+            <button data-role="none" id="hostTypeBtn" style="width:90%" class="import-phone_btn" onclick="contactsMethods.selectGuestTypeToAdd('host')">Host</button>
+            <button data-role="none" id="guestTypeBtn" style="width:90%" class="upload-csv_btn" onclick="contactsMethods.selectGuestTypeToAdd('guest')">Guest</button>
+            <button data-role="none" style="width:90%" class="create-contact_btn" onclick="contactsMethods.closeUserTypePicker();">Cancel</button>
+        </center>
+    </div> -->
+    <div class="foralbumpopup btn3style" data-role="popup" id="userTypePopup" data-overlay-theme="b" data-theme="b" data-dismissible="false" style="max-width:400px;">
+        <div data-role="header" data-theme="a">
+            <h1>Create</h1>
+        </div>
+        <div role="main" class="ui-content">
+            <a href="#" class="ok ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-transition="flow" id="hostTypeBtn" onclick="contactsMethods.selectGuestTypeToAdd('host')">Host</a>
+            <a href="#" class="ok ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-transition="flow" id="guestTypeBtn" onclick="contactsMethods.selectGuestTypeToAdd('guest')">Guest</a>
+            <a href="#" class="cancel ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back" onclick="contactsMethods.closeUserTypePicker();">Cancel</a>
+        </div>
+    </div>
+    <header data-role="header" id="pageheader" class="jqm-header">
+        <a href="contacts.html"><img src="img/Back_arrow.png"></a>
+        <p class="pagetitle">Import Contacts</p>
+        <a href="#shaadiMenu" data-rel="popup" data-transition="slideup" class="menuicon ui-btn ui-btn-inline"></a>
+    </header>
+    <article data-role="content" id="pagecontent" class="jqm-content">
+        <div class="importcontacts">
+            <h2>Import Contacts From</h2>
+            <!-- <a href="#" class="facebook-contact">Facebook</a> -->
+            <!-- <a href="#" class="gmail-contact" onclick="contactsMethods.sourceToGetContacts('google')">Gmail Contact</a> -->
+            <a href="#" class="import-contact" onclick="contactsMethods.sourceToGetContacts('phone')">Import from Phone</a>
+            <a href="#" class="create-contact" onclick="contactsMethods.openUserTypePicker();">Create a New Contact</a>
+        </div>
+    </article>
+    <script type="text/javascript" src="js/contacts.js"></script>
+    <script type="text/javascript">
+    $("#importContactPage").ready(function() {
+        // Clear the filter preferences to avoid missing of data in contacts list page
+        localStorage.normalOrOutstation == "normal";
+        searchOptions.status=false;
+    });
+    </script>
+</section>

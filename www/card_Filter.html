@@ -1,0 +1,172 @@
+
+    <section data-role="page" class="filterbg jqm-demos jqm-home" id="cardfilter">
+        <div id="pageheader" data-role="header" class="jqm-header"> <a href="card_List.html"><img src="img/Back_arrow.png" ></a>
+            <p class="pagetitle">Card Filter</p>
+    
+            <div class="filter-lable">Reset 
+                <input data-role="flipswitch" name="flip-checkbox-1" id="flip-checkbox-1" type="checkbox" ">
+            </div>
+        </div>
+        
+		<article id="pagecontent" role="main" class="jqm-content">
+            <div class="filter-search" style="margin:10px 0 70px auto; width:94%">
+                <form>
+                    <label>Color</label>
+					<div data-role="collapsible" data-icon="none" and data-iconpos="none" style="border-radius:0">
+                            <h1 class="select-color">
+							   <!-- <div class="right-padding">
+                                    <div class="choose-green"></div><span class="color-name">Green</span>
+						        </div>
+								<div class="right-padding">
+                                    <div class="choose-violet"></div><span class="color-name">Violet</span>
+						        </div>-->
+						            <img src="img/dropdown-icon.png" id="colordropicon" style="float:right; margin-right:10px; margin-top:0px; margin-right:7px;">
+							</h1>
+							    
+								<div class="alternate-color-border" style="margin-top:15px;">
+                                    <span class="choose-orange"></span><span class="alternate-colors">Orange</span>
+								    <span class="unselected-icon"><img src="img/unselected.png" id="orange" data-checked="uncheck" onclick="cardfilter.getcolor(this)"></span>
+								</div>
+								<div class="alternate-color-border">
+                                    <span class="choose-brown"></span><span class="alternate-colors">Brown</span>
+								    <span class="unselected-icon"><img src="img/unselected.png" id="brown" data-checked="uncheck" onclick="cardfilter.getcolor(this)"></span>
+								</div>
+								<div class="alternate-color-border">
+                                    <span class="choose-blue"></span><span class="alternate-colors">Blue</span>
+								    <span class="unselected-icon"><img src="img/unselected.png" id="blue"  data-checked="uncheck" onclick="cardfilter.getcolor(this)"></span>
+								</div>
+								<div class="alternate-color-border">
+                                    <span class="choose-green"></span><span class="alternate-colors">Green</span>
+								    <span class="unselected-icon"><img src="img/unselected.png" id="green" data-checked="checked" onclick="cardfilter.getcolor(this)"></span>
+								</div>
+								<div class="alternate-color-border">
+                                    <span class="choose-purple"></span><span class="alternate-colors">Purple</span>
+								    <span class="unselected-icon"><img src="img/unselected.png" id="purple"  data-checked="uncheck" onclick="cardfilter.getcolor(this)"></span>
+								</div>
+                    </div>
+				</form>
+				
+			<form>
+                    <label>Card Type</label>
+					<div data-role="collapsible" data-icon="none" and data-iconpos="none" style="border-radius:0" >
+                            <h1 class="card-filter-detail">
+							   <!-- <span style="padding-right:12px;">Glossy</span>
+								<span style="padding-right:12px;"></span>
+								<span></span>-->
+						            <img src="img/dropdown-icon.png" id="cardtypedropdpwnicon" class="icon-dropdown">
+							</h1>
+							
+								<div class="alternate-color-border" style="margin-top:15px;">
+                                    <span class="alternate-colors">Glossy</span>
+								    <span class="unselected-icon"><img src="img/unselected.png" id="glossy" data-checked="uncheck" onclick="cardfilter.gettype(this)"></span>
+								</div>
+								<div class="alternate-color-border">
+                                    <span class="alternate-colors">bright</span>
+								    <span class="unselected-icon"><img src="img/unselected.png" id="bright" data-checked="uncheck" onclick="cardfilter.gettype(this)"></span>
+								</div>
+								<div class="alternate-color-border">
+                                   <span class="alternate-colors">light</span>
+								    <span class="unselected-icon"><img src="img/unselected.png" id="light"  data-checked="uncheck" onclick="cardfilter.gettype(this)"></span>
+								</div>
+								
+                    </div>
+				</form>
+				
+			
+				
+				<form>
+                    <label>Theme</label>
+					<div data-role="collapsible" data-icon="none" and data-iconpos="none" style="border-radius:0" >
+                            <h1 class="card-filter-detail">
+							   <!-- <span style="padding-right:12px;">Ganesha</span>
+								<span style="padding-right:12px;"></span>
+								<span></span>-->
+						            <img src="img/dropdown-icon.png" id="themedropdownicon" class="icon-dropdown">
+							</h1>
+							    
+							<div class="alternate-color-border" style="margin-top:15px;">
+                                    <span class="alternate-options">ganesha</span>
+								    <span class="unselected-icon"><img src="img/unselected.png" id="ganesha" data-checked="uncheck" onclick="cardfilter.gettheme(this)"></span>
+							</div>
+							<div class="alternate-color-border" style="margin-top:15px;">
+                                    <span class="alternate-options">death</span>
+								    <span class="unselected-icon"><img src="img/unselected.png" id="death" data-checked="uncheck" onclick="cardfilter.gettheme(this)"></span>
+							</div>
+							
+                    </div>
+				</form>
+				
+				
+				
+				
+<form>
+                    <label>Price (Rs.)</label>
+					<div data-role="collapsible" data-icon="none" and data-iconpos="none" style="border-radius:0" >
+                            <h1 class="card-filter-detail">
+							    <div class="rupee-symbol">&#8377 <span class="selected-card-cost">70 - 100</span>
+								</div>
+						            <img src="img/dropdown-icon.png"  id="pricedropdownicon" class="icon-dropdown"style="margin-top:-26px;">
+							</h1>
+							    
+								<fieldset data-role="controlgroup" data-role="none" style="border-radius:0 !important;" >
+     	                            <input type="radio" name="radio-choice" id="radio-choice-1"  onclick="cardfilter.getrange(this)" data-max="50" data-min="0" value="choice-1" />
+     	                            <label for="radio-choice-1" class="select-one">&#8377 0 - 50</label>
+
+     	                            <input type="radio" name="radio-choice" id="radio-choice-2" onclick="cardfilter.getrange(this)" data-max="100" data-min="60" value="choice-2"  />
+     	                            <label for="radio-choice-2" class="select-one">&#8377 60 - 100</label>
+									
+									<input type="radio" name="radio-choice" id="radio-choice-3" onclick="cardfilter.getrange(this)" data-max="120" data-min="100"  value="choice-3"  />
+     	                            <label for="radio-choice-3" class="select-one">&#8377 70 - 100</label>
+                                </fieldset>
+
+                    </div>
+				</form>
+				
+			
+					<form>
+                    <label>Card</label>
+					<div data-role="collapsible" data-icon="none" and data-iconpos="none" style="border-radius:0" >
+                            <h1 class="card-filter-detail">
+							   <!-- <span style="padding-right:12px;">Physical Card</span>
+								<span style="padding-right:12px;"></span>
+								<span></span>-->
+						            <img src="img/dropdown-icon.png" id="cardtypedropdownicon" class="icon-dropdown" >
+							</h1>
+							    
+							<div class="alternate-color-border" style="margin-top:15px;">
+                                    <span class="alternate-options">Phisical card</span>
+								    <span class="unselected-icon"><img src="img/unselected.png" id="p" data-checked="uncheck" onclick="cardfilter.cardtype(this)"></span>
+							</div>
+							<div class="alternate-color-border" style="margin-top:15px;">
+                                    <span class="options-selected">E Card</span>
+								    <span class="unselected-icon"><img src="img/unselected.png" id="e" data-checked="uncheck" onclick="cardfilter.cardtype(this)"></span>
+							</div>
+							
+                    </div>
+				</form>
+				
+				
+				
+				
+				
+			</div>
+			<a href="#" class="search-btn subpagejoin ui-btn ui-mini" style="z-index:2" onclick="cardfilter.searchcard()">Search</a>
+		    
+			<div id="pagefooter" data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer"> </div>
+       </article>
+		
+<!-- /page -->
+
+<script type="text/javascript"  src="js/weddingCard.js"></script>
+<script type="text/javascript"  src="js/cardfilter.js"></script>
+<script type="text/javascript">
+
+    $("#cardfilter").ready(function() {
+	
+      console.log('moni')
+	  cardfilter.cardArray = JSON.parse( localStorage["card"] )
+	  console.log(cardfilter.cardArray)
+
+    });
+	</script>
+ </section >

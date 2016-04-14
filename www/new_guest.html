@@ -1,0 +1,278 @@
+<section data-role="page" id="newGuestPage">
+    <header data-role="header" id="pageheader" class="jqm-header">
+        <a href="#" onclick="history.back()"><img src="img/Back_arrow.png"></a>
+        <p class="pagetitle">New Guest</p>
+        <a href="#shaadiMenu" data-rel="popup" data-transition="slideup" class="menuicon ui-btn ui-btn-inline"></a>
+    </header>
+    <article data-role="content" id="pagecontent" class="jqm-content">
+        <div class="formstyels">
+            <label class="customlable">Name</label>
+            <div class="ui-grid-a">
+                <div class="ui-block-a">
+                    <div class="ui-bar ui-bar-a">
+                        <input id="gFirstName" type="text" placeholder="First Name">
+                    </div>
+                </div>
+                <div class="ui-block-b">
+                    <div class="ui-bar ui-bar-a">
+                        <input id="gLastName" type="text" placeholder="Last Name">
+                    </div>
+                </div>
+            </div>
+            <div class="ui-grid">
+                <div class="ui-block">
+                    <div class="ui-bar ui-bar">
+                        <label for="gPhoneNumber">Contact</label>
+                        <input id="gPhoneNumber" type="tel" placeholder="Phone no." style="padding-left:3em">
+                    </div>
+                </div>
+            </div>
+            <div class="ui-grid">
+                <div class="ui-block">
+                    <div class="ui-bar ui-bar">
+                        <label>Email</label>
+                        <input id="gEmailid" type="email" placeholder="Email">
+                    </div>
+                </div>
+            </div>
+            <div class="ui-grid">
+                <div class="ui-block">
+                    <div class="ui-bar ui-bar">
+                        <label>City</label>
+                        <input id="gAddress" type="text" placeholder="City">
+                    </div>
+                </div>
+            </div>
+            <label class="customlable">Gender</label>
+            <div class="ui-grid-a">
+                <div class="ui-block-a">
+                    <div class="ui-bar ui-bar-a">
+                        <label class="rediostyle">
+                            <input name="nGGender" value="Male" type="radio"> Male </label>
+                    </div>
+                </div>
+                <div class="ui-block-b">
+                    <div class="ui-bar ui-bar-a">
+                        <label class="rediostyle">
+                            <input name="nGGender" value="Female" type="radio"> Female
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <label for="text-basic" class="customlable">Bride or Groom Side</label>
+            <div class="ui-grid-a">
+                <div class="ui-block-a">
+                    <div class="ui-bar ui-bar-a">
+                        <label class="rediostyle">
+                            <input name="nGBrideOrGroomSide" value="Bride" type="radio"> Bride </label>
+                    </div>
+                </div>
+                <div class="ui-block-b">
+                    <div class="ui-bar ui-bar-a">
+                        <label class="rediostyle">
+                            <input name="nGBrideOrGroomSide" value="Groom" type="radio"> Groom
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="ui-grid">
+                <!--Host Relation ship start-->
+                <div class="ui-block" style="width:100%">
+                    <div class="ui-bar ui-bar">
+                        <label for="relation" class="select">Head Count</label>
+                        <select id="gHeadCount" data-native-menu="false">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                            <option>10</option>
+                        </select>
+                    </div>
+                </div>
+                <!-- Host Relation ship end-->
+            </div>
+            <label for="text-basic" class="customlable">If Outstation</label>
+            <div class="ui-grid-a">
+                <div class="ui-block-a">
+                    <div class="ui-bar ui-bar-a">
+                        <label class="rediostyle">
+                            <input name="nGOutstationOrNot" value="true" type="radio"> Yes </label>
+                    </div>
+                </div>
+                <div class="ui-block-b">
+                    <div class="ui-bar ui-bar-a">
+                        <label class="rediostyle">
+                            <input name="nGOutstationOrNot" value="false" type="radio"> No
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div id="outstationGuestBlock" style="display:none;">
+                <!-- Outstation guest block start -->
+                <label class="customlable">Arrival Date & Time</label>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <div class="ui-bar ui-bar-a">
+                            <input type="date" id="gArrivalDate" placeholder="Arrival Date">
+                        </div>
+                    </div>
+                    <div class="ui-block-b">
+                        <div class="ui-bar ui-bar-a">
+                            <input type="time" id="gArrivalTime" placeholder="Arrival Time">
+                        </div>
+                    </div>
+                </div>
+                <div class="ui-grid">
+                    <div class="ui-block">
+                        <div class="ui-bar ui-bar">
+                            <label>Arriving By</label>
+                            <select id="gArrivingBy" data-native-menu="false">
+                                <option value="moderesetter">Bus/Train/Flight</option>
+                                <option value="Bus">Bus</option>
+                                <option value="Train">Train</option>
+                                <option value="Flight">Flight</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <label for="text-basic" class="customlable">Pick Up Needed</label>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <div class="ui-bar ui-bar-a">
+                            <label class="rediostyle">
+                                <input name="nGPickupNeeded" value="true" type="radio"> Yes
+                            </label>
+                        </div>
+                    </div>
+                    <div class="ui-block-b">
+                        <div class="ui-bar ui-bar-a">
+                            <label class="rediostyle">
+                                <input name="nGPickupNeeded" value="false" type="radio"> No
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui-grid">
+                    <div class="ui-block">
+                        <div class="ui-bar ui-bar">
+                            <label>Arrival Location</label>
+                            <input id="gLocation" type="text" placeholder="Arrival Location">
+                        </div>
+                    </div>
+                </div>
+                <label class="customlable">Departure Date & Time</label>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <div class="ui-bar ui-bar-a">
+                            <input type="date" id="gDepartureDate" placeholder="Departure Date">
+                        </div>
+                    </div>
+                    <div class="ui-block-b">
+                        <div class="ui-bar ui-bar-a">
+                            <input type="time" id="gDepartureTime" placeholder="Departure Time">
+                        </div>
+                    </div>
+                </div>
+                <div class="ui-grid">
+                    <div class="ui-block">
+                        <div class="ui-bar ui-bar">
+                            <label>Departing By</label>
+                            <select id="gDepartingBy" data-native-menu="false">
+                                <option value="moderesetter">Bus/Train/Flight</option>
+                                <option value="Bus">Bus</option>
+                                <option value="Train">Train</option>
+                                <option value="Flight">Flight</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <label for="text-basic" class="customlable">Drop Needed</label>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <div class="ui-bar ui-bar-a">
+                            <label class="rediostyle">
+                                <input name="nGDropNeeded" value="true" type="radio"> Yes
+                            </label>
+                        </div>
+                    </div>
+                    <div class="ui-block-b">
+                        <div class="ui-bar ui-bar-a">
+                            <label class="rediostyle">
+                                <input name="nGDropNeeded" value="false" type="radio"> No
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <label class="customlable">Accommodation Offered</label>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <div class="ui-bar ui-bar-a">
+                            <label class="rediostyle">
+                                <input name="nGAccOffered" value="true" type="radio"> Yes
+                            </label>
+                        </div>
+                    </div>
+                    <div class="ui-block-b">
+                        <div class="ui-bar ui-bar-a">
+                            <label class="rediostyle">
+                                <input name="nGAccOffered" value="false" type="radio"> No
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <label class="customlable">Transport Offered</label>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <div class="ui-bar ui-bar-a">
+                            <label class="rediostyle">
+                                <input name="nGCabOffered" value="true" type="radio"> Yes
+                            </label>
+                        </div>
+                    </div>
+                    <div class="ui-block-b">
+                        <div class="ui-bar ui-bar-a">
+                            <label class="rediostyle">
+                                <input name="nGCabOffered" value="false" type="radio"> No
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <!-- Outstation guest block end -->
+            </div>
+        </div>
+        <a href="#" class="joinbtn subpagejoin ui-btn ui-mini" onclick="contactsMethods.validateGuestContactForm()">Save Guest Info</a>
+    </article>
+    <script type="text/javascript" src="js/contacts.js"></script>
+    <script type="text/javascript">
+    $("#newGuestPage").ready(function() {
+                $("#gPhoneNumber").intlTelInput({
+                    numberType: "MOBILE",
+                    initialCountry: "in",
+                    // onlyCountries: ['in'],
+                    // allowDropdown:false,
+                    utilsScript: "lib/libphonenumber/build/utils.js"
+                });
+
+
+                $("#gFirstName ,#gLastName ").keyup(function(e) {
+                    var str = $.trim($(this).val());
+                    if (str != "") {
+                        var regx = /^[A-Za-z]+$/;
+                        if (!regx.test(str)) {
+                            str=str.replace(/[^a-zA-Z.]+/g, ''); // replace special characters with space
+                            $(this).val(str)
+                            cm.showToast("Only alphabets allowed !");
+                        }
+                    } else {
+                        //empty value -- do something here
+                        console.log("Only alphabets detected");
+                    }
+                });
+            });
+    </script>
+</section>

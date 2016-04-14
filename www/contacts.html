@@ -1,0 +1,70 @@
+<section data-role="page" id="contactsPage" class="jqm-demos jqm-home">
+    <header data-role="header" id="pageheader" class="jqm-header">
+        <a href="dashboard.html"><img src="img/Back_arrow.png"></a>
+        <p class="pagetitle">All Contacts</p>
+        <div class="topbartools">
+            <ul>
+                <li class="place-icon" onclick="contactsMethods.manageSearch()"><img src="img/search-icon.png"></li>
+                <li class="share-icon" id="addContactBtn">
+                    <a href="importcontacts.html"><img src="img/add-guests-icon.png"></a>
+                </li>
+                <li class="delete-icon">
+                    <a href="filter_contacts.html"><img src="img/filter-icon.png"></a>
+                </li>
+                <li onclick="contactsMethods.shareOpener()">
+                    <a href="#"><img src="img/share_icon.png"></a>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <article data-role="content" id="pagecontent" class="jqm-content">
+        <!-- <div data-role="popup" id="contactStatusPopup" data-overlay-theme="b" data-corners="false">
+            <p class="pop-up_create-new">Choose Status</p>
+            <center>
+                <button data-role="none" style="width:90%" class="import-phone_btn" onclick="contactsMethods.changeStatus('ayes')">Attending</button>
+                <button data-role="none" style="width:90%" class="upload-csv_btn" onclick="contactsMethods.changeStatus('ano')">Not Attending</button>
+            </center>
+        </div> -->
+        <div class="foralbumpopup btn3style statusstyle" data-role="popup" id="contactStatusPopup" data-overlay-theme="b" data-theme="b" data-dismissible="false" style="max-width:400px;">
+            <div data-role="header" data-theme="a">
+                <h1>Change Status</h1>
+            </div>
+            <div role="main" class="ui-content">
+                <a href="#" class="ok ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-transition="flow" onclick="contactsMethods.collectUserId('ayes')">Attending</a> <a href="#" class="ok ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-transition="flow" onclick="contactsMethods.collectUserId('ano')">Not Attending</a><a href="#" class="cancel ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">Back</a></div>
+        </div>
+        <div class="contact-list">
+            <div id="contactOptionBlock" class="contact-toolbar">
+                <a href="#" id="selectAllBtn" class="ui-btn ui-btn-inline selectall" onclick="contactsMethods.selectAllContacts()" data-allselected="no">Select All</a>
+                <a href="#" class="ui-btn ui-btn-inline changestatus" onclick="contactsMethods.openStatusPopup();">Change Status</a>
+                <a href="#" class="ui-btn ui-btn-inline invite" onclick="contactsMethods.collectUserId('iyes');">Invite</a>
+                <a href="#" class="ui-btn ui-btn-inline" onclick="contactsMethods.mailUser();"><img src="img/toolbar-contact-icon.png"></a>
+                <a href="#" class="ui-btn ui-btn-inline "><img src="img/toolbar-delete-icon.png" onclick="contactsMethods.configureForDelete()"></a>
+                <!-- <a href="#" class="ui-btn ui-btn-inline "><img src="img/share_icon.png" onclick=""></a> -->
+            </div>
+            <input type="text" id="contactSearchBox" style="display: none" data-role="search" placeholder="Search Contact">
+            <ul data-role="listview" id="contactList" data-inset="true" data-input="#contactSearchBox" data-filter="true"></ul>
+        </div>
+    </article>
+    <script type="text/javascript" src="js/contacts.js"></script>
+    <script type="text/javascript">
+    $("#contactsPage").ready(function() {
+        var weddingDetailsObject = JSON.parse(localStorage.weddingDetailsObject);
+        if (weddingDetailsObject.usertype == "guest"){
+            $("#addContactBtn,#contactOptionBlock").hide(); // hide the add contact button for guest
+        }
+        if (localStorage.cachedContacts != "") {
+            // if contacts exists in cache then just print it
+            contactsMethods.printContacts(localStorage.cachedContacts);
+            console.log("Cached contacts found");
+        } else {
+            // If no cached contacts found do the regular sync and print routine
+            if (localStorage.normalOrOutstation == "normal" || localStorage.normalOrOutstation == "guestalone")
+                contactsMethods.fetchContactsList();
+            else if (localStorage.normalOrOutstation == "outstation")
+                contactsMethods.fetchOutStationContactsList();
+            else if (localStorage.normalOrOutstation == "hostalone")
+                contactsMethods.fetchContactsListFromHost();
+        }
+    });
+    </script>
+</section>

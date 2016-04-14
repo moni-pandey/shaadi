@@ -1,0 +1,120 @@
+<section data-role="page" id="AccommodationPage" class="jqm-demos jqm-home" style="background:#F4F4F4;">
+    <header data-role="header" id="pageheader" class="jqm-header">
+        <a href="#" onclick="history.back()"><img src="img/Back_arrow.png"></a>
+        <p class="pagetitle">Accommodations</p>
+        <a href="#shaadiMenu" data-rel="popup" data-transition="slideup" class="menuicon ui-btn ui-btn-inline"></a>
+        <div class="topbartools">
+            <ul>
+                <li class="place-icon" onclick="accommodationMethods.showAddAccPopup()"><img src="img/add-hotels.png"></li>
+                <li class="share-icon" onclick="accommodationMethods.shareAccData()"><img src="img/share-icon.png"></li>
+                <!-- <li class="delete-icon"><img src="img/delete.png"></li> -->
+            </ul>
+        </div>
+    </header>
+    <article data-role="content" id="pagecontent" class="jqm-content">
+        <div id="accomodationEntries"></div>
+        <div id="addAccomBlock" class="accommodations formstyels footerform" style="display:none;">
+            <div class="acco-list">
+                <div class="adate">
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a">
+                            <div class="ui-bar ui-bar-a">
+                                <input id="accArrivalDate" type="date" placeholder="Arrival Date">
+                            </div>
+                        </div>
+                        <div class="ui-block-b">
+                            <div class="ui-bar ui-bar-a">
+                                <input id="accDepartureDate" type="date" placeholder="Departure Date">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="atime">
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a">
+                            <div class="ui-bar ui-bar-a">
+                                <input id="checkInTime" type="time" placeholder="Arrival Time">
+                            </div>
+                        </div>
+                        <div class="ui-block-b">
+                            <div class="ui-bar ui-bar-a">
+                                <input id="checkOutTime" type="time" placeholder="Departure Time">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ahotalname">
+                    <div class="ui-grid">
+                        <div class="ui-block">
+                            <div class="ui-bar ui-bar">
+                                <!-- <select name="select-choice-a" id="select-choice-a" data-native-menu="false">
+                                    <option>-- Type or Search Lodge --</option>
+                                    <option value="">Type or Search Lodge 1</option>
+                                    <option value="">Type or Search Lodge 2</option>
+                                    <option value="">Type or Search Lodge 3</option>
+                                    <option value="">Type or Search Lodge 4</option>
+                                </select> -->
+                                <input type="text" id="lodgemenu" placeholder="Lodge name">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="aroomsavaiable">
+                    <div class="ui-grid">
+                        <div class="ui-block">
+                            <div class="ui-bar ui-bar">
+                                <select name="select-choice-b" data-native-menu="false" id="roomsCount">
+                                    <option value="reseted">Number of Rooms</option>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ahotelphone">
+                    <div class="ui-grid">
+                        <div class="ui-block">
+                            <div class="ui-bar ui-bar">
+                                <!-- <select name="select-choice-a" id="select-choice-a" data-native-menu="false">
+                                    <option>-- Type or Search Lodge --</option>
+                                    <option value="">Type or Search Lodge 1</option>
+                                    <option value="">Type or Search Lodge 2</option>
+                                    <option value="">Type or Search Lodge 3</option>
+                                    <option value="">Type or Search Lodge 4</option>
+                                </select> -->
+                                <input type="tel" id="hotelPhoneno" placeholder="Hotel Number" style="padding-left:2em;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="atools">
+                    <div class="acancel-list" onclick="accommodationMethods.hideAddAccPopup();">Cancel</div>
+                    <div class="asave-list" onclick="accommodationMethods.validateAccommodation();">Save</div>
+                </div>
+            </div>
+        </div>
+    </article>
+    <script type="text/javascript" src="js/accommodation.js"></script>
+    <script type="text/javascript">
+    $("#AccommodationPage").ready(function() {
+        accommodationMethods.fetchAccomodationList();
+        localStorage.accDataForShare="false"; // clear previously stored Accommodation details
+    });
+    $("#hotelPhoneno").intlTelInput({
+        numberType: "MOBILE",
+        initialCountry:"in",
+        // onlyCountries: ['in'],
+        // allowDropdown:false,
+        utilsScript: "lib/libphonenumber/build/utils.js"
+    });
+    </script>
+</section>

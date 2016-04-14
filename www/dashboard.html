@@ -1,0 +1,69 @@
+<section data-role="page" id="dashboard" class="settingbody jqm-demos jqm-home" style="background:#F4F4F4;">
+    <header data-role="header" id="pageheader" class="jqm-header" style="height:35px">
+        <a href=""><img src=""></a>
+        <p class="pagetitle"></p>
+        <a href="#shaadiMenu" data-rel="popup" data-transition="slideup" class="menuicon ui-btn ui-btn-inline"></a>
+    </header>
+    <div class="settingheader">
+        <!-- <img class="sheaderbg" src="img/setting-header-bg.png"> -->
+        <div role="plannerlogo" id="plannerlogo" class="plannerlogo">
+            <h2>Manage My Shaadi</h2>
+        </div>
+    </div>
+    <article data-role="content" id="pagecontent" class="jqm-content">
+        <div class="settingpage">
+            <div class="singlebtn messaging" onclick="dashboardMethods.showContactForChat();">
+                <div class="btn1">
+                    <div class="btn-txt"><a href="#">Messaging</a></div>
+                </div>
+            </div>
+            <div class="singlebtn vendors">
+                <div class="btn1">
+                    <div class="btn-txt"><a href="#">Vendors</a></div>
+                </div>
+            </div>
+            <div class="singlebtn storyboard" onclick="dashboardMethods.showStoryBoard();">
+                <div class="btn1">
+                    <div class="btn-txt"><a href="#">Storyboard</a></div>
+                </div>
+            </div>
+            <div class="singlebtn event" onclick="dashboardMethods.showEvents();">
+                <div class="btn1">
+                    <div class="btn-txt"><a href="#">Events</a></div>
+                </div>
+            </div>
+            <div class="singlebtn gallery" onclick="dashboardMethods.showGallery();">
+                <div class="btn1">
+                    <div class="btn-txt"><a href="#">Gallery</a></div>
+                </div>
+            </div>
+            <div class="singlebtn contacts" onclick="dashboardMethods.showContact('normal');">
+                <div class="btn1">
+                    <div class="btn-txt"><a href="#">Contacts</a></div>
+                </div>
+            </div>
+            <div class="singlebtn setting" onclick="dashboardMethods.showManager();">
+                <div class="btn1">
+                    <div class="btn-txt"><a href="#">Travel</a></div>
+                </div>
+            </div> <div class="singlebtn event" onclick="dashboardMethods.showWeddingCard();">
+                <div class="btn1">
+                    <div class="btn-txt"><a href="#">weddingcard</a></div>
+                </div>
+            </div>
+        </div>
+        <!-- <ul data-role="listview">
+            <li onclick="dashboardMethods.showStoryBoard();">Story Board</li>
+            <li onclick="dashboardMethods.showEvents();">Events</li>
+            <li onclick="dashboardMethods.showGallery();">Gallery</li>
+            <li onclick="dashboardMethods.showManager();">Travel</li>
+            <li onclick="dashboardMethods.showContact('normal');">Contacts</li>
+        </ul> -->
+    </article>
+    <script type="text/javascript" src="js/dashboard.js"></script>
+    <script type="text/javascript">
+    $("#dashboard").ready(function() {
+        $("body").removeClass("ui-loading");
+    });
+    </script>
+</section>

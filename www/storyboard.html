@@ -1,0 +1,119 @@
+<section data-role="page" id="weddingDetailsEdit" class="jqm-demos jqm-home">
+    <header data-role="header" id="pageheader" class="jqm-header">
+        <a href="#" onclick="storyboardMethods.saveStory()"><img src="img/Back_arrow.png" /></a>
+        <p class="pagetitle">Story Board</p>
+        <a href="#shaadiMenu" data-rel="popup" data-transition="slideup" class="menuicon ui-btn ui-btn-inline"></a>
+    </header>
+    <article data-role="content" id="pagecontent" class="jqm-content">
+        <div class="story-board">
+            <h3>Wedding Details</h3>
+            <div class="edit-profile-img">
+                <div class="editbtn" style="display:none">Edit</div>
+                <span><img src="" id="storyboard-img"></span>
+                <div id="changeImage" class="editimg" onclick="storyboardMethods.changeWeddingImg()"></div>
+                <div id="savechangeImage" class="changeimg" style="display:none" onclick="storyboardMethods.savechangeWeddingImg()"></div>
+            </div>
+            <div class="profile-detail profile-title">
+                <h2 id="copName"></h2>
+                <div class="seen-status"> <span id="dtLeft" class="seen-date"></span> <span id="dtStatus" class="seen-day"></span></div>
+                <div class="edit-list hidedit" onclick="storyboardMethods.editAll()" id="editAll">Edit</div>
+            </div>
+            <div class="profile-detail ">
+                <h3>Wedding location & Date</h3>
+                <p class="datetime" id="weddingDT">
+                </p>
+                <p id="weddingLoc"></p>
+            </div>
+            <h2>How They Met</h2>
+            <div class="profile-detail">
+                <!-- <div class="list-tools">
+                    <div class="edit-list hidedit" onclick="storyboardMethods.editHowTheyMet()" id="howTheymetEdit">Edit</div>
+                    <div class="cancel-list" id="howTheymetCancel" style="display:none;" onclick="storyboardMethods.cancelHowTheyMet()">Cancel</div>
+                    <div class="save-list" id="howTheymetSave" style="display:none;" onclick="storyboardMethods.saveHowTheyMet()">Save</div>
+                </div>-->
+                <div class="uneditable">
+                    <p id="howTheyMetDiv"></p>
+                </div>
+                <div class="editable">
+                    <textarea rows="5" style="display:none" id="howTheyMetTbox"></textarea>
+                </div>
+            </div>
+            <h2>About Bride</h2>
+            <div class="profile-detail">
+                <!-- <div class="list-tools">
+                    <div class="edit-list hidedit" onclick="storyboardMethods.editAboutBride()" id="aboutBrideEdit">Edit</div>
+                    <div class="cancel-list" id="aboutBrideCancel" style="display:none;" onclick="storyboardMethods.cancelAboutBride()">Cancel</div>
+                    <div class="save-list" id="aboutBrideSave" style="display:none;" onclick="storyboardMethods.saveAboutBride()">Save</div>
+                </div>-->
+                <div class="uneditable">
+                    <p id="aboutBrideDiv"></p>
+                </div>
+                <div class="editable">
+                    <textarea rows="5" style="display:none" id="aboutBrideTbox"></textarea>
+                </div>
+            </div>
+            <h2>About Groom</h2>
+            <div class="profile-detail">
+                <!-- <div class="list-tools">
+                   <div class="edit-list hidedit" onclick="storyboardMethods.editAboutGroom()" id="aboutGroomEdit">Edit</div>
+                    <div class="cancel-list" id="aboutGroomCancel" style="display:none;" onclick="storyboardMethods.cancelAboutGroom()">Cancel</div>
+                    <div class="save-list" id="aboutGroomSave" style="display:none;" onclick="storyboardMethods.saveAboutGroom()">Save</div>
+                </div>-->
+                <div class="uneditable">
+                    <p id="aboutGroomDiv"></p>
+                </div>
+                <div class="editable">
+                    <textarea rows="5" style="display:none" id="aboutGroomTbox"></textarea>
+                </div>
+            </div>
+            <h2>About Bride's Family</h2>
+            <div class="profile-detail">
+                <!-- <div class="list-tools">
+                    <div class="edit-list hidedit" onclick="storyboardMethods.editAboutBrideFamily()" id="aboutBrideFamilyEdit">Edit</div>
+                    <div class="cancel-list" id="aboutBrideFamilyCancel" style="display:none;" onclick="storyboardMethods.cancelAboutBrideFamily()">Cancel</div>
+                    <div class="save-list" id="aboutBrideFamilySave" style="display:none;" onclick="storyboardMethods.saveAboutBrideFamily()">Save</div>
+                </div>-->
+                <div class="uneditable">
+                    <p id="aboutBrideFamilyDiv"></p>
+                </div>
+                <div class="editable">
+                    <textarea rows="5" style="display:none" id="aboutBrideFamilyTbox"></textarea>
+                </div>
+            </div>
+            <h2>About Groom's Family</h2>
+            <div class="profile-detail">
+                <!-- <div class="list-tools">
+                    <div class="edit-list hidedit" onclick="storyboardMethods.editAboutGroomFamily()" id="aboutGroomFamilyEdit">Edit</div>
+                    <div class="cancel-list" id="aboutGroomFamilyCancel" style="display:none;" onclick="storyboardMethods.cancelAboutGroomFamily()">Cancel</div>
+                    <div class="save-list" id="aboutGroomFamilySave" style="display:none;" onclick="storyboardMethods.saveaboutGroomFamily()">Save</div>
+                </div>-->
+                <div class="uneditable">
+                    <p id="aboutGroomFamilyDiv"></p>
+                </div>
+                <div class="editable">
+                    <textarea rows="5" style="display:none" id="aboutGroomFamilyTbox"></textarea>
+                </div>
+            </div>
+            <!-- Wishcouple button -->
+            <div class="wish-couple" onclick="storyboardMethods.gotocommentPage()">
+                <div class="wish-couple-left" id="wishBtn">
+                    Wish the Couple
+                </div>
+                <!-- <div class="wish-couple-link">
+                    <img src="img/share.png">
+                </div> -->
+            </div>
+        </div>
+    </article>
+    <script type="text/javascript" src="js/storyboard.js"></script>
+    <script type="text/javascript">
+    $("#weddingDetailsEdit").ready(function() {
+        /*var weddingDetailsObject = JSON.parse(localStorage.weddingDetailsObject);
+        if (weddingDetailsObject.usertype == "guest")
+            $("#changeImage").hide(); // Hide Edit Cover pic button for guest*/
+        localStorage.editStoryboardClicked="false"; // flag to check whether Edit button clicked or not
+        storyboardMethods.manageWishButton(); // change the text of Wish button
+        storyboardMethods.fetchWeddingDetails();
+    });
+    </script>
+</section>

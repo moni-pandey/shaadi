@@ -1,0 +1,29 @@
+<section data-role="page" id="pickContactPage" class="jqm-demos jqm-home">
+    <header data-role="header" id="pageheader" class="jqm-header">
+        <a href="importcontacts.html"><img src="img/Back_arrow.png"></a>
+        <p class="pagetitle">All Contacts</p>
+        <a href="#shaadiMenu" data-rel="popup" data-transition="slideup" class="menuicon ui-btn ui-btn-inline"></a>
+    </header>
+    <article data-role="content" id="pagecontent" class="jqm-content">
+        <div class="contact-list">
+            <ul data-role="listview" id="genericContactList" data-inset="true" data-autodividers="true" data-filter="true"></ul>
+        </div>
+    </article>
+    <div id="pagefooter" data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
+        <div class="allcon-btn">
+            <div class="ui-grid-a">
+                <div class="ui-block-a">
+                    <div class="ui-bar ui-bar-a" >
+                        <button id="selectionDoneBtn" class="joinbtn ui-btn ui-mini submit" type="submit" id="selectionDoneBtn" onclick="contactsMethods.contactSelectionDone();">DONE</button>
+                    </div>
+                </div>
+                <div class="ui-block-b">
+                    <div class="ui-bar ui-bar-a" >
+                        <button id="selectionCancelBtn" class="joinbtn ui-btn ui-mini canecl" id="selectionCancelBtn" onclick="history.back()">CANCEL</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="js/contacts.js"></script>
+</section>

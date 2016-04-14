@@ -1,0 +1,28 @@
+<section data-role="page" id="verifyCodePage" class="redbgimg jqm-demos jqm-home">
+    <header data-role="header" id="pageheader" class="jqm-header">
+        <a href="verifyphone.html"><img src="img/Back_arrow.png"></a>
+        <p class="pagetitle">Manage My Shaadi</p>
+    </header>
+    <div role="banner" id="pagebanner" class="banner">
+        <img src="img/wp_photo_3.png">
+    </div>
+    <div role="plannerlogo" id="plannerlogo" class="plannerlogo">
+        <img src="img/app-logo.png">
+        <h2>Manage My Shaadi</h2>
+    </div>
+    <article data-role="content" id="pagecontent" class="jqm-content">
+        <!-- <center>
+        <p id="verify-code-text">Please enter the last five digits of the number from which you have got a missed call</p></center> -->
+        <div class="enterphone endercode" style="margin-left:10%;width:80%">
+            <input id="otpBox" value="" type="text" placeholder="Enter Code">
+        </div>
+        <a href="#" class="request-code verify-code ui-btn ui-mini" onclick="loginMethods.verifyNumber();">Verify Code</a>
+    </article>
+    <script type="text/javascript" src="js/login.js"></script>
+        <script type="text/javascript">
+        $("#verifyCodePage").ready(function() {
+            // loginMethods.autoFillOtp();
+            
+        });
+        </script>
+</section>

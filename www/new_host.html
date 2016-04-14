@@ -1,0 +1,119 @@
+<section data-role="page" id="newHostPage" class="jqm-demos jqm-home">
+    <header data-role="header" id="pageheader" class="jqm-header">
+        <a href="#" onclick="history.back()"><img src="img/Back_arrow.png"></a>
+        <p class="pagetitle">New Host</p>
+        <a href="#shaadiMenu" data-rel="popup" data-transition="slideup" class="menuicon ui-btn ui-btn-inline"></a>
+    </header>
+    <article data-role="content" id="pagecontent" class="jqm-content">
+        <div class="formstyels">
+            <label class="customlable">Name</label>
+            <div class="ui-grid-a">
+                <div class="ui-block-a">
+                    <div class="ui-bar ui-bar-a">
+                        <input id="hFirstName" type="text" placeholder="First Name">
+                    </div>
+                </div>
+                <div class="ui-block-b">
+                    <div class="ui-bar ui-bar-a">
+                        <input id="hLastName" value="" type="text" placeholder="Last Name">
+                    </div>
+                </div>
+            </div>
+            <div class="ui-grid">
+                <div class="ui-block">
+                    <div class="ui-bar ui-bar">
+                        <label for="hPhoneNumber">Contact</label>
+                        <input id="hPhoneNumber" type="tel" placeholder="Phone no." style="padding-left:3em">
+                    </div>
+                </div>
+            </div>
+            <div class="ui-grid">
+                <div class="ui-block">
+                    <div class="ui-bar ui-bar">
+                        <label for="text-basic">Email</label>
+                        <input id="hEmail" type="email" placeholder="Email">
+                    </div>
+                </div>
+            </div>
+            <label class="customlable">Gender</label>
+            <div class="ui-grid-a">
+                <div class="ui-block-a">
+                    <div class="ui-bar ui-bar-a">
+                        <label class="rediostyle">
+                            <input name="nHGender" value="Male" type="radio"> Male </label>
+                    </div>
+                </div>
+                <div class="ui-block-b">
+                    <div class="ui-bar ui-bar-a">
+                        <label class="rediostyle">
+                            <input name="nHGender" value="Female" type="radio"> Female
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <label for="text-basic" class="customlable">Bride or Groom Side</label>
+            <div class="ui-grid-a">
+                <div class="ui-block-a">
+                    <div class="ui-bar ui-bar-a">
+                        <label class="rediostyle">
+                            <input name="nHBrideOrGroomSide" value="Bride" type="radio"> Bride </label>
+                    </div>
+                </div>
+                <div class="ui-block-b">
+                    <div class="ui-bar ui-bar-a">
+                        <label class="rediostyle">
+                            <input name="nHBrideOrGroomSide" value="Groom" type="radio"> Groom
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="ui-grid">
+                <!--Host Relation ship start-->
+                <div class="ui-block" style="width:100%">
+                    <div class="ui-bar ui-bar">
+                        <label for="relation" class="select">I am</label>
+                        <select id="newHostRelation" data-native-menu="false">
+                            <option>--- Choose your Relation ---</option>
+                            <option>Bride</option>
+                            <option>Groom</option>
+                            <option>Parent of Bride</option>
+                            <option>Parent of Groom</option>
+                            <option>Relative of Bride</option>
+                            <option>Realtive of Groom</option>
+                        </select>
+                    </div>
+                </div>
+                <!-- Host Relation ship end-->
+            </div>
+        </div>
+        <a href="#" class="joinbtn subpagejoin ui-btn ui-mini" onclick="contactsMethods.validateHostContactForm()">New Host</a>
+    </article>
+    <script type="text/javascript" src="js/contacts.js"></script>
+    <script type="text/javascript">
+    $("#newHostPage").ready(function() {
+        $("#hPhoneNumber").intlTelInput({
+            numberType: "MOBILE",
+            initialCountry: "in",
+            // onlyCountries: ['in'],
+            // allowDropdown:false,
+            utilsScript: "lib/libphonenumber/build/utils.js"
+        });
+
+        $("#hFirstName ,#hLastName ").keyup(function(e) {
+            var str = $.trim($(this).val());
+            if (str != "") {
+                var regx = /^[A-Za-z]+$/;
+                if (!regx.test(str)) {
+                    str = str.replace(/[^a-zA-Z.]+/g, ''); // replace special characters with space
+                    $(this).val(str)
+                    cm.showToast("Only alphabets allowed !");
+                }
+            } else {
+                //empty value -- do something here
+                console.log("Only alphabets detected");
+            }
+        });
+
+    });
+    </script>
+</section>

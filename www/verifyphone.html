@@ -1,0 +1,32 @@
+<section data-role="page" id="requestVerificationCode" class="redbgimg jqm-demos jqm-home">
+    <header data-role="header" id="pageheader" class="jqm-header">
+        <a href="#"><img src="img/wp_logo.png"></a>
+        <p class="pagetitle" style="margin-top: 5px;">Manage My Shaadi</p>
+    </header>
+    <div role="banner" id="pagebanner" class="banner">
+        <img src="img/wp_photo_3.png">
+    </div>
+    <div role="plannerlogo" id="plannerlogo" class="plannerlogo">
+        <img src="img/app-logo.png">
+        <h2>Manage My Shaadi</h2>
+    </div>
+    <article data-role="content" id="pagecontent" class="jqm-content">
+        <div class="enterphone">
+            <input id="mobileNumInput" type="tel" placeholder="Enter Phone Number">
+        </div>
+        <a href="#" class="request-code ui-btn ui-mini forplanner" onclick="loginMethods.requestNumberCode();">Request a code</a>
+    </article>
+    <script type="text/javascript" src="js/login.js"></script>
+    <script type="text/javascript">
+    $("#mobileNumInput").intlTelInput({
+        numberType: "MOBILE",
+        initialCountry:"in",
+        // onlyCountries: ['in'],
+        // allowDropdown:false,
+        utilsScript: "lib/libphonenumber/build/utils.js"
+    }); 
+	
+
+    console.log("Initialized Mobile number Input");
+    </script>
+</section>

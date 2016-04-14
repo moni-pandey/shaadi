@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Manage your Shaadi</title>
+    <link rel="stylesheet" href="css/themes/default/jquery.mobile-1.4.5.min.css">
+ 
+    <link rel="stylesheet" href="css/intlTelInput.css">
+    <link rel="stylesheet" href="css/app.css">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript">
+    $(document).on("mobileinit", function() {
+        // Setting default page transition to slide
+        $.mobile.defaultPageTransition = 'slide';
+
+    });
+    </script>
+    <script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
+    <script type="text/javascript" src="js/parse-1.6.4.min.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/moment/moment.min.js"></script>
+    <script type="text/javascript" src="js/intelinput/intlTelInput.min.js"></script>
+ 
+    <script type="text/javascript" src="js/commonmethods.js"></script>
+</head>
+
+<body>
+    <div data-role="popup" id="shaadiMenu" data-theme="a">
+        <ul data-role="listview" data-inset="true" style=" width:100% !important;">
+            <!-- li data-role="list-divider">Menu</li -->
+            <li><a href="socialweddings.html">Switch Wedding</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="privacy_policy.html">Privacy Policy</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#" onclick="cm.rateus()">rate us</a></li>
+        </ul>
+    </div>
+    <section data-role="page" id="first-page" class="redbgimg jqm-demos jqm-home">
+        <header data-role="header" id="pageheader" class="jqm-header">
+            <a href="#"><img src="img/wp_logo.png"></a>
+            <p class="pagetitle" style="margin-top: 5px;">Manage My Shaadi</p>
+        </header>
+        <div role="banner" id="pagebanner" class="banner">
+            <img src="img/wp_photo_3.png">
+        </div>
+        <div role="plannerlogo" id="plannerlogo" class="plannerlogo">
+            <img src="img/app-logo.png">
+            <h2>Manage My Shaadi</h2>
+        </div>
+        <article data-role="content" id="pagecontent" class="jqm-content">
+            <a href="#" class="joinbtn ui-btn ui-mini" onclick="loginMethods.numberVerificatonExisting();">Join Wedding</a>
+            <a href="#" style="display: none" class="newbtn ui-btn ui-mini" onclick="loginMethods.numberVerificatonNew();">New Wedding</a>
+        </article>
+        <footer data-role="footer" id="pagefooter" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
+        </footer>
+        <script type="text/javascript" src="js/login.js"></script>
+        <script type="text/javascript">
+        document.addEventListener('deviceready', function() {
+            if (navigator.userAgent.match(/Android/i)) {  // setting font-family based on device type 
+                $('body').css("font-family", 'Roboto');
+            } else {
+                $('body').css("font-family", 'Helvetica Neue, Avenir');
+            }
+            cm.handleBack(); // stop the hardware back button functionality
+            navigator.splashscreen.show(); //Force show Splash Screen
+            $("#shaadiMenu").popup().enhanceWithin(); //Initialize the External panel
+            localStorage.cachedContacts = ""; // clear the cachedContacts on device ready
+            // Just to verify whether already the user has logged in
+            if (localStorage.userMobile != null) {
+                // To verify whether the logged user has joined any wedding or not
+                if (localStorage.weddingDetailsObject != null && localStorage.joinedWedding != null && localStorage.joinedWedding != '') {
+                    var weddingDetailsObject = JSON.parse(localStorage.weddingDetailsObject) || "";
+                    var weddingDate = weddingDetailsObject.dater || "";
+                    if (!cm.isWeddingOver(weddingDate))
+                    // To verify whether the joined wedding is in future
+                        $(":mobile-pagecontainer").pagecontainer("change", "socialweddings.html", {
+                        showLoadMsg: false
+                    });
+                    else
+                    // if the joined wedding is over user has to be shown with wedding list to join
+                        $(":mobile-pagecontainer").pagecontainer("change", "socialweddings.html", {
+                        showLoadMsg: false
+                    });
+                    navigator.splashscreen.hide();
+                } else {
+                    $(":mobile-pagecontainer").pagecontainer("change", "socialweddings.html", {
+                        showLoadMsg: false
+                    });
+                    navigator.splashscreen.hide();
+                }
+
+            } else navigator.splashscreen.hide();
+        }, false);
+        </script>
+    </section>
+</body>
+
+</html>

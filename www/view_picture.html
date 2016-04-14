@@ -1,0 +1,47 @@
+<section data-role="page" id="viewPicturePage" class="albumsbg jqm-demos jqm-home">
+    <header data-role="header" id="pageheader" class="jqm-header">
+        <a href="#" onclick="history.back()"><img src="img/Back_arrow.png"></a>
+        <p class="pagetitle" id="selectedAlbumTitle"></p>
+        <a href="#shaadiMenu" data-rel="popup" data-transition="slideup" class="menuicon ui-btn ui-btn-inline"></a>
+    </header>
+    <article data-role="content" id="pagecontent" class="jqm-content">
+        <div class="reception-photos-detail">
+            <ul class="singel-photo">
+                <li>
+                    <a href="#"><img src="" id="imageViewerBlock"></a>
+                </li>
+            </ul>
+            <div class="social-footer">
+                <div class="social-count">
+                    <ul> 
+                        <li><img src="img/like.png"> <span id="noOfLikes"></span><span>&nbsp; Likes</span> </li>
+                        <li><img src="img/comments-img.png">&nbsp;<span id="noOfComments"></span><span>&nbsp;Comments</span></li>
+                    </ul>
+                </div>
+                <div class="ui-grid-b">
+                    <div class="ui-block-a">
+                        <div class="ui-bar ui-bar-a">
+                            <div onclick="galleryMethods.likePicture(this)" id="picLikeBtn" data-liked="false"><img src="img/like.png"> Like</div>
+                        </div>
+                    </div>
+                    <div class="ui-block-b">
+                        <div class="ui-bar ui-bar-a commentlist" onclick="galleryMethods.showPictureComments()">
+                            <div class="commentbtn"><img src="img/comments-img.png"> Comment</div>
+                        </div>
+                    </div>
+                    <div class="ui-block-c">
+                        <div class="ui-bar ui-bar-a">
+                            <div class="sharebtn" onclick="galleryMethods.sharePicture()"><img src="img/share_icon.png"> Share</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" src="js/gallery.js"></script>
+        <script type="text/javascript">
+        $("#viewPicturePage").ready(function() {
+            galleryMethods.viewPicture();
+        });
+        </script>
+    </article>
+</section>

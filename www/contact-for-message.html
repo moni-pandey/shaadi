@@ -1,0 +1,43 @@
+<section data-role="page" id="friendsContactsPage" class="jqm-demos jqm-home">
+    <header data-role="header" id="pageheader" class="jqm-header">
+        <a href="dashboard.html"><img src="img/Back_arrow.png"></a>
+        <p class="pagetitle">All Contacts</p>
+    </header>
+    <article data-role="content" id="pagecontent" class="jqm-content">
+        <div class="contact-list">
+            <div id="contactOptionBlock" class="contact-toolbar" style="display:none">
+                <a href="#" id="selectAllBtn" class="ui-btn ui-btn-inline selectall" onclick="contactsMethods.selectAllContacts()" data-allselected="no">Select All</a>
+                <a href="#" class="ui-btn ui-btn-inline changestatus" onclick="contactsMethods.openStatusPopup();">Change Status</a>
+                <a href="#" class="ui-btn ui-btn-inline invite" onclick="contactsMethods.inviteUser();">Invite</a>
+                <a href="#" class="ui-btn ui-btn-inline" onclick="contactsMethods.mailUser();"><img src="img/toolbar-contact-icon.png"></a>
+                <a href="#" class="ui-btn ui-btn-inline "><img src="img/toolbar-delete-icon.png" onclick="contactsMethods.deleteContact()"></a>
+                <a href="#" class="ui-btn ui-btn-inline "><img src="img/red_comment.png" onclick="contactsMethods.getval()"></a>
+            </div>
+            <input type="text" id="contactSearchBox" style="display: none" data-role="search" placeholder="Search Contact">
+            <ul data-role="listview" id="mContactList" data-inset="true"></ul>
+        </div>
+    </article>
+    <div id="pagefooter" data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
+        <div class="allcon-btn">
+            <div class="ui-grid-a">
+                <div class="ui-block-a">
+                    <div class="ui-bar ui-bar-a" >
+                        <button id="selectionDoneBtn" class="joinbtn ui-btn ui-mini submit" type="submit" id="selectionDoneBtn" onclick="messagingMethods.checkParticipantExistance();">DONE</button>
+                    </div>
+                </div>
+                <div class="ui-block-b">
+                    <div class="ui-bar ui-bar-a" >
+                        <button id="selectionCancelBtn" class="joinbtn ui-btn ui-mini canecl" id="selectionCancelBtn" onclick="history.back()">CANCEL</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="js/contacts.js"></script>
+    <script type="text/javascript" src="js/messaging.js"></script>
+    <script type="text/javascript">
+    	$("#friendsContactsPage").ready(function(){
+    		messagingMethods.fetchContactsList();
+    	});
+    </script>
+</section>

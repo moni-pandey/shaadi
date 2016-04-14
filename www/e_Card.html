@@ -1,0 +1,102 @@
+<!--<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>E-Card</title>
+        <link rel="shortcut icon" href="favicon.ico">
+        <link rel="stylesheet" href="css/themes/default/jquery.mobile-1.4.5.min.css">
+        <!-- link rel="stylesheet" href="_assets/css/jqm-demos.css" 
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+        <link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Roboto:300'>
+        <link rel="stylesheet" href="css/app.css">
+        <script src="js/jquery.js"></script>
+        <script src="_assets/js/index.js"></script>
+        <script src="js/jquery.mobile-1.4.5.min.js"></script>
+		<link href='https://fonts.googleapis.com/css?family=Roboto:400,900,700,500' rel='stylesheet' type='text/css'>
+	</head>
+	<body>-->
+	
+	    <section data-role="page" class="jqm-demos jqm-home" id="eviewcard" >
+		    
+			<div id="pageheader" data-role="header" class="jqm-header"> <a href="javascript:history.back()"><img src="img/Back_arrow.png"></a>
+                <p class="pagetitle">Invitation Cards</p>
+                 <a href="#shaadiMenu" data-rel="popup" data-transition="slideup" class="menuicon ui-btn ui-btn-inline"></a>
+            </div>
+			
+			<article id="pagecontent" role="main" class="jqm-content">
+			    <div class="cardlist">
+    	            <h3 class="e-card-text"><img src="img/star.png">E-card</h3>
+                    <div class="add-favourites">Favourites 
+					        <h6 class="fav-count">4</h6>
+					        <img src="img/fav.png" class="fav-img">
+					</div>
+			        
+					<div class="profile-detail">
+        	                <img class="wedding-card-img" src="">
+							<img src="img/fav-on.png"  class="add-favorites-icon">
+							<p class="e-card-name">Card Name</p>
+							
+						<div class="ui-grid-a">
+                            <div class="ui-block-a">
+                                <div class="ui-bar ui-bar-a" style="background-color:transparent;border:none;padding-left:0; margin-top:-10px;">
+                                    <p class="e-card-info">Color</p>
+									<p class="e-card-info">Type</p>
+									<p class="e-card-info">Theme</p>
+                                </div>
+                            </div>
+                            <div class="ui-block-b">
+                                <div class="ui-bar ui-bar-a" style="background-color:transparent;border:none; margin-top:-10px;">
+                                    <p class="e-card-color"><span></span> Green</p>
+									<p class="e-card-details ">E Card</p>
+									<p class="e-card-details theme">Ganesha</p>
+                                </div>
+                            </div>
+                        </div>
+						<a href="#" class="add-to-my-fav-btn subpagejoin ui-btn ui-mini addtofav" data-like="liked" onclick="weddingcard.likeprod(this)"><img src="img/fav-white.png" class="fav-white " > Add to my Favourite</a>
+                    </div>
+				    
+					<a href="#" class="share-button subpagejoin ui-btn ui-mini" style="margin-top:20px" onclick="weddingcard.openwhatsapp()"><img src="img/share-icon.png"></a>
+				    <h5 class="share-with-others-host-text">Share with Other Hosts</h5>
+				
+				</div>
+		        <div id="pagefooter" data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer"> </div>
+            </article>
+	<script type="text/javascript"  src="js/weddingCard.js"></script>
+	<script type="text/javascript"  src="js/cardfilter.js"></script>
+<script type="text/javascript">
+
+    $("#eviewcard").ready(function() {
+	//var text =localStorage.favcount+' '+'Favourites'
+        //alert('e')
+		//localStorage.cname   localStorage.favcoun
+		//localStorage.price= $(id).data('price')
+		
+		/*if($(id).data('best'))
+		   $('#starimg').attr('src','img/star.png')
+		   else*/
+		   $('.wedding-card-img').attr('src',localStorage.i1)
+		
+		$('.card-color').html('<span></span>'+localStorage.color)
+		//$('.card-color').html('<span></span>'+localStorage.color)
+		//$('.etype').text(localStorage.type)
+		$('.e-card-name').text(localStorage.cname)
+		$('.fav-count').html(localStorage.favcount)
+		$('.theme').text(localStorage.theme)
+		//$('.ori').text(localStorage.orientation)
+		$('.print').text(localStorage.printing)
+		////$('.i1').attr("src" ,localStorage.i1)
+		//$('.i2').attr("src" ,localStorage.i2)
+		//$('.i3').attr("src" ,localStorage.i3)
+        if(localStorage.linkeunlike!='liked')
+	{	$('.add-favorites-icon').attr('src' ,'img/fav-off.png')
+	
+	$('.addtofav').data('like' ,'unlike')
+	
+	}
+		$('.addtofav').data('cardid' ,localStorage.cardid)
+		$('.addtofav').attr('id' ,localStorage.cardid)
+		
+    });
+	</script>
+	</section>

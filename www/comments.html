@@ -1,0 +1,28 @@
+<section data-role="page" id="commentsPage" class="jqm-demos jqm-home" style="background:#F4F4F4;">
+    <header data-role="header" id="pageheader" class="jqm-header">
+        <a href="#" onclick="history.back()"><img src="img/Back_arrow.png"></a>
+        <p class="pagetitle">Wishes</p>
+        <a href="#shaadiMenu" data-rel="popup" data-transition="slideup" class="menuicon ui-btn ui-btn-inline"></a>
+    </header>
+    <article data-role="content" id="pagecontent" class="jqm-content">
+        <div class="chat-screen">
+            <div class="topstatus">
+                <div class="likescount" style="display:none"></div>
+                <!--We could show this later-->
+                <div class="commentscount" id="noOfComments"></div>
+            </div>
+            <div id="commentlistid"></div>
+        </div>
+        <div class="typehere" id="addCommentBlock">
+            <input type="text" id="commentBox" placeholder="Comment on this.....">
+            <input class="submitcommemt" type="submit" value="" onclick="commentsMethods.addComment()">
+        </div>
+    </article>
+    <script type="text/javascript" src="js/comments.js"></script>
+    <script type="text/javascript">
+    $("#commentsPage").ready(function() {
+        commentsMethods.manageCommentsPage(); // Hide add Comments block
+        commentsMethods.fetchComments();
+    });
+    </script>
+</section>

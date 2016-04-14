@@ -1,0 +1,27 @@
+<section data-role="page" id="picturePage" class="albumsbg jqm-demos jqm-home">
+    <header data-role="header" id="pageheader" class="jqm-header">
+        <a href="#" onclick="history.back()"><img src="img/Back_arrow.png"></a>
+        <p class="pagetitle" id="albumTitle"></p>
+        <a href="#shaadiMenu" data-rel="popup" data-transition="slideup" class="menuicon ui-btn ui-btn-inline"></a>
+    </header>
+    <article data-role="content" id="pagecontent" class="jqm-content">
+        <div class="reception-photos">
+            <div  id="picturesBlock" class="recep-container"></div>
+            <div class="image-upload">
+                <label for="file-input"> <img src="img/upload-icon.jpg"> </label>
+                <input id="file-input" type="file" class="uploader" name='file' />
+            </div>
+        </div>
+    </article>
+    <script type="text/javascript" src="js/cloudinary/jquery.ui.widget.js"></script>
+    <script type="text/javascript" src="js/cloudinary/jquery.iframe-transport.js"></script>
+    <script type="text/javascript" src="js/cloudinary/jquery.fileupload.js"></script>
+    <script type="text/javascript" src="js/cloudinary/jquery.cloudinary.js"></script>
+    <script type="text/javascript" src="js/gallery.js"></script>
+    <script type="text/javascript">
+    $("#picturePage").ready(function() {
+        galleryMethods.bindCloudinary();
+        galleryMethods.fetchPictures();
+    });
+    </script>
+</section>

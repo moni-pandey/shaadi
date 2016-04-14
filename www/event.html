@@ -1,0 +1,121 @@
+<section data-role="page" class="jqm-demos jqm-home" id="eventsPage">
+    <header data-role="header" id="pageheader" class="jqm-header">
+        <a href="#" onclick="history.back()"><img src="img/Back_arrow.png"></a>
+        <p class="pagetitle">Event</p>
+        <a href="#shaadiMenu" data-rel="popup" data-transition="slideup" class="menuicon ui-btn ui-btn-inline"></a>
+    </header>
+    <article data-role="content" id="pagecontent" class="jqm-content">
+        <!-- Popup start -->
+        <div class="foralbumpopup btn3style statusstyle" data-role="popup" id="eventInviterPopup" data-overlay-theme="b" data-theme="b" data-dismissible="false" style="max-width:400px;">
+            <div data-role="header" data-theme="a">
+                <h1>Invite Guests</h1>
+            </div>
+            <div role="main" class="ui-content">
+                <a href="#" class="ok ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-transition="flow" onclick="eventsMethods.inviteGuests('groom')">Groom Side</a>
+                <a href="#" class="ok ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-transition="flow" onclick="eventsMethods.inviteGuests('bride')">Bride Side</a>
+                <a href="#" class="ok ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-transition="flow" onclick="eventsMethods.inviteGuests('all')">All</a>
+                <a href="#" class="ok ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-transition="flow" onclick="eventsMethods.validateEvent('pickContact')">Select Guests</a>
+                <a href="#" class="cancel ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">Back</a>
+            </div>
+        </div>
+        <!-- Popup end -->
+        <div class="event-container">
+            <div class="event-header">
+                <p class="leftdays">
+                    <span class="headerdays" id="daysLeft"></span>
+                    <span class="textdays" id="dayType"></span>
+                </p>
+                <h2 id="cName"></h2>
+                <p id="weddateDetails"></p>
+            </div>
+            <div id="eventList"></div>
+            <div class="event-inner addeventcls" style="display:none">
+                <div class="event-list new-event-list">
+                    <div class="formstyels">
+                        <h4> 
+                    <span class="event-banner" onclick="eventsMethods.addEventPhoto();">
+                    <div id="eventPicTemplate">
+                        <img src="img/add-photo.png" />
+                    </div>
+                    <div id="eventPic" style="display:none">
+                        <img id="eventImg" src="" />
+                    </div>
+                    <div id="eventPic_edit" style="display:none">
+                        <img id="eventImg_edit" src="" />
+                    </div>
+                    </span> 
+                    <span class="event-list-content">
+                    <span class="event-title">Event</span>
+                    <span class="event-list-toolbar">
+                    <span class="toolbar-icon event-save" onclick="eventsMethods.validateEvent()" id="addEVent">Save</span>
+                    <span class="toolbar-icon event-delete" onclick="eventsMethods.toggleEventAdd()">Cancel</span>
+                    </span>
+                    </span>
+                    </h4>
+                        <div class="event-list-content-edit">
+                            <div class="ui-field-contain">
+                                <div class="formstyels">
+                                    <div class="lablestar">
+                                        <div class="star"></div>
+                                        <input id="addEventName" placeholder="Event name" type="text">
+                                    </div>
+                                    <input id="addEventDes" placeholder="Description" type="text">
+                                    <div class="lablestar">
+                                        <div class="star"></div>
+                                        <input id="addEventDate" placeholder="Date" type="date">
+                                    </div>
+                                    <div class="lablestar">
+                                        <div class="star"></div>
+                                        <input id="addEventTime" placeholder="Time" type="time">
+                                    </div>
+                                    <!-- <input id="addEventMenu" placeholder="Menu" type="text"> -->
+                                    <div class="lablestar">
+                                        <div class="star"></div>
+                                        <label for="addEventMenu" class="select">Menu</label>
+                                    </div>
+                                    <select id="addEventMenu" data-native-menu="false" multiple="multiple">
+                                        <option value="Breakfast">Breakfast</option>
+                                        <option value="Lunch">Lunch</option>
+                                        <option value="Dinner">Dinner</option>
+                                        <option value="Snacks">Snacks</option>
+                                        <option value="Drinks">Drinks</option>
+                                    </select>                                    
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div data-role="collapsible" class="event-list-map"> -->
+                        <h4 onclick="eventsMethods.configureMap()"><span>Venue:</span> Choose Location on map</h4>
+                        <!-- <div style="width:10;height:0" id="map_canvas">
+                            </div> 
+                        </div>-->
+                    </div>
+                </div>
+                <div class="event-status" onclick="eventsMethods.showPopup('eventInviterPopup')"> <span class="toolbar-icon event-iguests">Invite Guests</span></div>
+            </div>
+            <a href="#" class="joinbtn customfixed subpagejoin ui-btn ui-mini" id="eventAdderBtn" onclick="eventsMethods.toggleEventAdd()">Add New Event</a>
+        </div>
+    </article>
+    <script type="text/javascript" src="js/event.js"></script>
+    <script type="text/javascript">
+    $("#eventsPage").ready(function() {
+        localStorage.eventAction = "add";
+
+        eventsMethods.fetchWeddingInfo();
+        eventsMethods.getUserLocation();
+        $("#addEventName").keyup(function(e) {
+            var str = $.trim($(this).val());
+            if (str != "") {
+                var regx = /^[A-Za-z]+$/;
+                if (!regx.test(str)) {
+                    str = str.replace(/[^a-zA-Z.]+/g, ''); // replace special characters with space
+                    $(this).val(str);
+                    cm.showToast("Only alphabets allowed !");
+                }
+            } else {
+                //empty value -- do something here
+                console.log("Only alphabets detected");
+            }
+        });
+    });
+    </script>
+</section>
