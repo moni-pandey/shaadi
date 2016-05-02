@@ -30,14 +30,16 @@ var outstationMethods = {
                     osgObj.accId = rowObject.get("accomOffered") == "true" && rowObject.get("accomOffered") != "" ? rowObject.get("accomodationID") : "false";
                     osgObj.cabId = rowObject.get("transportOffered") == "true" && rowObject.get("transportOffered") != "" ? rowObject.get("transportID") : "false";
                     osgObj.cabNeededOrNot = rowObject.get("pickupNeeded") == "true" || rowObject.get("pickupNeeded") == "true" ? "" : "ui-disabled"; // If pickup or drop needed enable 
-                    if (osgObj.accId != "false")
+                    osgObj.accHtml = "";
+                    osgObj.cabHtml = "";
+                    /*if (osgObj.accId != "false")
                         osgObj.accHtml = outstationMethods.getAllotedAccommodation(osgObj.accId);
                     if (osgObj.cabId != "false")
-                        osgObj.cabHtml = outstationMethods.getAllotedCab(osgObj.cabId);
+                        osgObj.cabHtml = outstationMethods.getAllotedCab(osgObj.cabId);*/
                     outstationMethods.osgArray.push(osgObj);
                 }
                 if (outstationMethods.osgArray.length > 0)
-                    outstationMethods.makeOSGLHtml();
+                    outstationMethods.processAccCabData();
                 /*var osGuestHtml = "";
                 for (var i = 0; i < foundOSGuest.length; i++) {
                     var rowObject = foundOSGuest[i];
@@ -105,6 +107,40 @@ var outstationMethods = {
             }
         })
     },
+    processAccCabData: function() {
+        // To check and get the data of accommodation and cab details
+        if (typeof outstationMethods.osgArray[outstationMethods.counter] != "undefined") {
+            // If the counter has not reached the size of osgArray
+            if (outstationMethods.osgArray[outstationMethods.counter].accId != "false") {
+                // Accommodation alloted
+                if (outstationMethods.osgArray[outstationMethods.counter].accHtml == "") {
+                    // Accommodation html not found invoke a method to get the html
+                    outstationMethods.getAllotedAccommodation(outstationMethods.osgArray[outstationMethods.counter].accId);
+                }
+            } else if (outstationMethods.osgArray[outstationMethods.counter].cabId != "false") {
+                // cab alloted
+                if (outstationMethods.osgArray[outstationMethods.counter].cabHtml == "") {
+                    // Cab html not found invoke a method to get the html
+                    outstationMethods.getAllotedCab(outstationMethods.osgArray[outstationMethods.counter].cabId);
+                }
+            } else {
+                // Both cab and accommodation not alloted so iterate the array to next counter value
+                if (outstationMethods.counter < outstationMethods.osgArray.length) {
+                    // counter value has not reached the size of osgArray
+                    outstationMethods.counter++;
+                    outstationMethods.processAccCabData();
+                } else {
+                    // counter has reached the size of osgArray so build the html
+                    outstationMethods.counter = 0;
+                    outstationMethods.makeOSGLHtml();
+                }
+            }
+        } else {
+            // counter has reached the size of osgArray so build the html
+            outstationMethods.counter = 0;
+            outstationMethods.makeOSGLHtml();
+        }
+    },
     makeOSGLHtml: function() {
         // To build the html text for showing the list of outstation guests
         var rowObject = outstationMethods.osgArray[outstationMethods.counter];
@@ -160,9 +196,10 @@ var outstationMethods = {
         }
         osGuestHtml += '</div>'; // Collapsible set end
         outstationMethods.counter++;
-        if (outstationMethods.counter < outstationMethods.osgArray.length)
+        if (outstationMethods.counter < outstationMethods.osgArray.length) {
+            
             outstationMethods.makeOSGLHtml();
-        else
+        } else
             $("#outstationGuestList").html(osGuestHtml).trigger("create");
     },
     getAllotedAccommodation: function(allocatedAccID) {
@@ -177,8 +214,15 @@ var outstationMethods = {
                 formattedAccommodation += "Hotel Name: " + allocatedAccommodation.get("hotelName");
                 formattedAccommodation += "<br/>No.Of Rooms:" + allocatedAccommodation.get("noOfRooms");
                 formattedAccommodation += "<br/>Occupancy:4"; //ToDo:Include Occupancy field
-                console.warn("formattedAccommodation:"+formattedAccommodation);
-                return formattedAccommodation;
+                console.warn("formattedAccommodation:" + formattedAccommodation);
+                outstationMethods.osgArray[outstationMethods.counter].accHtml = formattedAccommodation;
+                if (outstationMethods.osgArray[outstationMethods.counter].cabId != "false")
+                    outstationMethods.getAllotedCab(outstationMethods.osgArray[outstationMethods.counter].cabId);
+                else if (outstationMethods.counter < outstationMethods.osgArray.length) {
+                    outstationMethods.counter++;
+                    outstationMethods.processAccCabData();
+                }
+                // return formattedAccommodation;
 
             },
             error: function() {
@@ -199,8 +243,15 @@ var outstationMethods = {
                 formattedCab += "Driver Name: " + allocatedCab.get("driverName");
                 formattedCab += "<br/>Driver No: " + allocatedCab.get("driverContactNo");
                 formattedCab += "<br/>Car No: " + allocatedCab.get("vehicleNumber");
-                console.warn("formattedCab:"+formattedCab);
-                return formattedCab;
+                console.warn("formattedCab:" + formattedCab);
+                outstationMethods.osgArray[outstationMethods.counter].cabHtml = formattedCab;
+                if (outstationMethods.counter < outstationMethods.osgArray.length) {
+                    outstationMethods.counter++;
+                    outstationMethods.processAccCabData();
+                } else {
+                    outstationMethods.counter = 0;
+                    outstationMethods.makeOSGLHtml();
+                }
             },
             error: function() {
                 cm.showAlert("Sorry!Couldn't fetch Allocated Cab");

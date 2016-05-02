@@ -1,8 +1,9 @@
 <section data-role="page" id="galleryPage" class="albumsbg jqm-demos jqm-home">
     <header data-role="header" id="pageheader" class="jqm-header">
-        <a href="#" onclick="history.back()"><img src="img/Back_arrow.png"></a>
-        <p class="pagetitle">Albums</p>
         <a href="#shaadiMenu" data-rel="popup" data-transition="slideup" class="menuicon ui-btn ui-btn-inline"></a>
+        <!-- <a href="#" onclick="history.back()"><img src="img/Back_arrow.png"></a> -->
+        <p class="pagetitle">Albums</p>
+        <a href="#" class="chatIcon" onclick="dashboardMethods.showContactForChat();"><img src="img/chat.png" /></a>
     </header>
     <article data-role="content" id="pagecontent" class="jqm-content">
         <div class="foralbumpopup" data-role="popup" id="createAlbumPopup" data-overlay-theme="b" data-theme="b" data-dismissible="false" style="max-width:400px;">
@@ -36,14 +37,17 @@
         </div>
         <div id="galleryOptionBlock" class="topbartools albumtools belowheader" style="display:none;">
             <ul>
-                <li onclick="galleryMethods.makeAlbumsPrivate()">
+                <li onclick="galleryMethods.collectGalleryId('makeAlbumsPrivate')">
                     <a href="#"><img src="img/lock.png" class="lock"> <span>Make it Private</span></a>
                 </li>
                 <li onclick="galleryMethods.showGalleryPopup('renameAlbumPopup')">
                     <a href="#"><img src="img/pencil-white.png"> <span>Rename</span></a>
                 </li>
-                <li onclick="galleryMethods.showGalleryPopup('deleteAlbumPopup');">
+                <li onclick="galleryMethods.collectGalleryId('deleteAlbumPopup');">
                     <a href="#"><img src="img/delete-icon.png"> <span>Delete</span></a>
+                </li>
+                <li onclick="galleryMethods.changeCover();">
+                    <a href="#"><img src="img/pencil-white.png"> <span>Change Cover</span></a>
                 </li>
                 <!-- <li onclick="galleryMethods.makeAlbumsPrivate()"><img src="img/lock.png"> <span>Make it Private</span></li>
                 <li onclick="galleryMethods.showGalleryPopup('renameAlbumPopup')"><img src="img/pencil-white.png"> <span>Rename</span></li>
@@ -62,7 +66,7 @@
     <script type="text/javascript">
     $("#galleryPage").ready(function() {
         galleryMethods.fetchAlbums();
-
+        localStorage.changeCover = "false";
     });
     </script>
 </section>

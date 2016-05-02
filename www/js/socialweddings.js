@@ -123,23 +123,24 @@ var socialWeddingMethods = {
                     weddingHtml += '<div class="social-profile-img">'; // Wedding Cover picture div start
                     weddingHtml += imageHtml;
                     weddingHtml += '<div class="seen-status">'; // Wedding Status div start
-                    weddingHtml += '<span class="seen-past">'+ weddingDetObj.weddingDate +'</span>'; // Status span for past
+                    weddingHtml += '<span class="seen-past">' + weddingDetObj.weddingDate + '</span>'; // Status span for past
                     weddingHtml += '</div>'; // Wedding Status div end
                     weddingHtml += '</div>'; // Wedding Cover picture div end
                     weddingHtml += '<div class="social-profile-details">'; // Wedding info div start
                     weddingHtml += '<div class="social-subtitle" style="display:none"></div>'; // Wedding sub title
-                    weddingHtml += '<div class="profile-name">' + cm.trimText(weddingDetObj.coupleName,14) + '</div>'; // Couples name
+                    weddingHtml += '<div class="profile-name">' + cm.trimText(weddingDetObj.coupleName, 14) + '</div>'; // Couples name
                     weddingHtml += '<div class="profile-dateofbirth">' + weddingDetObj.dayAndTime + '</div>'; // Wedding Date
                     weddingHtml += '</div>'; // Wedding info div end
                     weddingHtml += '</div>'; // Wedding details div end
+                    var checkOrNot = localStorage.joinedWedding == weddingDetObj.wedId ? "checked" : "";
                     weddingHtml += '<div class="wedding-list-right">'; // Wedding Checkbox div start
-                    weddingHtml += '<label><input name="checkbox-0 " type="radio" data-wid="' + weddingDetObj.wedId + '" \
+                    weddingHtml += '<label><input ' + checkOrNot + ' name="checkbox-0 " type="radio" data-wid="' + weddingDetObj.wedId + '" \
                                                                     data-diffDays="' + weddingDetObj.diffDays + '"  data-dater="' + weddingDetObj.dayAndTime + '" data-name="' + weddingDetObj.coupleName + '" data-weddingdate="' + weddingDetObj.dateOfWedding + '" data-wdt="' + weddingDetObj.weddingDate + '"data-status="before" data-img="' + imageFile + '"onclick="socialWeddingMethods.selectWedding(this)"></label>'; // Checkbox
                     weddingHtml += '</div>'; // Wedding Checkbox div end 
                     weddingHtml += '</div>'; // Wedding Listitem container end
                 } else {
                     //This marriage yet to happen
-                    var dayOrDays=weddingDetObj.diffdays==1?"Day":"Days";
+                    var dayOrDays = weddingDetObj.diffdays == 1 ? "Day" : "Days";
                     weddingHtml += '<div class="social-wedding-list" data-wid="' + weddingDetObj.wedId + '" \
                                                                     data-diffDays="' + weddingDetObj.diffDays + '"  data-dater="' + weddingDetObj.dayAndTime + '" data-name="' + weddingDetObj.coupleName + '" data-weddingdate="' + weddingDetObj.dateOfWedding + '" data-wdt="' + weddingDetObj.weddingDate + '" data-status="left" data-img="' + imageFile + '"onclick="socialWeddingMethods.selectWedding(this)">'; // Wedding Listitem container start
                     weddingHtml += '<div class="wedding-list-left checked-list">'; // // Wedding details div start
@@ -147,12 +148,12 @@ var socialWeddingMethods = {
                     weddingHtml += imageHtml;
                     weddingHtml += '<div class="seen-status">'; // Wedding Status div start
                     weddingHtml += '<span class="seen-date">' + weddingDetObj.diffDays + '</span>'; // No. of days left span
-                    weddingHtml += '<span class="seen-day">'+dayOrDays+' Left</span>'; // Days Left span
+                    weddingHtml += '<span class="seen-day">' + dayOrDays + ' Left</span>'; // Days Left span
                     weddingHtml += '</div>'; // Wedding Status div end
                     weddingHtml += '</div>'; // Wedding Cover picture div end
                     weddingHtml += '<div class="social-profile-details">'; // Wedding info div start
                     weddingHtml += '<div class="social-subtitle"></div>'; // Wedding sub title
-                    weddingHtml += '<div class="profile-name">' + cm.trimText(weddingDetObj.coupleName,14) + '</div>'; // Couples name
+                    weddingHtml += '<div class="profile-name">' + cm.trimText(weddingDetObj.coupleName, 14) + '</div>'; // Couples name
                     weddingHtml += '<div class="profile-dateofbirth">' + weddingDetObj.dayAndTime + '</div>'; // Wedding Date
                     weddingHtml += '</div>'; // Wedding info div end
                     weddingHtml += '</div>'; //  Wedding details div end
@@ -166,6 +167,8 @@ var socialWeddingMethods = {
                 }
             }
             $("#weddingList").html(weddingHtml).trigger("create"); //.listview("refresh").trigger("create")
+            if($(".social-wedding-list").length==1)
+                $(".social-wedding-list").trigger("click");
             $("body").removeClass("ui-loading");
         } else {
             cm.showToast("You are not having any active Wedding Invites");
@@ -305,7 +308,7 @@ var socialWeddingMethods = {
         console.log(localStorage.joinedWedding);
         if ($(selectedWedding).data('status') == "before")
         // cm.showAlert("Sorry!This wedding is over you cannot Join now");
-            socialWeddingMethods.showWeddingDetails(selectedWedding, "dashboard");
+            socialWeddingMethods.showWeddingDetails(selectedWedding, "storyboard");
         else {
             /* navigator.notification.confirm(
                  'Are you sure do you want to join this wedding?', // message
@@ -319,7 +322,7 @@ var socialWeddingMethods = {
                  'Join Wedding', // title
                  ['Yes', 'No'] // buttonLabels
              );*/
-            socialWeddingMethods.showWeddingDetails(selectedWedding, "dashboard");
+            socialWeddingMethods.showWeddingDetails(selectedWedding, "storyboard");
         }
 
     },
@@ -369,6 +372,7 @@ var brideAndGroomName = $(selectedWedding).data('name');*/
                         if (rowObject.get("weddingID") == weddingId) {
                             console.log("Host man");
                             weddingDetailsObject.usertype = "host";
+							localStorage.taskusertype = "host";
                             weddingDetailsObject.relation = rowObject.get("relationToBrideGroom");
                             localStorage.weddingDetailsObject = JSON.stringify(weddingDetailsObject);
                             localStorage.userId = rowObject.get("hostID");
@@ -395,6 +399,7 @@ var brideAndGroomName = $(selectedWedding).data('name');*/
                                     if (rowObject.get("weddingID") == weddingId) {
                                         console.log("Guest man");
                                         weddingDetailsObject.usertype = "guest";
+										localStorage.taskusertype = "guest";
                                         localStorage.weddingDetailsObject = JSON.stringify(weddingDetailsObject);
                                         localStorage.userId = rowObject.get("guestID");
                                         localStorage.userName = rowObject.get("guestName");

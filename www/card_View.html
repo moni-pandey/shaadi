@@ -16,118 +16,114 @@
 		<link href='https://fonts.googleapis.com/css?family=Roboto:400,900,700,500' rel='stylesheet' type='text/css'>
 	</head>
 	<body>-->
-	
-	    <section data-role="page" class="jqm-demos jqm-home" id="viewCard">
-		    
-			<div id="pageheader" data-role="header" class="jqm-header"> <a href="card_List.html"><img src="img/Back_arrow.png"></a>
-                <p class="pagetitle">Invitation Cards</p>
-                    <a href="#shaadiMenu" data-rel="popup" data-transition="slideup" class="menuicon ui-btn ui-btn-inline"></a>
+<section data-role="page" class="jqm-demos jqm-home" id="viewCard">
+    <div id="pageheader" data-role="header" class="jqm-header">
+        <a href="" onclick="history.back()"><img src="img/Back_arrow.png"></a>
+        <p class="pagetitle">Invitation Cards</p>
+        <a href="#shaadiMenu" data-rel="popup" data-transition="slideup" class="menuicon ui-btn ui-btn-inline"></a>
+        <a href="#" class="chatIcon" onclick="dashboardMethods.showContactForChat();"><img src="img/chat.png" /></a>
+    </div>
+    <article id="pagecontent" role="main" class="jqm-content">
+        <div class="viewcardlist">
+            <h3 class="e-card-text"><img  id="starimg" src="img/star.png">Best Seller</h3>
+            <div class="add-favourites">Favourites
+                <h6 class="fav-count">4</h6>
+                <img src="img/fav.png" class="fav-img">
             </div>
-			
-			<article id="pagecontent" role="main" class="jqm-content">
-			    <div class="viewcardlist">
-    	            <h3 class="e-card-text"><img  id="starimg" src="img/star.png">Best Seller</h3>
-                    <div class="add-favourites">Favourites 
-					        <h6 class="fav-count">4</h6>
-					        <img src="img/fav.png" class="fav-img">
-					</div>
-			        
-					<div class="profile-detail">
-        	                <img class="wedding-card-img" src="img/1-image.png">
-							<img src="img/fav-on.png"  class="add-favorites-icon">
-							
-						<div class="ui-grid-b">
-                            <div class="ui-block-a">
-                                <div class="ui-bar ui-bar-a" style="background-color:transparent; border:none; padding:18px 10px 3px 0">
-                                    <img class="wedding-card-img i1" src="img/1-image.png">
-                                </div>
-                            </div>
-                            <div class="ui-block-b">
-                                <div class="ui-bar ui-bar-a" style="background-color:transparent; border:none; padding:18px 5px 3px">
-                                    <img class="wedding-card-img i2" src="img/1-image.png">
-                                </div>
-                            </div>
-							<div class="ui-block-c">
-                                <div class="ui-bar ui-bar-a" style="background-color:transparent; border:none; padding:18px 0 3px 10px">
-                                    <img class="wedding-card-img i3" src="img/1-image.png">
-                                </div>
-                            </div>
+            <div class="profile-detail">
+                <img class="wedding-card-img" src="img/1-image.png">
+                <img src="img/fav-on.png" class="add-favorites-icon">
+                <div class="ui-grid-b">
+                    <div class="ui-block-a">
+                        <div class="ui-bar ui-bar-a" style="background-color:transparent; border:none; padding:18px 10px 3px 0">
+                            <img class="wedding-card-img i1" src="img/1-image.png">
                         </div>
-						
-							<p class="card-name-n-price" style="margin-bottom:20px;">Card Name <span>&#8377 7/-</span></p>
-							
-						<div class="ui-grid-a">
-                            <div class="ui-block-a">
-                                <div class="ui-bar ui-bar-a" style="background-color:transparent;border:none;padding-left:0; margin-top:-10px;">
-                                    <p class="card-info">Color</p>
-									<p class="card-info">Type</p>
-									<p class="card-info">Theme</p>
-									<p class="card-info">Orientation</p>
-									<p class="card-info">Printing</p>
-                                </div>
-                            </div>
-                            <div class="ui-block-b">
-                                <div class="ui-bar ui-bar-a" style="background-color:transparent;border:none; margin-top:-10px;">
-                                    <p class="card-color"><span></span> Green</p>
-									<p class="card-details ctype">E Card</p>
-									<p class="card-details theme">Ganesha</p>
-									<p class="card-details ori">Horizontal</p>
-									<p class="card-details print">Offset</p>
-                                </div>
-                            </div>
-                        </div>
-						<a href="#" class="add-to-my-fav-btn subpagejoin ui-btn ui-mini addtofav" data-like="liked" onclick="weddingcard.likeprod(this)"><img src="img/fav-white.png" class="fav-white "   > Add to my Favourite</a>
                     </div>
-				    
-					<p class="quantity-text">Quantity</p>
-                        <div data-role="controlgroup" data-type="horizontal">
-                             <button class="quantity-decrease-btn" id="minus" onclick="weddingcard.calQuantity(this)" >-</button>
-                             <input class="input-card-quantity" type="number" data-wrapper-class="controlgroup-textinput ui-btn">
-                             <button class="quantity-increase-btn " onclick="weddingcard.calQuantity(this)" id="plus">+</button>
+                    <div class="ui-block-b">
+                        <div class="ui-bar ui-bar-a" style="background-color:transparent; border:none; padding:18px 5px 3px">
+                            <img class="wedding-card-img i2" src="img/1-image.png">
                         </div>
-					<p class="cards-mrp">Price of Cards<span style="" class="totalamtt">&#8377 3,500</span>
-					   <h6 class="conditions">*shipping charges extra</h6>
-					</p>
-					
-					<a href="#" class="orange-btn subpagejoin ui-btn ui-mini" onclick="weddingcard.yourorder()">Order Card</a>
-				</div>
-		        <div id="pagefooter" data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer"> </div>
-              </article>
-		
-<!-- /page -->
-<script type="text/javascript"  src="js/weddingCard.js"></script>
-<script type="text/javascript">
-
+                    </div>
+                    <div class="ui-block-c">
+                        <div class="ui-bar ui-bar-a" style="background-color:transparent; border:none; padding:18px 0 3px 10px">
+                            <img class="wedding-card-img i3" src="img/1-image.png">
+                        </div>
+                    </div>
+                </div>
+                <p class="card-name-n-price" style="margin-bottom:20px;">Card Name <span>&#8377 7/-</span></p>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <div class="ui-bar ui-bar-a" style="background-color:transparent;border:none;padding-left:0; margin-top:-10px;">
+                            <p class="card-info">Color</p>
+                            <p class="card-info">Type</p>
+                            <p class="card-info">Theme</p>
+                            <p class="card-info">Orientation</p>
+                            <p class="card-info">Printing</p>
+                        </div>
+                    </div>
+                    <div class="ui-block-b">
+                        <div class="ui-bar ui-bar-a" style="background-color:transparent;border:none; margin-top:-10px;">
+                            <p class="card-color"><span></span> Green</p>
+                            <p class="card-details ctype">E Card</p>
+                            <p class="card-details theme">Ganesha</p>
+                            <p class="card-details ori">Horizontal</p>
+                            <p class="card-details print">Offset</p>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="add-to-my-fav-btn subpagejoin ui-btn ui-mini addtofav" data-like="liked" onclick="weddingcard.likeprod(this)"><img src="img/fav-white.png" class="fav-white "> Add to my Favourite</a>
+            </div>
+            <p class="quantity-text">Quantity</p>
+            <div data-role="controlgroup" data-type="horizontal">
+            
+                <button class="quantity-decrease-btn" id="minus" onclick="weddingcard.calQuantity(this)">-</button>
+            
+                <input class="input-card-quantity" type="number" data-wrapper-class="controlgroup-textinput ui-btn">
+                <button class="quantity-increase-btn " onclick="weddingcard.calQuantity(this)" id="plus">+</button>
+            </div>
+            <p class="cards-mrp">Price of Cards<span style="" class="totalamtt">&#8377 3,500</span>
+                <h6 class="conditions">*shipping charges extra</h6>
+            </p>
+            <a href="#" class="orange-btn subpagejoin ui-btn ui-mini" onclick="weddingcard.yourorder()">Order Card</a>
+        </div>
+        <div id="pagefooter" data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer"> </div>
+    </article>
+    <!-- /page -->
+    <script type="text/javascript" src="js/weddingCard.js"></script>
+    <script type="text/javascript">
     $("#viewcard").ready(function() {
 
-		console.log(localStorage.price)
-		$('.card-color').html('<span></span>'+localStorage.color)
-		$('.card-name-n-price').html( localStorage.cname +'<span>' +localStorage.price +'/-</span>' )
-		$('.ctype').text(localStorage.cardtype)
-		$('.yo').html('&#8377'+localStorage.price)
-		$('.fav-count').html(localStorage.favcount)
-		$('.totalamtt').html('<span>&#8377</span>' + localStorage.price)
-		$('.theme').text(localStorage.theme)
-		$('.ori').text(localStorage.orientation)
-		$('.print').text(localStorage.printing)
-		$('.i1').attr("src" ,localStorage.i1)
-		$('.i2').attr("src" ,localStorage.i2)
-		$('.i3').attr("src" ,localStorage.i3)
-        if(localStorage.linkeunlike!='liked')
-	{	$('.add-favorites-icon').attr('src' ,'img/fav-off.png')
-	
-	$('.addtofav').data('like' ,'unlike')
-	
-	}
-	$('.addtofav').data('cardid' ,localStorage.cardid)
-		$('.addtofav').attr('id' ,localStorage.cardid)
-		
+        console.log(localStorage.price)
+        $('.card-color').html('<span></span>' + localStorage.color)
+        $('.card-name-n-price').html(localStorage.cname + '<span>' + localStorage.price + '/-</span>')
+        $('.ctype').text(localStorage.cardtype)
+        $('.yo').html('&#8377' + localStorage.price)
+        $('.fav-count').html(localStorage.favcount)
+        $('.totalamtt').html('<span>&#8377</span>' + localStorage.price)
+        $('.theme').text(localStorage.theme)
+        $('.ori').text(localStorage.orientation)
+        $('.print').text(localStorage.printing)
+        $('.i1').attr("src", localStorage.i1)
+        $('.i2').attr("src", localStorage.i2)
+        $('.i3').attr("src", localStorage.i3)
+        if (localStorage.linkeunlike != 'liked') {
+            $('.add-favorites-icon').attr('src', 'img/fav-off.png')
+
+            $('.addtofav').data('like', 'unlike')
+
+        }
+        $('.addtofav').data('cardid', localStorage.cardid)
+        $('.addtofav').attr('id', localStorage.cardid)
+
     });
-	
-	if(localStorage.color.toLowerCase() =='green')
-	     $('.card-color span').css({  "background-color":"#73ac07"});
-		 else
-		 $('.card-color span').css({  "background-color":"#ff8500"}); 
-	      
-	</script>
-	</section>
+
+    if (localStorage.color.toLowerCase() == 'green')
+        $('.card-color span').css({
+            "background-color": "#73ac07"
+        });
+    else
+        $('.card-color span').css({
+            "background-color": "#ff8500"
+        });
+    </script>
+</section>

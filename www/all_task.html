@@ -1,0 +1,99 @@
+<section data-role="page" class="jqm-demos jqm-home" id="loadTask">
+    <div id="pageheader" data-role="header" class="jqm-header">
+        <a href="#shaadiMenu" data-rel="popup" data-transition="slideup" class="menuicon ui-btn ui-btn-inline"></a>
+        <!-- <a href="#"><img onclick="history.back()" src="img/Back_arrow.png"></a> -->
+        <p class="pagetitle">All Task</p>
+        <div class="topbartools">
+            <ul>
+                <li class="place-icon" style="padding-right:5px;"><img src="img/search-icon.png" onclick="taskmthds.showSeach()"></li>
+                <li class="create-new-icon"><img src="img/create-New-task.png" onclick="taskmthds.createtask()"></li>
+                <li class="delete-icon" onclick="dashboardMethods.showContactForChat();"><img src="img/chat.png"></li>
+            </ul>
+        </div>
+    </div>
+    <article id="pagecontent" role="main" class="jqm-content">
+        <div class="search-task">
+            <div data-role="controlgroup" data-type="horizontal" style="margin:20px auto 0;">
+                <button class="ui-btn ui-icon-arrow-l ui-btn-icon-left button_back" id="hidebtn"></button>
+                <input type="text" data-wrapper-class="controlgroup-textinput ui-btn" id="enterartist">
+                <button class="ui-btn ui-icon-delete ui-btn-icon-right cross-button" id="clearbtn"></button>
+            </div>
+        </div>
+        <div style="text-align:center; padding:20px 15px;">
+            <div data-role="controlgroup" data-type="horizontal" class="task-btns-bg">
+                <a href="#" class="ui-btn task-btns selected-task-tab" id="all">All</a>
+                <a href="#" class="ui-btn task-btns" id="pending" onclick="taskmthds.pendingList()">Pending</a>
+                <a href="#" class="ui-btn task-btns" id="completed" onclick="taskmthds.completedList()">Completed</a>
+            </div>
+        </div>
+        <div class="cardlist" style="margin-top:-20px;">
+            <!--  <div class="profile-detail" style="padding-bottom:1px">
+				        <h6 class="deadline-day-text"><img src="img/task-date.png">Deadline 18 Apr 2016 
+						    <span style="float:right;">
+							    <h6 class="mark-complete-text">Mark Complete <img src="img/mark-complete.png"></h6>
+							</span>
+						</h6>
+						<h3 class="name-of-task">Gold Rings <img src="img/edit-task.png"></h3>
+						<h5 class="task-details">Order gold rings</h5>
+						<h6 class="assign-to-text">
+						    Assign to: 
+							<span>John Doe</span>
+							<span class="delete-assigned"><img src="img/delete-red.png"></span>
+					    </h6>
+					</div>
+					
+					<div class="profile-detail" style="padding-bottom:1px">
+				        <h6 class="deadline-day-text"><img src="img/task-date.png">Deadline 18 Apr 2016 
+						    <span style="float:right;">
+							    <h6 class="mark-complete-text">Mark Complete <img src="img/mark-complete.png"></h6>
+							</span>
+						</h6>
+						<h3 class="name-of-task">Find Photographer <img src="img/edit-task.png"></h3>
+						<h5 class="task-details">wedding photography</h5>
+						<h6 class="assign-to-text">
+						    Assign to: 
+							<span>John Doe</span>
+							<span class="delete-assigned"><img src="img/delete-red.png"></span>
+					    </h6>
+					</div>
+					
+					<div class="profile-detail" style="padding-bottom:1px">
+				        <h6 class="deadline-day-done"><img src="img/calendar-gray.png">Deadline 18 Apr 2016 
+						    <span style="float:right;">
+							    <h6 class="completed-text">Completed <img src="img/completed.png"></h6>
+							</span>
+						</h6>
+						<h3 class="name-of-task-completed">Gold Rings</h3>
+						<h5 class="task-details-completed">Order gold rings</h5>
+						<h6 class="assign-to-text-completed">
+						    Assign to: 
+							<span>John Doe</span>
+							<span class="delete-assigned"><img src="img/delete-gray.png"></span>
+					    </h6>
+					</div> -->
+        </div>
+        <div id="pagefooter" data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer"> </div>
+    </article>
+    <!-- /page -->
+    <script type="text/javascript" src="js/task.js"></script>
+    <script type="text/javascript">
+    $("#loadTask").ready(function() {
+        $('.search-task').hide();
+
+        if (localStorage.taskusertype == 'host') {
+            taskmthds.loadhosttask();
+        } else {
+            taskmthds.loadguesttask();
+        }
+        $(document).on('click', '#all', function() {
+            $('.cardlist').html(' ')
+            if (localStorage.taskusertype == 'host') {
+                taskmthds.loadhosttask();
+            } else {
+                taskmthds.loadguesttask();
+            }
+        })
+
+    });
+    </script>
+</section>

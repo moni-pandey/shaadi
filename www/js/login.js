@@ -29,8 +29,8 @@ var loginMethods = {
         //To prompt user to enter his/her mobile number for verification
         mobileNumber = $('#mobileNumInput').intlTelInput("getNumber");
         var countryData = $("#mobileNumInput").intlTelInput("getSelectedCountryData");
-        localStorage.userDialCode=countryData.dialCode;
-        console.warn("countryData:"+countryData.dialCode)
+        localStorage.userDialCode = countryData.dialCode;
+        console.warn("countryData:" + countryData.dialCode)
         if (mobileNumber == '' || mobileNumber == null) {
             cm.showAlert("Enter Mobile Number");
         } else if (isNaN(mobileNumber)) {
@@ -38,8 +38,9 @@ var loginMethods = {
         } else if (!($("#mobileNumInput").intlTelInput("isValidNumber"))) {
             cm.showAlert("Enter a valid Number");
         } else {
-            var smsText = "Verification code for Shaadi app is 77889"; // sms text
-            if (SMS) {
+            localStorage.autoGenOTP=Math.floor(Math.random()*90000) + 10000;
+            var smsText = "Verification code for Shaadi app is "+localStorage.autoGenOTP; // sms text
+            if (SMS && navigator.userAgent.match(/Android/i)) {
                 // If SMS plugin is supported
                 SMS.sendSMS(mobileNumber, smsText, function() {
                     /*$(":mobile-pagecontainer").pagecontainer("change", "verifycode.html", {
@@ -55,12 +56,12 @@ var loginMethods = {
                 }, function(str) {
                     cm.showAlert(str);
                 });
-            } else { 
+            } else {
                 // SMS plugin is not available so using social sharing plugin for sending sms
-                if(device.isVirtual){
+                if (device.isVirtual) {
                     // If the app is running in simulator
                     loginMethods.changeToVerifyCodePage(); // navigate to verify code page
-                    $('#otpBox').val("770889");
+                    $('#otpBox').val(localStorage.autoGenOTP);
                     // cm.showToast("Please enter your OTP");
                     return;
                 }
@@ -108,10 +109,10 @@ var loginMethods = {
         //Fill the starting 5 digits of the Missed call which has been received
         var smsData = e.data;
         $("#otpBox").val((smsData.body).replace(/^\D+/g, ''));
-		loginMethods.verifyNumber();
+        loginMethods.verifyNumber();
     },
     verifyNumber: function() {
-        if ($('#otpBox').val() == "77889") {
+        if ($('#otpBox').val() == localStorage.autoGenOTP) {
             cm.showToast("Verified your mobile number");
             if (SMS) SMS.stopWatch(function() {}, function() {});
             localStorage.userMobile = parseInt(mobileNumber);

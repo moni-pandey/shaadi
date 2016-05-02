@@ -1,6 +1,7 @@
 var eventsMethods = {
     eventGuestsArray: [],
     createdGuestContactId: [],
+    counter: 0,
     showPopup: function(popupName) {
         // To open popups
         $("#" + popupName).popup("open");
@@ -21,6 +22,7 @@ var eventsMethods = {
                 success: function() {
                     localStorage.editEventGuestFlag = "false"; // disable editing
                     localStorage.editableEventId = ""; // clear the selected event id
+                    localStorage.invitedGuests = ""; // clear the invited guests value
                     cm.showToast("Event guests updated successfully");
                     $("body").removeClass("ui-loading");
                     eventsMethods.listEvents();
@@ -49,22 +51,29 @@ var eventsMethods = {
                 var rowObject = weddingResults[0];
                 var dateOfWedding = rowObject.get('dateOfWedding');
                 var timeDiff = cm.dateDiffCalc(dateOfWedding);
-                $("#daysLeft").html(timeDiff);
                 var weddingDetailsObject = JSON.parse(localStorage.weddingDetailsObject);
-                $("#dayType").html("Days " + weddingDetailsObject.status);
+                if (timeDiff >= 0) {
+                    // Furture wedding
+                    $("#daysLeft").html(timeDiff);
+                    $("#dayType").html("Days " + weddingDetailsObject.status);
+                } else
+                // Past wedding 
+                    $("#daysLeft,#dayType").hide();
+
+
                 $("#cName").html(weddingDetailsObject.brideAndGroomName);
                 $("#nofdaysdiv").show();
                 $("#weddateDetails").html("Join us on " + weddingDetailsObject.dater + " for our Wedding");
-                if (weddingDetailsObject.usertype == "guest"){
+                if (weddingDetailsObject.usertype == "guest") {
                     // $(".addeventcls").hide();
+                    console.warn("Guest hide add event button");
                     $("#eventAdderBtn").hide();
-                }
-                
-                else if(weddingDetailsObject.usertype == "host"){
+                } else if (weddingDetailsObject.usertype == "host") {
+                    console.warn("Host show add event button");
                     $("#eventAdderBtn").show(); // Add event button will be visible only for Host
                     // $(".addeventcls").show();
                 }
-                
+
                 $("body").removeClass("ui-loading");
                 eventsMethods.listEvents();
             },
@@ -190,10 +199,12 @@ var eventsMethods = {
     },
     validateEvent: function(pickContact) {
         eventAction = localStorage.eventAction;
-        if (localStorage.editEventGuestFlag == "true") {
+        pickContact = pickContact == "pickContact" ? "pickContact" : "";
+        if (localStorage.editEventGuestFlag == "true" && pickContact == "pickContact") {
             eventsMethods.changeToInviteGuestPage(localStorage.editableEventId);
             return;
         }
+        console.warn("pickContact:" + pickContact);
         if ($("#addEventName").val() == "")
             cm.showAlert("Please enter Event name");
 
@@ -209,15 +220,15 @@ var eventsMethods = {
             cm.showAlert("Event date shouldn't be after 30 days of wedding");
         else if ($("#addEventTime").val() == "")
             cm.showAlert("Please enter Event time");
-        else if (localStorage.invitedGuests == "" || localStorage.invitedGuests == null)
+        else if (localStorage.invitedGuests == "" || localStorage.invitedGuests == null && typeof pickContact == "")
             cm.showAlert("Please Invite guests for the Event");
         /*else if ($("#addEventVenu").val() == "")
             cm.showAlert("Please enter Event venue");*/
         else {
             if (eventAction == "add")
-                eventsMethods.addEvent("pickContact");
+                eventsMethods.addEvent(pickContact);
             else if (eventAction == "edit")
-                eventsMethods.updateEvent("pickContact");
+                eventsMethods.updateEvent(pickContact);
 
         }
     },
@@ -243,7 +254,10 @@ var eventsMethods = {
     },
     addEvent: function(pickContact) {
         // To add an event 
-        $("body").addClass("ui-loading");
+		//issseu 28 fix
+		var selected_value = $('#addEventMenu').val()
+		 if(selected_value) { 
+      $("body").addClass("ui-loading");
         var eventClass = Parse.Object.extend("Event");
         var eventObj = new eventClass();
         eventObj.set("eventName", $("#addEventName").val());
@@ -265,16 +279,8 @@ var eventsMethods = {
                 if (pickContact == "pickContact") {
                     // If pick contact is choosed change to contacts list page
                     eventsMethods.changeToInviteGuestPage(eventSuccess.id);
-                }
-                /*$('#addEventName').val('');
-                $('#addEventDate').val('');
-                $('#addEventTime').val('');
-                //$('#addEventVenu').val('');
-                $('#addEventMenu').val('');
-                $('#addEventDes').val('');
-                $("#eventImg,#eventImg_edit").prop("src", "");
-                $("#eventPic,#eventPic_edit").hide();
-                $("#eventPicTemplate").show();*/
+                } else
+                    localStorage.invitedGuests = "";
                 eventsMethods.toggleEventAdd(); // Hide the add/edit block after adding
                 cm.showToast('Event Added Successfully');
                 $("body").removeClass("ui-loading");
@@ -284,6 +290,14 @@ var eventsMethods = {
                 $("body").removeClass("ui-loading");
             }
         });
+		
+		           }//end if
+ else
+ {
+	 
+	 cm.showToast("select from menu ");
+ }
+		
     },
     editEvent: function(selectedEvent) {
         //To Edit a event
@@ -331,7 +345,7 @@ var eventsMethods = {
                 }
                 // $('#addEventMenu').val(rowObject.get('Menu')).change();
                 $('#addEventDes').val(rowObject.get('eventDesc'));
-                localStorage.userLatLng = rowObject.get('venueLocationLatitude')+","+rowObject.get('venueLocationLongitude');
+                localStorage.userLatLng = rowObject.get('venueLocationLatitude') + "," + rowObject.get('venueLocationLongitude');
                 localStorage.userLat = rowObject.get('venueLocationLatitude');
                 localStorage.userLng = rowObject.get('venueLocationLongitude');
                 //localStorage.eventAction="add";
@@ -363,21 +377,12 @@ var eventsMethods = {
         eventObj.save(null, {
             success: function(eventSuccess) {
                 eventObj.set("eventID", eventSuccess.id);
-
                 eventObj.save();
                 if (pickContact == "pickContact") {
                     // If pick contact is choosed change to contacts list page
                     eventsMethods.changeToInviteGuestPage(eventSuccess.id);
-                }
-                /*$('#addEventName').val('');
-                $('#addEventDate').val('');
-                $('#addEventTime').val('');
-                // $('#addEventVenu').val('');
-                $('#addEventMenu').val('');
-                $('#addEventDes').val('');
-                $("#eventImg,#eventImg_edit").prop("src", "");
-                $("#eventPic,#eventPic_edit").hide();
-                $("#eventPicTemplate").show();*/
+                } else
+                    localStorage.invitedGuests = ""; // clear the invite guests value
                 eventsMethods.toggleEventAdd(); // Hide the add/edit block after updating
                 cm.showToast('Event Updated Successfully');
                 $("body").removeClass("ui-loading");
@@ -462,7 +467,7 @@ var eventsMethods = {
             $.mobile.silentScroll($('.addeventcls').offset().top);
         $('#addEventName').val('');
         $('#addEventDate').val(moment().format('YYYY-MM-DD')); // show current date
-        $('#addEventTime').val(moment().format('hh:mm')); // show current time
+        $('#addEventTime').val(moment().format('HH:MM')); // show current time
         //$('#addEventVenu').val('');
         //$('#addEventMenu').val('');
         $('#addEventDes').val('');
@@ -508,10 +513,10 @@ var eventsMethods = {
         };
         map = plugin.google.maps.Map.getMap(mapOptions);
         map.addEventListener(plugin.google.maps.event.MAP_READY, onMapReady);
-        map.addEventListener(plugin.google.maps.event.MAP_CLICK, function(latLng){
-            localStorage.userLat=latLng.lat;
-            localStorage.userLng=latLng.lng;
-            localStorage.userLatLng=latLng;
+        map.addEventListener(plugin.google.maps.event.MAP_CLICK, function(latLng) {
+            localStorage.userLat = latLng.lat;
+            localStorage.userLng = latLng.lng;
+            localStorage.userLatLng = latLng;
             onMapReady();
         });
 
@@ -608,7 +613,7 @@ var eventsMethods = {
                     groomHtml += '<li class="contactli" data-guestname="' + guestName + '" data-guestid="' + rowObject.get("guestID") + '" data-guestorhost="guest" data-mobilenumber="' + rowObject.get("mobileNo") + '" data-emailid="' + rowObject.get("Email") + '">'; // Contact Start
                     groomHtml += '<a href="#"> <img src="img/no-pic.png">'; // Contact picture
                     groomHtml += '<h2>' + guestName + '</h2>'; // Contact name start and end
-                    // groomHtml += '<p class="' + contactsMethods.statusClassGenerator(rowObject.get('status')) + '">' + contactsMethods.statusChecker(rowObject.get('status')) + '</p></a>'; // Contact status
+                    groomHtml += '<p class="' + contactsMethods.statusClassGenerator(rowObject.get('status')) + '">' + contactsMethods.statusChecker(rowObject.get('status')) + '</p></a>'; // Contact status
                     groomHtml += '</li>'; // Contact end
                 }
                 eventsMethods.fetchBrideGuests(groomHtml); // call to print the list of contacts
@@ -638,10 +643,41 @@ var eventsMethods = {
                     brideHtml += '<li class="contactli" data-guestname="' + guestName + '" data-guestid="' + rowObject.get("guestID") + '" data-guestorhost="guest" data-mobilenumber="' + rowObject.get("mobileNo") + '" data-emailid="' + rowObject.get("Email") + '">'; // Contact Start
                     brideHtml += '<a href="#"> <img src="img/no-pic.png">'; // Contact picture
                     brideHtml += '<h2>' + guestName + '</h2>'; // Contact name start and end
-                    // groomHtml += '<p class="' + contactsMethods.statusClassGenerator(rowObject.get('status')) + '">' + contactsMethods.statusChecker(rowObject.get('status')) + '</p></a>'; // Contact status
+                    brideHtml += '<p class="' + contactsMethods.statusClassGenerator(rowObject.get('status')) + '">' + contactsMethods.statusChecker(rowObject.get('status')) + '</p></a>'; // Contact status
                     brideHtml += '</li>'; // Contact end
                 }
-                eventsMethods.printContacts(brideHtml, "eventGuestList"); // call to print the list of contacts
+                eventsMethods.fetchMiscGuests(brideHtml); // call to print the list of contacts
+                // eventsMethods.printContacts(brideHtml, "eventGuestList"); // call to print the list of contacts
+                $("body").removeClass("ui-loading");
+            },
+            error: function() {
+                cm.showAlert("Sorry!Unable to fetch contacts");
+                $("body").removeClass("ui-loading");
+            }
+        });
+    },
+    fetchMiscGuests: function(brideHtml) {
+        // To list all uncategorized guests
+        var guestClass = Parse.Object.extend("Guest");
+        var guestObj = new guestClass();
+        var queryGuest = new Parse.Query(guestObj);
+        queryGuest.equalTo("weddingID", localStorage.joinedWedding);
+        queryGuest.doesNotExist("brideOrGroomSide");
+        queryGuest.ascending("guestName");
+        $("body").addClass("ui-loading");
+        queryGuest.find({
+            success: function(foundGroomGuests) {
+                var completeHtml = brideHtml + '<li data-role="list-divider">Misc</li>';
+                for (var i = 0; i < foundGroomGuests.length; i++) {
+                    var rowObject = foundGroomGuests[i];
+                    var guestName = rowObject.get('guestName');
+                    completeHtml += '<li class="contactli" data-guestname="' + guestName + '" data-guestid="' + rowObject.get("guestID") + '" data-guestorhost="guest" data-mobilenumber="' + rowObject.get("mobileNo") + '" data-emailid="' + rowObject.get("Email") + '">'; // Contact Start
+                    completeHtml += '<a href="#"> <img src="img/no-pic.png">'; // Contact picture
+                    completeHtml += '<h2>' + guestName + '</h2>'; // Contact name start and end
+                    completeHtml += '<p class="' + contactsMethods.statusClassGenerator(rowObject.get('status')) + '">' + contactsMethods.statusChecker(rowObject.get('status')) + '</p></a>'; // Contact status
+                    completeHtml += '</li>'; // Contact end
+                }
+                eventsMethods.printContacts(completeHtml, "eventGuestList"); // call to print the list of contacts
                 $("body").removeClass("ui-loading");
             },
             error: function() {
@@ -662,7 +698,8 @@ var eventsMethods = {
                 contactObject.guestname = $(item).data("guestname");
                 contactObject.guestphone = $(item).data("mobilenumber");
                 contactObject.duplicate = false;
-                if (eventsMethods.createdGuestContactId.length > 0) {
+                eventsMethods.eventGuestsArray.push(contactObject);
+                /*if (eventsMethods.createdGuestContactId.length > 0) {
                     for (var i = 0; i < eventsMethods.createdGuestContactId.length; i++) {
                         console.log("contactObject.guestid:" + contactObject.guestid);
                         if (contactObject.guestid == eventsMethods.createdGuestContactId[i])
@@ -670,49 +707,77 @@ var eventsMethods = {
                         else
                             eventsMethods.eventGuestsArray.push(contactObject);
                     }
-                    /*contactsMethods.createdPhoneContactId.each(function(value) {
-                        if (contactObject.guestid == value) console.log("Sorry!This is an duplicate entry");
-                        else contactsMethods.contactsArray.push(contactObject);
-                    });*/
+                    
                 } else
-                    eventsMethods.eventGuestsArray.push(contactObject);
+                    eventsMethods.eventGuestsArray.push(contactObject);*/
 
             }
         });
-        eventsMethods.checkForExistance();
+        if (eventsMethods.eventGuestsArray.length > 0)
+            eventsMethods.checkForExistance();
     },
     checkForExistance: function() {
-        //To check the existance of the contacts in parse db    :ToDo:Check for the existance in Parse DB    
-        for (i = 0; i < eventsMethods.eventGuestsArray.length; i++) {
-            // var tempContact = contactsMethods.contactsArray[i];
-            var eventGuestClass = Parse.Object.extend("EventGuest");
-            var eventGuestObj = new eventGuestClass();
-            var queryEventGuest = new Parse.Query(eventGuestObj);
-            var queryEventId = queryEventGuest.equalTo("eventID", localStorage.inviterEventID);
-            var queryEventGuestPhone = queryEventGuest.equalTo("mobileNo", eventsMethods.eventGuestsArray[i].guestphone);
-            var compoundGuestQuery = Parse.Query.or(queryEventId, queryEventGuestPhone);
-            compoundGuestQuery.find({
-                success: function(foundContactResult) {
-                    if (foundContactResult.length == 0) {
-                        console.log("Result not found in Parse we could add it");
-                    } else {
-                        /*debugger;
-                            
-                            contactsMethods.contactsArray[i].duplicate = true;
-                            // contactsMethods.contactsArray.splice(i, 1);
-                            // delete contactsMethods.contactsArray[i];
-                            debugger;*/
-                        console.log("i: " + i);
-                        console.log("contactsArray inside else: " + JSON.stringify(eventsMethods.eventGuestsArray[i]));
-                    }
-                },
-                error: function(error) {
-                    cm.showAlert("Sorry!Couldn't add Guest");
+
+        //To check the existance of the contacts in parse db    
+        var noOfContactSelected = eventsMethods.eventGuestsArray.length;
+        var eventGuestClass = Parse.Object.extend("EventGuest");
+        var eventGuestObj = new eventGuestClass();
+        var queryEventGuest = new Parse.Query(eventGuestObj);
+        queryEventGuest.equalTo("eventID", localStorage.inviterEventID);
+        queryEventGuest.equalTo("mobileNo", eventsMethods.eventGuestsArray[eventsMethods.counter].guestphone.toString());
+        $("body").addClass("ui-loading");
+        queryEventGuest.find().then(function(foundGuests) {
+            if (foundGuests.length > 0) {
+                // Guest already exist so skip it and iterate to the next contact
+                eventsMethods.counter++;
+                if (eventsMethods.counter < noOfContactSelected)
+                    eventsMethods.checkForExistance();
+                else {
+                    eventsMethods.counter = 0; // reset the counter value to 0
+                    localStorage.editableEventId = localStorage.inviterEventID;
+                    localStorage.inviterEventID = ""; // clear the cached event id
+                    eventsMethods.inviteGuests("custom");
+                    $(":mobile-pagecontainer").pagecontainer("change", "event.html", {
+                        showLoadMsg: false
+                    });
                 }
-            });
-            // cm.sleep(3000);
-        }
-        eventsMethods.saveSelectedContacts();
+            } else {
+                // New Guest so can be added
+                var eventGuestClass = Parse.Object.extend("EventGuest");
+                var eventGuestObj = new eventGuestClass();
+                eventsMethods.createdGuestContactId.push(eventsMethods.eventGuestsArray[eventsMethods.counter].guestid);
+                eventGuestObj.set("eventID", localStorage.inviterEventID);
+                eventGuestObj.set("guestName", eventsMethods.eventGuestsArray[eventsMethods.counter].guestname);
+                eventGuestObj.set("guestPhone", (eventsMethods.eventGuestsArray[eventsMethods.counter].guestphone).toString());
+                eventGuestObj.set("addedBy", localStorage.userId);
+                eventGuestObj.set("guestID", eventsMethods.eventGuestsArray[eventsMethods.counter].guestid);
+                eventGuestObj.set("status", "Invited");
+                eventGuestObj.save(null, {
+                    success: function(addedGuest) {
+                        console.log("Added Guest Id: " + addedGuest.id);
+                        eventsMethods.counter++;
+                        if (eventsMethods.counter < noOfContactSelected)
+                            eventsMethods.checkForExistance();
+                        else {
+                            eventsMethods.counter = 0; // reset the counter value to 0
+                            localStorage.editableEventId = localStorage.inviterEventID;
+                            localStorage.inviterEventID = ""; // clear the cached event id
+                            eventsMethods.inviteGuests("custom");
+                            $(":mobile-pagecontainer").pagecontainer("change", "event.html", {
+                                showLoadMsg: false
+                            });
+                        }
+                        $("body").removeClass("ui-loading");
+                        // All contacts has been invited now change to events page
+
+                    },
+                    error: function() {
+                        cm.showAlert("Sorry!Couldn't add Guest");
+                        $("body").removeClass("ui-loading");
+                    }
+                });
+            }
+        });
     },
     saveSelectedContacts: function() {
         //To Save the selected Contacts in Parse DB
@@ -731,8 +796,13 @@ var eventsMethods = {
                 eventGuestObj.save(null, {
                     success: function(addedGuest) {
                         console.log("Added Guest Id: " + addedGuest.id);
+                        if (eventsMethods.eventGuestsArray.length == i)
+                        // All contacts has been invited now change to events page
+                            $(":mobile-pagecontainer").pagecontainer("change", "event.html", {
+                            showLoadMsg: false
+                        });
 
-                        eventGuestObj.save();
+                        // eventGuestObj.save();
                         // console.log("tempContact after adding: " + JSON.stringify(tempContact));
                     },
                     error: function() {

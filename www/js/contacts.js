@@ -5,6 +5,7 @@ var contactsMethods = {
     //To store selected Contacts
     selectedContactsArray: [],
     iterator: 0,
+    counter: 0, // For checking existance
     sourceToGetContacts: function(contactSource) {
         //To Select Contact source
         // cm.showToast("Coming Soon");
@@ -147,7 +148,8 @@ var contactsMethods = {
                     contactObject.guestphone = $(item).data("guestphone");
                     contactObject.duplicate = false;
                 }
-                if (contactsMethods.createdPhoneContactId.length > 0) {
+                contactsMethods.contactsArray.push(contactObject);
+                /*if (contactsMethods.createdPhoneContactId.length > 0) {
                     for (var i = 0; i < contactsMethods.createdPhoneContactId.length; i++) {
                         console.log("contactObject.guestid:" + contactObject.guestid);
                         if (contactObject.guestid == contactsMethods.createdPhoneContactId[i])
@@ -155,24 +157,76 @@ var contactsMethods = {
                         else
                             contactsMethods.contactsArray.push(contactObject);
                     }
-                    /*contactsMethods.createdPhoneContactId.each(function(value) {
-                        if (contactObject.guestid == value) console.log("Sorry!This is an duplicate entry");
-                        else contactsMethods.contactsArray.push(contactObject);
-                    });*/
+                    
                 } else
-                    contactsMethods.contactsArray.push(contactObject);
+                    contactsMethods.contactsArray.push(contactObject);*/
 
             }
         });
-        contactsMethods.checkForExistance();
+        if (contactsMethods.contactsArray.length > 0)
+            contactsMethods.checkForExistance();
 
         // console.log(contactsMethods.contactsArray);
     },
     checkForExistance: function() {
-        //To check the existance of the contacts in parse db    :ToDo:Check for the existance in Parse DB    
+        //To check the existance of the contacts in parse db    :ToDo:Check for the existance in Parse DB 
+        var noOfContactSelected = contactsMethods.contactsArray.length;
         if (localStorage.contactSource == "phone") {
-            console.log("contactsArray before for: " + JSON.stringify(contactsMethods.contactsArray));
-            for (i = 0; i < contactsMethods.contactsArray.length; i++) {
+            console.log("contactsArray while checking" + JSON.stringify(contactsMethods.contactsArray));
+            var guestClass = Parse.Object.extend("Guest");
+            var guestObj = new guestClass();
+            var queryGuest = new Parse.Query(guestObj);
+            queryGuest.equalTo("weddingID", localStorage.joinedWedding);
+            queryGuest.equalTo("mobileNo", contactsMethods.contactsArray[contactsMethods.counter].guestphone.toString());
+            $("body").addClass("ui-loading");
+            queryGuest.find().then(function(foundGuests) {
+                if (foundGuests.length > 0) {
+                    // Guest already exist so skip it and iterate to the next contact
+                    contactsMethods.counter++;
+                    if (contactsMethods.counter < noOfContactSelected)
+                        contactsMethods.checkForExistance();
+                    else {
+                        contactsMethods.counter=0; // reset the counter value to 0
+                        localStorage.cachedContacts = ""; // clear the cache to refresh the contacts after importing
+                        $(":mobile-pagecontainer").pagecontainer("change", "contacts.html", {
+                            showLoadMsg: false
+                        });
+                    }
+                } else {
+                    // New Guest so can be added
+                    var guestClass = Parse.Object.extend("Guest");
+                    var guestObj = new guestClass();
+                    // contactsMethods.createdPhoneContactId.push(contactsMethods.contactsArray[i].guestid);
+                    guestObj.set("weddingID", localStorage.joinedWedding);
+                    guestObj.set("guestName", contactsMethods.contactsArray[contactsMethods.counter].guestname);
+                    guestObj.set("mobileNo", (contactsMethods.contactsArray[contactsMethods.counter].guestphone).toString());
+                    guestObj.set("addedBy", localStorage.userId);
+                    guestObj.set("status", "Not Invited");
+                    guestObj.save(null, {
+                        success: function(addedGuest) {
+                            console.log("Added Guest Id: " + addedGuest.id);
+                            guestObj.set("guestID", addedGuest.id);
+                            guestObj.save();
+                            contactsMethods.counter++;
+                            if (contactsMethods.counter < noOfContactSelected)
+                                contactsMethods.checkForExistance();
+                            else {
+                                contactsMethods.counter=0; // reset the counter value to 0
+                                localStorage.cachedContacts = ""; // clear the cache to refresh the contacts after importing
+                                $(":mobile-pagecontainer").pagecontainer("change", "contacts.html", {
+                                    showLoadMsg: false
+                                });
+                            }
+                            $("body").removeClass("ui-loading");
+                        },
+                        error: function() {
+                            cm.showAlert("Sorry!Couldn't add Guest");
+                            $("body").removeClass("ui-loading");
+                        }
+                    });
+                }
+            });
+            /*for (i = 0; i < contactsMethods.contactsArray.length; i++) {
                 // var tempContact = contactsMethods.contactsArray[i];
                 var guestClass = Parse.Object.extend("Guest");
                 var guestObj = new guestClass();
@@ -185,12 +239,6 @@ var contactsMethods = {
                         if (foundContactResult.length == 0) {
                             console.log("Result not found in Parse we could add it");
                         } else {
-                            /*debugger;
-                            
-                                contactsMethods.contactsArray[i].duplicate = true;
-                                // contactsMethods.contactsArray.splice(i, 1);
-                                // delete contactsMethods.contactsArray[i];
-                                debugger;*/
                             console.log("i: " + i);
                             console.log("contactsArray inside else: " + JSON.stringify(contactsMethods.contactsArray[i]));
                         }
@@ -198,10 +246,9 @@ var contactsMethods = {
                     error: function(error) {
                         cm.showAlert("Sorry!Couldn't add Guest");
                     }
-                });
-                // cm.sleep(3000);
+                });                
             }
-            contactsMethods.saveSelectedContacts();
+            contactsMethods.saveSelectedContacts();*/
         }
     },
     checkContactExistOrNot: function(userNumber, successMethod) {
@@ -745,7 +792,7 @@ var contactsMethods = {
                 hostObj.set("hostID", addHostSuccess.id);
                 hostObj.save();
                 cm.showToast("Successfully added Host");
-                localStorage.cachedContacts=""; // clear the cached contacts
+                localStorage.cachedContacts = ""; // clear the cached contacts
                 $("body").removeClass("ui-loading");
                 $(":mobile-pagecontainer").pagecontainer("change", "contacts.html", {
                     showLoadMsg: false
@@ -832,6 +879,7 @@ var contactsMethods = {
                     if (localStorage.cSPopupShown == "true")
                         $("#contactStatusPopup").popup("close");
                     // $("#contactOptionBlock").hide();
+                    localStorage.cachedContacts=""; // clear cached contacts
                     contactsMethods.fetchContactsList();
                     cm.showToast("Deleted Contacts Successfully");
                 }
@@ -1419,9 +1467,9 @@ $("#contactList").on("taphold", "li.contactli", function() {
     var weddingDetailsObject = JSON.parse(localStorage.weddingDetailsObject);
     if (weddingDetailsObject.usertype == "host")
         $(this).toggleClass("single-selected");
-    if ($("li.single-selected").length > 0) // To show or hide the Contacts options
+    /*if ($("li.single-selected").length > 0) // To show or hide the Contacts options
         $("#contactOptionBlock").show();
-    else $("#contactOptionBlock").hide();
+    else $("#contactOptionBlock").hide();*/
 });
 
 $("input[name='nHGender']").on("click", function() {

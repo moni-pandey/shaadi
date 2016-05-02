@@ -1,26 +1,26 @@
 <section data-role="page" id="friendsListPage" class="jqm-demos jqm-home">
     <header data-role="header" id="pageheader" class="jqm-header">
-        <a href="dashboard.html"><img src="img/Back_arrow.png"></a>
+        <a href="#shaadiMenu" data-rel="popup" data-transition="slideup" class="menuicon ui-btn ui-btn-inline"></a>
+        <!-- <a href="#" onclick="history.back()"><img src="img/Back_arrow.png"></a> -->
         <p class="pagetitle">Friends</p>
         <div class="topbartools">
             <ul>
                 <li style="visibility:hidden" class="place-icon"><img src="img/search-icon.png"></li>
                 <li class="share-icon" onclick="messagingMethods.showContactForMessaging()"><img src="img/add-guests-icon.png"></li>
-                <li  style="visibility:hidden" class="delete-icon"><img src="img/filter-icon.png"></li>
+                <li style="visibility:hidden" class="delete-icon"><img src="img/filter-icon.png"></li>
             </ul>
         </div>
     </header>
     <article data-role="content" id="pagecontent" class="jqm-content">
-
-    	<div class="contact-list friends-contacts">
-    		 <ul data-role="listview" data-inset="true" id="friendsList"></ul>
-    	</div>
+        <div class="contact-list friends-contacts">
+            <ul data-role="listview" data-inset="true" id="friendsList"></ul>
+        </div>
     </article>
     <script type="text/javascript" src="js/messaging.js"></script>
     <script type="text/javascript">
-    	$("#friendsListPage").ready(function() {
-    		// When Friends list page is ready load conversations
-    		messagingMethods.getConversationList();
-    	});
+    $("#friendsListPage").ready(function() {
+        // When Friends list page is ready load conversations
+        messagingMethods.getConversationList();
+    });
     </script>
 </section>

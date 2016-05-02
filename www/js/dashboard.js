@@ -44,6 +44,13 @@ var dashboardMethods = {
         $(":mobile-pagecontainer").pagecontainer("change", "friendscontacts.html", {
             showLoadMsg: false
         });
+    },
+	
+	showTask:function(){
+        // To show list of friends contacts
+        $(":mobile-pagecontainer").pagecontainer("change", "all_task.html", {
+            showLoadMsg: false
+        });
     }
 
 

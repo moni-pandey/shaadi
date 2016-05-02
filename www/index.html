@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Manage your Shaadi</title>
     <link rel="stylesheet" href="css/themes/default/jquery.mobile-1.4.5.min.css">
- 
     <link rel="stylesheet" href="css/intlTelInput.css">
     <link rel="stylesheet" href="css/app.css">
     <script type="text/javascript" src="js/jquery.js"></script>
@@ -22,21 +21,71 @@
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/moment/moment.min.js"></script>
     <script type="text/javascript" src="js/intelinput/intlTelInput.min.js"></script>
- 
     <script type="text/javascript" src="js/commonmethods.js"></script>
+    <script type="text/javascript" src="js/dashboard.js"></script>
 </head>
 
 <body>
-    <div data-role="popup" id="shaadiMenu" data-theme="a">
+    <!-- <div data-role="popup" id="shaadiMenu" data-theme="a">
         <ul data-role="listview" data-inset="true" style=" width:100% !important;">
-            <!-- li data-role="list-divider">Menu</li -->
             <li><a href="socialweddings.html">Switch Wedding</a></li>
             <li><a href="faq.html">FAQ</a></li>
             <li><a href="privacy_policy.html">Privacy Policy</a></li>
             <li><a href="#">Profile</a></li>
             <li><a href="#" onclick="cm.rateus()">rate us</a></li>
         </ul>
+    </div> -->
+ <!--   <div data-role="panel" id="shaadiMenu" data-theme="b" data-display="overlay" style="background-color:#6c0512" data-position-fixed="true" data-position="left">
+        <ul data-role="listview" class="left-menu">
+            <!-- <li><a href="#" >Messaging</a></li>/////
+            <li onclick="dashboardMethods.showContact('normal');"><a href="#">Contacts</a></li>
+            <li onclick="dashboardMethods.showGallery();"><a href="#">Gallery</a></li>
+            <li onclick="dashboardMethods.showEvents();"><a href="#">Event</a></li>
+            <li onclick="dashboardMethods.showStoryBoard();"><a href="#">StoryBoard</a></li>
+            <li onclick="dashboardMethods.showManager();"><a href="#">Travel</a></li>
+            <li onclick="dashboardMethods.showTask();"><a href="#">Tasks</a></li>
+            <li onclick="dashboardMethods.showContactForChat();"><a href="#">Chat</a></li>
+            <li onclick="dashboardMethods.showWeddingCard();"><a href="#">Wedding Card</a></li>
+            <li><a href="socialweddings.html">Switch Wedding</a></li>
+            <!-- <li class="divider"></li> ///
+            <li><a href="#">Profile</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="privacy_policy.html">Privacy Policy</a></li>
+            <!-- <li><a href="#" onclick="cm.rateus()">Rate us</a></li> ///
+        </ul>
     </div>
+	
+	-->
+	
+		<div data-role="panel" id="shaadiMenu" data-theme="b" data-role='none'  class="panel-top-bg" >
+				    
+                    <img src="./img/couple-photo.png" class="couple-pic-in-menu" height="50" width="50">
+					<p class="couple-name-in-menu">Vivek & Elina</p>
+                    <ul data-role="listview" class="left-menu">
+					    <li data-icon="none" and data-iconpos="none"onclick="dashboardMethods.showStoryBoard();" ><a href="#"><img src="./img/story-board.png" class="menu-icons"> Story Board</a></li>
+						<li data-icon="none" and data-iconpos="none" onclick="dashboardMethods.showEvents();"><a href="#"><img src="./img/event.png" class="menu-icons"> Events </a></li>
+						<li data-icon="none" and data-iconpos="none" onclick="dashboardMethods.showGallery();"><a href="#"><img src="./img/gallery.png" class="menu-icons" style="margin-top:12px;"> Gallery</a></li>
+						<li data-icon="none" and data-iconpos="none" onclick="dashboardMethods.showContact('normal');"><a href="#"><img src="./img/contact-menu.png" class="menu-icons" > Contacts</a></li>
+						<li data-icon="none" and data-iconpos="none" onclick="dashboardMethods.showManager();"><a href="#"><img src="./img/travel.png" class="menu-icons" >Travel</a></li>
+						
+						<li class="divider"></li>
+						
+						<li data-icon="none" and data-iconpos="none" onclick="dashboardMethods.showTask();"><a href="#"><img src="./img/todo.png" class="menu-icons" >To Do</a></li>
+						<li data-icon="none" and data-iconpos="none" onclick="dashboardMethods.showWeddingCard();"><a href="#"><img src="./img/wedding.png" class="menu-icons" >Wedding Card</a></li>
+						
+						<li class="divider"></li>
+						
+						<li data-icon="none" and data-iconpos="none"><a href="#"><img src="./img/profile.png" class="menu-icons" >Profile</a></li>
+						<li data-icon="none" and data-iconpos="none"><a href="privacy_policy.html"><img src="./img/privacy-policy.png" class="menu-icons" >Privacy Policy</a></li>
+						<li data-icon="none" and data-iconpos="none"><a href="faq.html"><img src="./img/faq.png" class="menu-icons" >FAQ</a></li>
+						
+						<li class="divider"></li>
+						
+						<li data-icon="none" and data-iconpos="none"><a href="socialweddings.html"><img src="./img/switch.png" class="menu-icons" >Switch Wedding</a></li>
+					</ul>
+                
+				</div>
+	
     <section data-role="page" id="first-page" class="redbgimg jqm-demos jqm-home">
         <header data-role="header" id="pageheader" class="jqm-header">
             <a href="#"><img src="img/wp_logo.png"></a>
@@ -51,7 +100,7 @@
         </div>
         <article data-role="content" id="pagecontent" class="jqm-content">
             <a href="#" class="joinbtn ui-btn ui-mini" onclick="loginMethods.numberVerificatonExisting();">Join Wedding</a>
-            <a href="#" style="display: none" class="newbtn ui-btn ui-mini" onclick="loginMethods.numberVerificatonNew();">New Wedding</a>
+            <a href="#" class="newbtn ui-btn ui-mini" onclick="loginMethods.numberVerificatonNew();">New Wedding</a>
         </article>
         <footer data-role="footer" id="pagefooter" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
         </footer>
@@ -65,7 +114,7 @@
             }
             cm.handleBack(); // stop the hardware back button functionality
             navigator.splashscreen.show(); //Force show Splash Screen
-            $("#shaadiMenu").popup().enhanceWithin(); //Initialize the External panel
+            $("#shaadiMenu").panel().enhanceWithin(); //Initialize the External panel
             localStorage.cachedContacts = ""; // clear the cachedContacts on device ready
             // Just to verify whether already the user has logged in
             if (localStorage.userMobile != null) {

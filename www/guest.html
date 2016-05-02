@@ -17,39 +17,35 @@
 	</head>
 	<body>
 	-->
-	    <section data-role="page" class="jqm-demos jqm-home" id="guest">
-		    
-			<div id="pageheader" data-role="header" class="jqm-header"> <a href="javascript:history.back()"><img src="img/Back_arrow.png"></a>
-                <p class="pagetitle">Invitation Cards</p>
-                <a href="#shaadiMenu" data-rel="popup" data-transition="slideup" class="menuicon ui-btn ui-btn-inline"></a>
+<section data-role="page" class="jqm-demos jqm-home" id="guest">
+    <div id="pageheader" data-role="header" class="jqm-header">
+        <a href="#shaadiMenu" data-rel="popup" data-transition="slideup" class="menuicon ui-btn ui-btn-inline"></a>
+        <a href="history.back()"><img src="img/Back_arrow.png"></a>
+        <p class="pagetitle">Invitation Cards</p>
+        <a href="#" class="chatIcon" onclick="dashboardMethods.showContactForChat();"><img src="img/chat.png" /></a>
+    </div>
+    <div id="pagecontent" role="main" class="jqm-content">
+        <div class="cardlist">
+            <h3 class="e-card-text">Send To My Guests</h3>
+            <div class="profile-detail">
+                <div class="ui-grid-a" style="margin:-8px -10px -5px -5px;">
+                    <div class="ui-block-a">
+                        <p class="upload-content-text">Upload File</p>
+                        <h6 class="file-type">*.docx, .xlsx, .pdf & .txt</h6>
+                    </div>
+                    <div class="ui-block-b" style="padding:13px 0 0 5px">
+                        <input type="file" data-role="none" style="display:none;" id="profilePhotoFileUpload" onchange="weddingcard.uploadfile()" />
+                        <div href="" onclick="$('#profilePhotoFileUpload').click();" class="upload-content-btn"><img src="img/upload.png" class="upload-icon">Upload File</div>
+                    </div>
+                </div>
             </div>
-			
-			<div id="pagecontent" role="main" class="jqm-content">
-			    <div class="cardlist">
-    	            <h3 class="e-card-text">Send To My Guests</h3>
-                
-						<div class="profile-detail">
-					    <div class="ui-grid-a" style="margin:-8px -10px -5px -5px;">
-                            <div class="ui-block-a">
-                                <p class="upload-content-text">Upload File</p>
-								<h6 class="file-type">*.docx, .xlsx, .pdf & .txt</h6>
-                            </div>
-                            <div class="ui-block-b" style="padding:13px 0 0 5px">
-								<input  type="file" data-role="none" style="display:none;"  id="profilePhotoFileUpload"  onchange="weddingcard.uploadfile()"/>
-                                <div href="" onclick="$('#profilePhotoFileUpload').click();" class="upload-content-btn"><img src="img/upload.png" class="upload-icon">Upload File</div>
-                            </div>
-                        </div>
-					</div>
-					
-					<h6 class="or-text" style="margin:12px auto -4px;">_____________________<span>or</span>_____________________</h6>
-					
-					<div class="profile-detail">
-					    <a href="#" class="select-from-contact-btn subpagejoin ui-btn ui-mini"><img src="img/contact-list.png" class="contact-list-icon">Select From Contact</a>
-						
-						<a href="#" class="select-all-contact-btn subpagejoin ui-btn ui-mini"><img src="img/tickmark.png" class="tick-list-icon" onclick="weddingcard.selectAll()">Select All</a>
-						<div class="contact-list">
-						    <ul data-role="listview" id="contactList" data-inset="true" style="box-shadow:none !important; border-radius:0 !important;">
-                              <!--  <li class="contact-unselected-bg"><a href="#"><img src="img/img.png" style="height:60%">
+            <h6 class="or-text" style="margin:12px auto -4px;">_____________________<span>or</span>_____________________</h6>
+            <div class="profile-detail">
+                <a href="#" class="select-from-contact-btn subpagejoin ui-btn ui-mini"><img src="img/contact-list.png" class="contact-list-icon">Select From Contact</a>
+                <a href="#" class="select-all-contact-btn subpagejoin ui-btn ui-mini"><img src="img/tickmark.png" class="tick-list-icon" onclick="weddingcard.selectAll()">Select All</a>
+                <div class="contact-list">
+                    <ul data-role="listview" id="contactList" data-inset="true" style="box-shadow:none !important; border-radius:0 !important;">
+                        <!--  <li class="contact-unselected-bg"><a href="#"><img src="img/img.png" style="height:60%">
 								    <h2 class="contact-unselected">Thomas & jennifer</h2></a>
 								</li>
 								
@@ -64,26 +60,21 @@
 								<li class="contact-selected-bg"><a href="#"> <img src="img/img.png" style="height:60%">
                                     <h2 class="contact-selected">Thomas & jennifer</h2></a> 
 								</li>-->
-							</ul>
-						</div>
-					</div>
-				    
-					<a href="#" class="send-now-btn subpagejoin ui-btn ui-mini" onclick="weddingcard.updateDB()" >Send Now</a>
-				</div>
-			</article>
-		    
-			<div id="pagefooter" data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer"> </div>
-      <!-- /page -->
+                    </ul>
+                </div>
+            </div>
+            <a href="#" class="send-now-btn subpagejoin ui-btn ui-mini" onclick="weddingcard.updateDB()">Send Now</a>
+        </div>
+        </article>
+        <div id="pagefooter" data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer"> </div>
+        <!-- /page -->
+        <script type="text/javascript" src="js/weddingCard.js"></script>
+        <script type="text/javascript" src="js/contacts.js"></script>
+        <script type="text/javascript">
+        $("#guest").ready(function() {
 
-<script type="text/javascript"  src="js/weddingCard.js"></script>
-<script type="text/javascript"  src="js/contacts.js"></script>
+            contactsMethods.fetchContactsList();
 
-<script type="text/javascript">
-
-    $("#guest").ready(function() {
-	
-       contactsMethods.fetchContactsList();
-
-    });
-	</script>
- </section >
+        });
+        </script>
+</section>

@@ -132,6 +132,9 @@ var cm = {
         var weddingDate = moment(weddingDetailsObject.formatedWeddingDate).startOf('day');
         var possibleEventStart = moment().startOf('day'); // Event can be  today 
         var possibleEventEnd = moment(weddingDate).add(30, 'days').endOf('day'); // Event can be held 30 days after  wedding date
+        if (possibleEventStart.isSame(moment(eventDate)))
+            return false;
+        console.warn("possibleEventStart:" + possibleEventStart + "possibleEventEnd:" + possibleEventEnd);
         var dateEventValidity = moment(eventDate).isBetween(possibleEventStart, possibleEventEnd);
         return !dateEventValidity;
     },
@@ -219,6 +222,41 @@ var cm = {
         console.log("handleBack called");
         document.addEventListener("backbutton", function() {
             console.log("Disabled Back button");
+            var activePage = $.mobile.pageContainer.pagecontainer("getActivePage");
+            var activePageId = activePage[0].id;
+            console.warn("activePageId:" + activePageId);
+/*            switch (activePageId) {
+                case 'first-page':
+                    console.log("Enabled back");
+                    break;
+                case 'requestVerificationCode':
+                    console.log("Disabled back");
+                    break;
+                case 'verifyCodePage':
+                    history.back();
+                    break;
+                case 'dashboard':
+                    history.back();
+                    break;
+                case 'weddingDetailsEdit':
+                    console.log("Enabled back");
+                    break;
+                case 'eventsPage':
+                    console.log("Enabled back");
+                    break;
+                case 'contactsPage':
+                    console.log("Enabled back");
+                    break;
+                case 'galleryPage':
+                    //cm.handleBack("true");
+                    console.log("Enabled back");
+                    break;
+                case 'managePage':
+                    //cm.handleBack("true");
+                    console.log("Enabled back");
+                    break;
+                default:
+            }*/
             /*   $(document).on("pagecontainershow", function() {
                    var activePage = $.mobile.pageContainer.pagecontainer("getActivePage");
 
@@ -271,10 +309,10 @@ var cm = {
 
     },
     rateus() {
-       // var customData = ""
+        // var customData = ""
 
-      //  Apptentive.engage(cm.successCallback, cm.errorCallback, 'rateUS', customData);
-	  console.log('rate')
+        //  Apptentive.engage(cm.successCallback, cm.errorCallback, 'rateUS', customData);
+        console.log('rate')
     },
     successCallback() {
 
@@ -291,3 +329,31 @@ var cm = {
 };
 
 cm.parseInitializer();
+$(document).on("pageinit", "#first-page,#AccommodationPage,#allotAccommodation,#allotCab,#cabPage,#cardfilter,#cardlistpage,#viewCard,#commentsPage,#friendsContactsPage,#contactsPage,#conversationPage,#eviewcard,#eventsPage,#eventsGuestPage,#faqPage,#favouritespages,#filterContactsPage,#filterlistpage,#galleryPage,#guest,#importContactPage,#managePage,#newGuestPage,#newHostPage,#newOSGuestPage,#newWeddingRegistration,#osguestRequestPage,#outstationGuestsPage,#pictureCommentsPage,#picturePage,#privacyPage,#pickContactPage,#sendToMe,#sendToself,#weddingDetailsEdit", function(event) {
+
+    $("#shaadiMenu").on("panelopen", function(event, ui) {
+        //setting overflow : hidden and binding "touchmove" with event which returns false
+        //$('body').css("overflow", "hidden").on("touchmove", stopScroll);
+    });
+
+    $("#shaadiMenu").on("panelclose", function(event, ui) {
+        //remove the overflow: hidden property. Also, remove the "touchmove" event. 
+        $('body').css("overflow", "auto").off("touchmove");
+    });
+
+    function stopScroll() {
+        $("#shaadiMenu").panel("close");
+        //return false;
+    }
+    $(document).on("swiperight", "#friendsListPage,#AccommodationPage,#allotAccommodation,#allotCab,#cabPage,#cardfilter,#cardlistpage,#viewCard,#commentsPage,#friendsContactsPage,#contactsPage,#conversationPage,#eviewcard,#eventsPage,#eventsGuestPage,#faqPage,#favouritespages,#filterContactsPage,#filterlistpage,#galleryPage,#guest,#importContactPage,#managePage,#newGuestPage,#newHostPage,#newOSGuestPage,#newWeddingRegistration,#osguestRequestPage,#outstationGuestsPage,#pictureCommentsPage,#picturePage,#privacyPage,#pickContactPage,#sendToMe,#sendToself,#weddingDetailsEdit", function(e) {
+        // We check if there is no open panel on the page because otherwise
+        // a swipe to close the left panel would also open the right panel (and v.v.).
+        // We do this by checking the data that the framework stores on the page element (panel: open).
+        if ($.mobile.activePage.jqmData("panel") !== "open") {
+            if (e.type === "swiperight") {
+                console.log("swiperight detected");
+                $("#shaadiMenu").panel("open");
+            }
+        }
+    });
+});

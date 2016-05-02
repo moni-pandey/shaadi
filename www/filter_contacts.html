@@ -1,10 +1,12 @@
 <section data-role="page" id="filterContactsPage" class="filterbg jqm-demos jqm-home">
     <header data-role="header" id="pageheader" class="jqm-header">
+        <a href="#shaadiMenu" data-rel="popup" data-transition="slideup" class="menuicon ui-btn ui-btn-inline"></a>
         <a href="#" onclick="history.back()"><img src="img/Back_arrow.png"></a>
         <p class="pagetitle">Import Contacts</p>
         <div class="filter-lable">Select All
             <input data-role="flipswitch" name="cSelectAll" id="cSelectAll" type="checkbox">
         </div>
+        <!-- <a href="#" class="chatIcon" onclick="dashboardMethods.showContactForChat();"><img src="img/chat.png" /></a> -->
     </header>
     <article data-role="content" id="pagecontent" class="jqm-content" class="jqm-content">
         <div class="filter-search">
@@ -22,10 +24,10 @@
                 <label>Invited By</label>
                 <div class="filter-lable">
                     <div class="individual-1 bridelable">Bride
-                        <input data-role="flipswitch"  id="cBride" type="checkbox">
+                        <input data-role="flipswitch" id="cBride" type="checkbox">
                     </div>
                     <div class="individual-1 groomlable">Groom
-                        <input data-role="flipswitch"  id="cGroom" type="checkbox">
+                        <input data-role="flipswitch" id="cGroom" type="checkbox">
                     </div>
                     <input data-role="flipswitch" id="cBrideAndGroom" type="checkbox">
                 </div>

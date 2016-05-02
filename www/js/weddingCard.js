@@ -212,6 +212,10 @@ var weddingcard = {
 				
 			 weddingcard.likecount--
 			   $('.fav-count').html(weddingcard.likecount)
+			   $('#noOffav').html('')
+			   var text =weddingcard.likecount + ' ' + 'Favourites'
+		        $('#noOffav').html('')
+		        $('#noOffav').html(text)
                     },
                     error:function(deleteWishError){
                         
@@ -251,6 +255,74 @@ var weddingcard = {
             })
 			
 		}
+		
+		
+	},	likeproductfav : function(id)
+	{  
+		var cardid = $(id).data('cardid')
+		var hidediv = $(id).data('cardid') +'profile'
+		if(weddingcard.likecount==0)
+		weddingcard.likecount=localStorage.favcount
+		var weddingDetailsObject = JSON.parse(localStorage.weddingDetailsObject);
+		//if($(id).data('like')=='liked')
+		//{
+	    var addfavClass = Parse.Object.extend("favCard");
+        var addfavQuery = new Parse.Query(addfavClass);
+        addfavQuery.equalTo("cardID", cardid);
+        addfavQuery.equalTo("weddingID", weddingDetailsObject.weddingId);
+        addfavQuery.find({
+            success:function(foundWish){
+                foundWish[0].destroy({
+                    success:function(deletedWishSuccess){
+                  $(id).data('like','unlike')
+				  $(id).attr("src","img/fav-off.png");
+				
+			 weddingcard.likecount--
+			   $('.fav-count').html(weddingcard.likecount)
+			   $('#noOffav').html('')
+			   var text =weddingcard.likecount + ' ' + 'Favourites'
+		        $('#noOffav').html('')
+		        $('#noOffav').html(text)
+				$('#'+hidediv).hide()
+                    },
+                    error:function(deleteWishError){
+                        
+                        cm.showAlert("error");
+                    }
+                })
+            },
+            error:function(wishError){
+                
+                cm.showAlert("error");
+            }
+        })
+		
+		
+		
+		
+	/*	}//end if
+		else 
+		{
+			//add to favcard table and 
+			var addfavClass = Parse.Object.extend("favCard");
+            var addfavObj = new addfavClass();
+            addfavObj.set("cardID", cardid);
+            addfavObj.set("weddingID", weddingDetailsObject.weddingId);
+			 addfavObj.save(null, {
+                success: function(wishResults) {
+                  addfavObj.save();
+                  console.log('liked')
+				  $(id).data('like','liked')
+				  $(id).attr("src","img/fav-on.png");
+				   weddingcard.likecount++
+			   $('.fav-count').html(weddingcard.likecount)
+               },
+                error: function(gameScore, error) {
+                     cm.showAlert("error");
+                }
+            })
+			
+		}*/
 		
 		
 	},
@@ -301,9 +373,9 @@ var weddingcard = {
 				console.log(results)
 				console.log(results[0])
 		                     var cardlistHTML =''
-		                     cardlistHTML +=' <div class="profile-detail">';
-							 cardlistHTML +='<img class="wedding-card-img" data-cardtype="'+rowObject.get('cardtype')+'" src="'+rowObject.get('imgurl1')+'"  id="'+rowObject.get('cardID')+'" data-theme="'+rowObject.get('theme')+'" data-price="'+rowObject.get('price')+'" data-orientation="'+rowObject.get('orientation')+'" data-printing="'+rowObject.get('printing')+'" data-best="'+rowObject.get('bestSeller')+'" data-color="'+rowObject.get('color')+'">'
-							 cardlistHTML +='<img src="img/fav-on.png" class="add-favorites-icon" data-cardid="'+rowObject.get('cardID')+'" id="'+rowObject.get('cardID')+'favlist" data-like="liked">';
+		                     cardlistHTML +=' <div class="profile-detail" id="'+rowObject.get('cardID')+'profile">';
+							 cardlistHTML +='<img class="wedding-card-img" data-cardtype="'+rowObject.get('cardtype')+'" data-cardid="'+rowObject.get('cardID')+'" src="'+rowObject.get('imgurl1')+'" data-like="liked"  onclick="weddingcard.getcardfavdetails(this)" data-i2="'+rowObject.get('imgurl2')+'" data-i3="'+rowObject.get('imgurl3')+'"  id="'+rowObject.get('cardID')+'"  data-cname="'+rowObject.get('cardName')+'" data-type="'+rowObject.get('type')+'" data-theme="'+rowObject.get('theme')+'" data-price="'+rowObject.get('price')+'" data-orientation="'+rowObject.get('orientation')+'" data-printing="'+rowObject.get('printing')+'" data-best="'+rowObject.get('bestSeller')+'" data-color="'+rowObject.get('color')+'">'
+						     cardlistHTML +='<img src="img/fav-on.png" class="add-favorites-icon" data-cardid="'+rowObject.get('cardID')+'" id="'+rowObject.get('cardID')+'favlist" onclick="weddingcard.likeproductfav(this)" data-like="liked"">';
 							 cardlistHTML +='<img src="img/uncheck.png" class="check-uncheck-icon" data-check="uncheck" data-checkedid="'+rowObject.get('cardID')+'" onclick="weddingcard.getselecteditem(this)">';
 							 cardlistHTML +='<p class="card-name-n-price">'+rowObject.get('cardName')+'<span>&#8377 '+rowObject.get('price')+'/-</span></p>';
 							 cardlistHTML +=' </div>' 
@@ -580,6 +652,35 @@ var weddingcard = {
 	}
 	,
 	getcarddetails : function(id)
+	{
+		localStorage.i1= $(id).attr('src')
+		localStorage.i2= $(id).data('i2')
+		localStorage.i3= $(id).data('i3')
+		localStorage.theme= $(id).data('theme')
+		localStorage.color= $(id).data('color')
+		localStorage.price= $(id).data('price')
+		localStorage.orientation= $(id).data('orientation')
+		localStorage.printing= $(id).data('printing')
+		localStorage.best= $(id).data('best')
+		localStorage.type= $(id).data('type')
+		localStorage.cname = $(id).data('cname')
+		localStorage.cardid = $(id).data('cardid')
+		localStorage.cardtype = $(id).data('cardtype')
+		localStorage.linkeunlike=$(id).data('like')
+		localStorage.favcount=weddingcard.likecount;
+		if(localStorage.cardtype=='e')
+			 $(":mobile-pagecontainer").pagecontainer("change", "e_Card.html", {
+            showLoadMsg: false
+        });
+		else
+		 $(":mobile-pagecontainer").pagecontainer("change", "card_View.html", {
+            showLoadMsg: false
+        });
+		
+		
+	}
+	,
+	getcardfavdetails : function(id)
 	{
 		localStorage.i1= $(id).attr('src')
 		localStorage.i2= $(id).data('i2')

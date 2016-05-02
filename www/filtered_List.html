@@ -19,27 +19,25 @@
 		<link href='https://fonts.googleapis.com/css?family=Roboto:400,900,700,500' rel='stylesheet' type='text/css'>
 	</head>
 	<body>-->
-	
-	   <section data-role="page" class="jqm-demos jqm-home" id="filterlistpage">
-		    
-			<header  id="pageheader" data-role="header" class="jqm-header"> <a href="javascript:history.back()"><img src="img/Back_arrow.png"></a>
-                <p class="pagetitle">Invitation Cards</p>
-                    <div class="topbartools">
-                        <ul>
-                            <li class="delete-icon" style="margin-left:25px"><img src="img/filter-icon.png" onclick="weddingcard.cardfilteragn()" ></li>
-                        </ul>
-                    </div>
-            </header >
-			
-			<article  id="pagecontent" role="main" class="jqm-content">
-			    <div class="cardlist">
-    	            <h3>Top Sellers</h3>
-                    <div class="add-favourites">Favourites 
-					        <h6 class="fav-count"></h6>
-					        <img src="img/fav.png" class="fav-img" onclick="weddingcard.gotofavlist()">
-					</div>
-			        
-					<!--<div class="profile-detail">
+<section data-role="page" class="jqm-demos jqm-home" id="filterlistpage">
+    <header id="pageheader" data-role="header" class="jqm-header">
+        <a href="history.back()"><img src="img/Back_arrow.png"></a>
+        <p class="pagetitle">Invitation Cards</p>
+        <div class="topbartools">
+            <ul>
+                <li class="delete-icon" style="margin-left:25px"><img src="img/filter-icon.png" onclick="weddingcard.cardfilteragn()"></li>
+                <li class="delete-icon" onclick="dashboardMethods.showContactForChat();"><img src="img/chat.png"></li>
+            </ul>
+        </div>
+    </header>
+    <article id="pagecontent" role="main" class="jqm-content">
+        <div class="cardlist">
+            <h3>Top Sellers</h3>
+            <div class="add-favourites">Favourites
+                <h6 class="fav-count"></h6>
+                <img src="img/fav.png" class="fav-img" onclick="weddingcard.gotofavlist()">
+            </div>
+            <!--<div class="profile-detail">
         	                <img class="wedding-card-img" src="img/1-image.png">
 							<img src="img/fav-on.png" class="add-favorites-icon">
 							<p class="card-name-n-price">Card Name <span>&#8377 7/-</span></p>
@@ -62,22 +60,18 @@
 							<img src="img/fav-off.png" class="add-favorites-icon">
 							<p class="card-name-n-price">Card Name <span>&#8377 9/-</span></p>
                     </div> -->
-					
-			    </div>
-		        <div id="pagefooter" data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer"> </div>
-            </article>
-		
-<!-- /page -->
-
-<script type="text/javascript"  src="js/weddingCard.js"></script>
-<script type="text/javascript"  src="js/cardfilter.js"></script>
-<script type="text/javascript">
-
+        </div>
+        <div id="pagefooter" data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer"> </div>
+    </article>
+    <!-- /page -->
+    <script type="text/javascript" src="js/weddingCard.js"></script>
+    <script type="text/javascript" src="js/cardfilter.js"></script>
+    <script type="text/javascript">
     $("#filterlistpage").ready(function() {
-	$('.fav-count').html(localStorage.favcount)
-	cardfilter.setfilteredobj()
-	console.log(JSON.parse(localStorage['card']))
+        $('.fav-count').html(localStorage.favcount)
+        cardfilter.setfilteredobj()
+        console.log(JSON.parse(localStorage['card']))
 
     });
-	</script>
- </section >
+    </script>
+</section>

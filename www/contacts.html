@@ -1,10 +1,11 @@
 <section data-role="page" id="contactsPage" class="jqm-demos jqm-home">
     <header data-role="header" id="pageheader" class="jqm-header">
-        <a href="dashboard.html"><img src="img/Back_arrow.png"></a>
+        <a href="#shaadiMenu" data-rel="popup" data-transition="slideup" class="menuicon ui-btn ui-btn-inline"></a>
+        <!-- <a href="#" onclick="history.back()"><img src="img/Back_arrow.png"></a> -->
         <p class="pagetitle">All Contacts</p>
         <div class="topbartools">
             <ul>
-                <li class="place-icon" onclick="contactsMethods.manageSearch()"><img src="img/search-icon.png"></li>
+                <li class="place-icon"><img src="img/search-icon.png"></li>
                 <li class="share-icon" id="addContactBtn">
                     <a href="importcontacts.html"><img src="img/add-guests-icon.png"></a>
                 </li>
@@ -14,6 +15,7 @@
                 <li onclick="contactsMethods.shareOpener()">
                     <a href="#"><img src="img/share_icon.png"></a>
                 </li>
+                <li class="delete-icon" onclick="dashboardMethods.showContactForChat();"><img src="img/chat.png"></li>
             </ul>
         </div>
     </header>
@@ -41,7 +43,7 @@
                 <a href="#" class="ui-btn ui-btn-inline "><img src="img/toolbar-delete-icon.png" onclick="contactsMethods.configureForDelete()"></a>
                 <!-- <a href="#" class="ui-btn ui-btn-inline "><img src="img/share_icon.png" onclick=""></a> -->
             </div>
-            <input type="text" id="contactSearchBox" style="display: none" data-role="search" placeholder="Search Contact">
+            <input type="text" id="contactSearchBox" data-role="search" placeholder="Search Contact">
             <ul data-role="listview" id="contactList" data-inset="true" data-input="#contactSearchBox" data-filter="true"></ul>
         </div>
     </article>
@@ -49,7 +51,7 @@
     <script type="text/javascript">
     $("#contactsPage").ready(function() {
         var weddingDetailsObject = JSON.parse(localStorage.weddingDetailsObject);
-        if (weddingDetailsObject.usertype == "guest"){
+        if (weddingDetailsObject.usertype == "guest") {
             $("#addContactBtn,#contactOptionBlock").hide(); // hide the add contact button for guest
         }
         if (localStorage.cachedContacts != "") {

@@ -1,25 +1,29 @@
 <section data-role="page" id="outstationGuestsPage" class="jqm-demos jqm-home" style="background:#F4F4F4;">
     <header data-role="header" id="pageheader" class="jqm-header">
+        <a href="#shaadiMenu" data-rel="popup" data-transition="slideup" class="menuicon ui-btn ui-btn-inline"></a>
         <a href="#" onclick="history.back()"><img src="img/Back_arrow.png"></a>
         <p class="pagetitle">Out Station Guests</p>
         <div class="topbartools">
             <ul>
                 <li class="place-icon"><img src="img/search-icon.png"></li>
-                <li class="share-icon" onclick="outstationMethods.showAddGuestPage();"><a href="#"><img src="img/add-guests-icon.png"></a></li>
+                <li class="share-icon" onclick="outstationMethods.showAddGuestPage();">
+                    <a href="#"><img src="img/add-guests-icon.png"></a>
+                </li>
+                <li class="delete-icon" onclick="dashboardMethods.showContactForChat();"><img src="img/chat.png"></li>
                 <!-- <li class="delete-icon"><img src="img/filter-icon.png"></li> -->
             </ul>
         </div>
     </header>
     <article data-role="content" id="pagecontent" class="jqm-content">
-    	<div class="guestspanel">
-    		<div class="guestspanel" id="outstationGuestList">
-    			<!-- Container for Holding Outstation guests -->
-    		</div>
-    	</div>
+        <div class="guestspanel">
+            <div class="guestspanel" id="outstationGuestList">
+                <!-- Container for Holding Outstation guests -->
+            </div>
+        </div>
     </article>
     <script type="text/javascript" src="js/outstation.js"></script>
     <script type="text/javascript">
-    $("#outstationGuestsPage").ready(function(){
+    $("#outstationGuestsPage").ready(function() {
         outstationMethods.fetchOutstationGuestList();
     });
     </script>

@@ -2,6 +2,8 @@ var galleryMethods = {
     //Array to save Base64
     imageArray: [],
     imageUrlArray: [],
+    galleryArray: [], // array to hold list of selected galleries
+    counter: 0,
     fetchAlbums: function() {
         //To Fetch the list of Albums available for a Wedding
         var albumHtml = "";
@@ -132,6 +134,11 @@ var galleryMethods = {
          }, "Create Album", ["Cancel", "Create"]);
      },*/
     registerAlbum: function() {
+        if ($("#albumNameBox").val() == "") {
+            cm.showToast("Please enter Album name");
+            $("#albumNameBox").focus();
+            return;
+        }
         var albumClass = Parse.Object.extend("Album");
         var albumObj = new albumClass();
         var weddingDetailsObject = JSON.parse(localStorage.weddingDetailsObject);
@@ -161,7 +168,12 @@ var galleryMethods = {
         });
     },
     updateAlbumName: function() {
-        // To Make the selected Albums Private :ToDo:Update the status of multiple Albums status
+        // To Make the selected Albums Private 
+        if ($("#editAlbumNameBox").val() == "") {
+            cm.showToast("Please enter Album name");
+            $("#editAlbumNameBox").focus();
+            return;
+        }
         var albumObject = Parse.Object.extend("Album");
         var albumQuery = new Parse.Query(albumObject);
         albumQuery.equalTo("albumID", localStorage.selectedAlbumId);
@@ -193,7 +205,11 @@ var galleryMethods = {
             success: function(foundAlbum) {
                 console.log("foundAlbum:" + JSON.stringify(foundAlbum));
                 foundAlbum[0].set("albumCover", coverPicUrl);
-                foundAlbum[0].save();
+                foundAlbum[0].save(null, {
+                    success: function(foundAlbum) {
+                        localStorage.changeCover = "false";
+                    }
+                });
                 console.log("Saved CoverPic");
                 $("body").removeClass("ui-loading");
             },
@@ -203,21 +219,48 @@ var galleryMethods = {
             }
         });
     },
+    collectGalleryId: function(callBackMethod) {
+        // Collect the list of Galleries selected
+        galleryMethods.galleryArray.length = 0; // clear the array
+        var selectedAlbums = $("div.album-chceked"); // list of selected albums
+        selectedAlbums.each(function(index, item) {
+            var galleryObj = {};
+            galleryObj.selectedAlbumId = $(item).data("albumid");
+            galleryMethods.galleryArray.push(galleryObj);
+        });
+        if (galleryMethods.galleryArray.length > 0) {
+            if (callBackMethod == "makeAlbumsPrivate")
+            // Make Albums private
+                galleryMethods.makeAlbumsPrivate();
+            else if (callBackMethod == "deleteAlbumPopup")
+                galleryMethods.showGalleryPopup('deleteAlbumPopup');
+        }
+    },
     makeAlbumsPrivate: function() {
         // To Make the selected Albums Private :ToDo:Update the status of multiple Albums status
         var albumObject = Parse.Object.extend("Album");
         var albumQuery = new Parse.Query(albumObject);
-        albumQuery.equalTo("albumID", localStorage.selectedAlbumId);
+        albumQuery.equalTo("albumID", galleryMethods.galleryArray[galleryMethods.counter].selectedAlbumId);
         $("body").addClass("ui-loading");
         albumQuery.find({
             success: function(foundAlbum) {
                 foundAlbum[0].set("privateAlbum", true);
-                foundAlbum[0].save();
-                cm.showAlert("Made the Album Private");
-                galleryMethods.fetchAlbums();
-                $("#galleryOptionBlock").hide();
-                $("body").removeClass("ui-loading");
-                console.log("Made the Album Private");
+                foundAlbum[0].save(null, {
+                    success: function(foundAlbum) {
+                        galleryMethods.counter++;
+                        var noOfSelectedAlbums = galleryMethods.galleryArray.length;
+                        if (galleryMethods.counter < noOfSelectedAlbums)
+                            galleryMethods.makeAlbumsPrivate();
+                        else {
+                            cm.showToast("Made the Album Private");
+                            galleryMethods.fetchAlbums();
+                            $("#galleryOptionBlock").hide();
+                            $("body").removeClass("ui-loading");
+                            console.log("Made the Album Private");
+                        }
+                    }
+                });
+
             },
             error: function() {
                 cm.showAlert("Sorry!Unable to mark Album Private");
@@ -243,16 +286,26 @@ var galleryMethods = {
         // To delete the selected Album
         var albumObject = Parse.Object.extend("Album");
         var albumQuery = new Parse.Query(albumObject);
-        albumQuery.equalTo("albumID", localStorage.selectedAlbumId);
+        albumQuery.equalTo("albumID", galleryMethods.galleryArray[galleryMethods.counter].selectedAlbumId);
         $("body").addClass("ui-loading");
-        albumQuery.get(localStorage.selectedAlbumId, {
+        albumQuery.get(galleryMethods.galleryArray[galleryMethods.counter].selectedAlbumId, {
             success: function(foundAlbum) {
-                foundAlbum.destroy({});
-                $("#deleteAlbumPopup").popup("close");
-                cm.showToast("Deleted Album successfully");
-                $("#galleryOptionBlock").hide();
-                galleryMethods.fetchAlbums();
-                $("body").removeClass('ui-loading');
+                foundAlbum.destroy({
+                    success: function(foundAlbum) {
+                        galleryMethods.counter++;
+                        var noOfSelectedAlbums = galleryMethods.galleryArray.length;
+                        if (galleryMethods.counter < noOfSelectedAlbums)
+                            galleryMethods.deleteAlbum();
+                        else {
+                            $("#deleteAlbumPopup").popup("close");
+                            cm.showToast("Deleted Album successfully");
+                            $("#galleryOptionBlock").hide();
+                            galleryMethods.fetchAlbums();
+                            $("body").removeClass('ui-loading');
+                        }
+                    }
+                });
+
             },
             error: function(error) {
                 cm.showAlert('Sorry!Unable to delete the Album');
@@ -350,6 +403,11 @@ var galleryMethods = {
         galleryMethods.updateAlbumCoverPic(imageUrl);
         galleryMethods.fetchPictures();
 
+    },
+    changeCover: function() {
+        // To change the cover picture of gallery
+        localStorage.changeCover = "true"; // flag to make the gallery update cover
+        galleryMethods.showPicturesPage(); // change to pictures page
     },
     fetchPictures: function() {
         // To List the Pictures from the parse and Cloudinary
@@ -458,6 +516,10 @@ var galleryMethods = {
         localStorage.selectedPicId = $(selectedPicture).data("picid");
         localStorage.selectedImgDivId = $(selectedPicture).attr("id");
         console.log("View Picture clicked");
+        if (localStorage.changeCover == "true") {
+            galleryMethods.updateAlbumCoverPic(localStorage.selectedPic);
+            return;
+        }
         $(":mobile-pagecontainer").pagecontainer("change", "view_picture.html", {
             showLoadMsg: false
         });
@@ -465,28 +527,52 @@ var galleryMethods = {
     swipePrepareForView: function(swipeEvent) {
         // To change the selected pic details on swipe
         var imgObj = JSON.parse(localStorage.imgObj);
-        console.log("imgObj type:"+typeof imgObj);
-        console.log("imgObj[0]:"+imgObj[0].imgIndex);
-        if (swipeEvent == "left") {
-            // If image has been swiped left
-            console.log("Swipe left");
+        var noOfImages = imgObj.length;
+        console.log("imgObj type:" + typeof imgObj);
+        console.log("imgObj.length:" + imgObj.length);
+        if (swipeEvent == "right") {
+            // If image has been swiped right
+            console.log("Swipe right");
             if (localStorage.selectedImgDivId != 0) {
                 // The swiped image is not the first image
                 console.log("selectedImgDivId:" + localStorage.selectedImgDivId);
                 localStorage.selectedImgDivId = parseInt(localStorage.selectedImgDivId) - 1;
-                $.each(imgObj,function(index, item) {
+                $.each(imgObj, function(index, item) {
                     console.log("imgObj[item].imgIndex:" + imgObj[index].imgIndex);
                     if (imgObj[index].imgIndex == localStorage.selectedImgDivId) {
                         localStorage.selectedPic = imgObj[index].imgURL;
                         localStorage.selectedPicId = imgObj[index].imgID;
                         localStorage.selectedImgDivId = imgObj[index].imgIndex;
                         console.log("View Picture Swiped");
-                        //$("#imageViewerBlock").attr("src", localStorage.selectedPic);
-                        $(":mobile-pagecontainer").pagecontainer("change", "view_picture.html", {
+                        $("#imageViewerBlock").attr("src", localStorage.selectedPic).hide('100').slideDown(500);
+                        /*$(":mobile-pagecontainer").pagecontainer("change", "view_picture.html", {
                             showLoadMsg: false,
                             reloadPage:true
-                        });
-                        //galleryMethods.viewPicture();
+                        });*/
+                        galleryMethods.viewPicture();
+                    }
+                });
+            }
+        } else if (swipeEvent == "left") {
+            // If image has been swiped left
+            console.log("Swipe right");
+            if (localStorage.selectedImgDivId != noOfImages - 1) {
+                // The swiped image is not the last image
+                console.log("selectedImgDivId:" + localStorage.selectedImgDivId);
+                localStorage.selectedImgDivId = parseInt(localStorage.selectedImgDivId) + 1;
+                $.each(imgObj, function(index, item) {
+                    console.log("imgObj[item].imgIndex:" + imgObj[index].imgIndex);
+                    if (imgObj[index].imgIndex == localStorage.selectedImgDivId) {
+                        localStorage.selectedPic = imgObj[index].imgURL;
+                        localStorage.selectedPicId = imgObj[index].imgID;
+                        localStorage.selectedImgDivId = imgObj[index].imgIndex;
+                        console.log("View Picture Swiped");
+                        $("#imageViewerBlock").attr("src", localStorage.selectedPic).hide('100').slideDown(500);
+                        /*$(":mobile-pagecontainer").pagecontainer("change", "view_picture.html", {
+                            showLoadMsg: false,
+                            reloadPage:true
+                        });*/
+                        galleryMethods.viewPicture();
                     }
                 });
             }
@@ -794,7 +880,10 @@ $("#galleryBlock").on("taphold", "div.albumselect", function() {
     console.log("taphold");
     localStorage.selectedAlbum = $(this).data("albumname");
     localStorage.selectedAlbumId = $(this).data("albumid");
-    $(this).toggleClass("selectedAlbum");
+    var weddingDetailsObject = JSON.parse(localStorage.weddingDetailsObject);
+    if (weddingDetailsObject.usertype == "host")
+        $(this).toggleClass("selectedAlbum");
+    else return;
     if ($(this).hasClass("album-chceked")) {
         console.log("Has class");
         $(this).removeClass("album-chceked").addClass("albums-con");

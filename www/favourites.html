@@ -1,0 +1,71 @@
+<!--<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Favourites</title>
+        <link rel="shortcut icon" href="favicon.ico">
+        <link rel="stylesheet" href="css/themes/default/jquery.mobile-1.4.5.min.css">
+        <!-- link rel="stylesheet" href="_assets/css/jqm-demos.css"
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+        <link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Roboto:300'>
+        <link rel="stylesheet" href="css/app.css">
+        <script src="js/jquery.js"></script>
+        <script src="_assets/js/index.js"></script>
+        <script src="js/jquery.mobile-1.4.5.min.js"></script>
+		<link href='https://fonts.googleapis.com/css?family=Roboto:400,900,700,500' rel='stylesheet' type='text/css'>
+	</head>
+	<body>-->
+<section data-role="page" class="jqm-demos jqm-home" id="favouritespages">
+    <div id="pageheader" data-role="header" class="jqm-header">
+        <a href="#shaadiMenu" data-rel="popup" data-transition="slideup" class="menuicon ui-btn ui-btn-inline"></a>
+        <a href="card_List.html"><img src="img/Back_arrow.png"></a>
+        <p class="pagetitle">Invitation Cards</p>
+        <a href="#" class="chatIcon" onclick="dashboardMethods.showContactForChat();"><img src="img/chat.png" /></a>
+    </div>
+    <article id="pagecontent" role="main" class="jqm-content">
+        <div class="cardlist">
+            <h3 id="noOffav">3 Favourites</h3>
+            <!--	<div class="profile-detail">
+        	                <img class="wedding-card-img" src="img/1-image.png">
+							<img src="img/fav-on.png" class="add-favorites-icon">
+							<img src="img/check.png" class="check-uncheck-icon">
+							<p class="card-name-n-price">Card Name <span>&#8377 7/-</span></p>
+                    </div>
+			        
+					<div class="profile-detail">
+        	                <img class="wedding-card-img" src="img/2-image.png">
+							<img src="img/fav-off.png" class="add-favorites-icon">
+							<img src="img/uncheck.png" class="check-uncheck-icon">
+							<p class="card-name-n-price">Card Name <span>&#8377 9/-</span></p>
+                    </div>
+					
+					<div class="profile-detail">
+        	                <img class="wedding-card-img" src="img/1-image.png">
+							<img src="img/fav-on.png" class="add-favorites-icon">
+							<img src="img/check.png" class="check-uncheck-icon">
+							<p class="card-name-n-price">Card Name <span>&#8377 7/-</span></p>
+                    </div>-->
+        </div>
+        <br>
+        <a href="#" class="orange-btn subpagejoin ui-btn ui-mini" onclick="weddingcard.oldcustomer()">Order Samples</a>
+        <p class="samples-free-text">First 5 Samples are FREE</p>
+        <h6 class="or-text">_____________________<span>or</span>_____________________</h6>
+        <a href="#" class="share-button subpagejoin ui-btn ui-mini"><img src="img/share-icon.png"></a>
+        <h5 class="share-with-others-host-text">Share with Other Hosts</h5>
+        <div id="pagefooter" data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer"> </div>
+    </article>
+    <!-- /page -->
+    <script type="text/javascript" src="js/weddingCard.js"></script>
+    <script type="text/javascript">
+    $("#favouritespages").ready(function() {
+        var text = localStorage.favcount + ' ' + 'Favourites'
+
+        $('#noOffav').html(text)
+
+        weddingcard.getfavlist();
+
+
+    });
+    </script>
+</section>

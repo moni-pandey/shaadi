@@ -1,8 +1,9 @@
 <section data-role="page" class="jqm-demos jqm-home" id="eventsPage">
     <header data-role="header" id="pageheader" class="jqm-header">
-        <a href="#" onclick="history.back()"><img src="img/Back_arrow.png"></a>
-        <p class="pagetitle">Event</p>
         <a href="#shaadiMenu" data-rel="popup" data-transition="slideup" class="menuicon ui-btn ui-btn-inline"></a>
+        <!-- <a href="#" onclick="history.back()"><img src="img/Back_arrow.png"></a> -->
+        <p class="pagetitle">Event</p>
+        <a href="#" class="chatIcon" onclick="dashboardMethods.showContactForChat();"><img src="img/chat.png" /></a>
     </header>
     <article data-role="content" id="pagecontent" class="jqm-content">
         <!-- Popup start -->
@@ -92,22 +93,24 @@
                 </div>
                 <div class="event-status" onclick="eventsMethods.showPopup('eventInviterPopup')"> <span class="toolbar-icon event-iguests">Invite Guests</span></div>
             </div>
-            <a href="#" class="joinbtn customfixed subpagejoin ui-btn ui-mini" id="eventAdderBtn" onclick="eventsMethods.toggleEventAdd()">Add New Event</a>
+            <a href="#" style="display: none;" class="joinbtn customfixed subpagejoin ui-btn ui-mini" id="eventAdderBtn" onclick="eventsMethods.toggleEventAdd()">Add New Event</a>
         </div>
     </article>
+    <script type="text/javascript" src="js/contacts.js"></script>
     <script type="text/javascript" src="js/event.js"></script>
     <script type="text/javascript">
     $("#eventsPage").ready(function() {
         localStorage.eventAction = "add";
-
+        localStorage.editEventGuestFlag="false";
+        localStorage.invitedGuests=""; // clear guests
         eventsMethods.fetchWeddingInfo();
         eventsMethods.getUserLocation();
         $("#addEventName").keyup(function(e) {
             var str = $.trim($(this).val());
             if (str != "") {
-                var regx = /^[A-Za-z]+$/;
+                var regx = /^[A-Za-z\s]+$/;
                 if (!regx.test(str)) {
-                    str = str.replace(/[^a-zA-Z.]+/g, ''); // replace special characters with space
+                    str = str.replace(/[^a-zA-Z.\s]+/g, ''); // replace special characters with space
                     $(this).val(str);
                     cm.showToast("Only alphabets allowed !");
                 }
@@ -116,6 +119,9 @@
                 console.log("Only alphabets detected");
             }
         });
+		
+
+		
     });
     </script>
 </section>

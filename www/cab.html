@@ -1,13 +1,14 @@
 <section data-role="page" id="cabPage" class="jqm-demos jqm-home" style="background:#F4F4F4;">
     <header data-role="header" id="pageheader" class="jqm-header">
+        <a href="#shaadiMenu" data-rel="popup" data-transition="slideup" class="menuicon ui-btn ui-btn-inline"></a>
         <a href="#" onclick="history.back()"><img src="img/Back_arrow.png"></a>
         <p class="pagetitle">Cab</p>
-        <a href="#shaadiMenu" data-rel="popup" data-transition="slideup" class="menuicon ui-btn ui-btn-inline"></a>
+        
         <div class="topbartools">
             <ul>
                 <li class="place-icon" onclick="cabMethods.setAddCabMode()"><img src="img/add-hotels.png"></li>
                 <li class="share-icon" id="shareCabBtn" onclick="cabMethods.shareCabData()"><img src="img/share-icon.png"></li>
-                <!-- <li class="delete-icon"><img src="img/delete.png"></li> -->
+                <li class="delete-icon" onclick="dashboardMethods.showContactForChat();"><img src="img/chat.png"></li>
             </ul>
         </div>
     </header>

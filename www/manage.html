@@ -1,10 +1,11 @@
 <section data-role="page" id="managePage" class="jqm-demos jqm-home">
     <header data-role="header" id="pageheader" class="jqm-header">
-        <a href="#" onclick="history.back()">
-            <img src="img/Back_arrow.png">
-        </a>
-        <p class="pagetitle">Manage</p>
         <a href="#shaadiMenu" data-rel="popup" data-transition="slideup" class="menuicon ui-btn ui-btn-inline"></a>
+        <!-- <a href="#" onclick="history.back()">
+            <img src="img/Back_arrow.png">
+        </a> -->
+        <p class="pagetitle">Manage</p>
+        <a href="#" class="chatIcon" onclick="dashboardMethods.showContactForChat();"><img src="img/chat.png" /></a>
     </header>
     <article data-role="content" id="pagecontent" class="jqm-content">
         <div class="importcontacts" id="hostTravelAccommodationOptions">
@@ -21,7 +22,6 @@
         <!--  <input type="button" onclick="manageMethods.showAccomodationPage();" value="Accommodation Inventory">
         <input type="button" onclick="manageMethods.showCabPage();" value="Cab Inventory"> -->
     </article>
-    <script type="text/javascript" src="js/dashboard.js"></script>
     <script type="text/javascript">
     $("#managePage").ready(function() {
         manageMethods.prepareManagePage();

@@ -1,0 +1,102 @@
+<section data-role="page" class="jqm-demos jqm-home" id="createTask">
+    <div id="pageheader" data-role="header" class="jqm-header">
+        <a href="#shaadiMenu" data-rel="popup" data-transition="slideup" class="menuicon ui-btn ui-btn-inline"></a>
+        <a href="#"><img id="createbck" src="img/Back_arrow.png"></a>
+        <p class="pagetitle">Task</p>
+        <a href="#" class="chatIcon" onclick="dashboardMethods.showContactForChat();"><img src="img/chat.png" /></a>
+        <div class="topbartools">
+            <ul>
+                <li class="place-icon" style="padding-right:5px;"><img style="display:none" src="img/search-icon.png"></li>
+                <li class="create-new-icon"><img style="display:none" src="img/create-New-task.png"></li>
+                <!-- <li class="delete-icon" onclick="dashboardMethods.showContactForChat();"><img src="img/chat.png"></li> -->
+            </ul>
+        </div>
+    </div>
+    <article id="pagecontent" role="main" class="jqm-content">
+        <div class="taskcardlist" style="padding:20px">
+            <h3><b>Create Task</b></h3>
+            <div class="profile-detail">
+                <div class="formstyels" style="margin:0 -10px; width:100%">
+                    <div class="ui-grid">
+                        <div class="ui-block">
+                            <div class="ui-bar ui-bar">
+                                <label for="text-basic">Task Title</label>
+                                <input name="text-basic" value="" id="tasktitle" type="text" placeholder="Enter title">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui-grid">
+                        <div class="ui-block">
+                            <div class="ui-bar ui-bar">
+                                <label for="text-basic">Description</label>
+                                <textarea name="addinfo" class="enter-address" id="taskdesc"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <label for="text-basic" class="customlable" style="margin-bottom:-5px;">Deadline</label>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a">
+                            <div class="ui-bar ui-bar-a" style="padding-right:0;">
+                                <input id="wedDateinput" type="date" placeholder="Enter Date">
+                            </div>
+                        </div>
+                        <div class="ui-block-b">
+                            <div class="ui-bar ui-bar-a" style="padding-right:0;">
+                                <input name="text-basic" id="text-basic" value="" type="time">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui-grid">
+                        <div class="ui-block">
+                            <div class="ui-bar ui-bar">
+                                <form method="post" action="demoform.asp">
+                                    <fieldset class="ui-field-contain" id="selectfieldset">
+                                        <label for="text-basic" style="margin-top:-15px;">Assign to</label>
+                                        <select name="day" id="day" data-native-menu="false">
+                                        </select>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a href="#" class="order-now-btn subpagejoin ui-btn ui-mini" onclick="taskmthds.addTask()">Create Task</a>
+        </div>
+        <div id="pagefooter" data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer"> </div>
+    </article>
+    <script type="text/javascript" src="js/task.js"></script>
+    <script type="text/javascript">
+    $("#createTask").ready(function() {
+
+        if (localStorage.taskusertype == 'host') {
+            $('#day').append('<option value="' + localStorage.userId + '">Me</option>')
+            var guestClass = Parse.Object.extend("Guest");
+            var guestObj = new guestClass();
+            var queryGuest = new Parse.Query(guestObj);
+            queryGuest.equalTo("weddingID", localStorage.joinedWedding);
+            queryGuest.find({
+                success: function(foundGuests) {
+                    for (var k = 0; k < foundGuests.length; k++) {
+
+                        $('#day').append('<option value="' + foundGuests[k].get('guestID') + '">' + foundGuests[k].get('guestName') + '</option>');
+
+                    }
+                    $('#day').selectmenu().selectmenu("refresh");
+                },
+                error: function(error) {
+                    cm.showAlert(error)
+                }
+            })
+
+        } else {
+            $('#day').append('<option value="' + localStorage.userId + '">Me</option>')
+            $('#day').selectmenu().selectmenu("refresh");
+        }
+
+        $(document).on('click', '#createbck', function() {
+            history.back();
+        })
+    });
+    </script>
+</section>

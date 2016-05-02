@@ -1,8 +1,9 @@
 <section data-role="page" id="eventsGuestPage" class="jqm-demos jqm-home">
     <header data-role="header" id="pageheader" class="jqm-header">
+        <a href="#shaadiMenu" data-rel="popup" data-transition="slideup" class="menuicon ui-btn ui-btn-inline"></a>
         <a href="event.html"><img src="img/Back_arrow.png"></a>
         <p class="pagetitle">Choose Guests</p>
-        <a href="#shaadiMenu" data-rel="popup" data-transition="slideup" class="menuicon ui-btn ui-btn-inline"></a>
+        <a href="#" class="chatIcon" onclick="dashboardMethods.showContactForChat();"><img src="img/chat.png" /></a>
     </header>
     <article data-role="content" id="pagecontent" class="jqm-content">
     	<div class="contact-list">
@@ -13,12 +14,12 @@
         <div class="allcon-btn">
             <div class="ui-grid-a">
                 <div class="ui-block-a">
-                    <div class="ui-bar ui-bar-a" style="height:60px;left:15%">
+                    <div class="ui-bar ui-bar-a" style="height:60px;">
                         <button id="selectionDoneBtn" class="joinbtn ui-btn ui-mini submit" type="submit" onclick="eventsMethods.selectedGuests()">DONE</button>
                     </div>
                 </div>
                 <div class="ui-block-b">
-                    <div class="ui-bar ui-bar-a" style="height:60px;left:15%">
+                    <div class="ui-bar ui-bar-a" style="height:60px;">
                         <button id="selectionCancelBtn" class="joinbtn ui-btn ui-mini canecl" onclick="history.back()">CANCEL</button>
                     </div>
                 </div>

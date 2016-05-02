@@ -71,7 +71,7 @@ body .jqm-demos {
 	font-weight: 400;
 }
 #pageheader .menuicon {
-	float: right !important;
+	/*float: right !important;*/
 	opacity: 1;
 	background: url(../img/wp_option_menu.png) no-repeat center center !important;
 	width: 6px;
@@ -1586,7 +1586,7 @@ div.hasDatepicker {
 }
 #pagecontent .albums-list .ablums-list-img img {
 	width: 100%;
-	height: 100px;
+	max-height: 100px;
 }
 #pagecontent .albums-list .ablums-list-content {
 	background: #CA3E5B;
@@ -1800,7 +1800,7 @@ div.hasDatepicker {
 }
 .reception-photos .recep-container .recep-list img {
 	width: 100%;
-	height: 150px;
+	max-height: 150px;
 }
 .social-footer {
 	position: fixed;
@@ -2351,7 +2351,8 @@ div.hasDatepicker {
 .event-container .event-list h4 .event-banner {
 	position: relative;
 	display: block;
-	height: 80px;
+	/*height: 80px;*/
+	height: 150px;
 	overflow: hidden;
 }
 .event-container .event-list h4 .ui-icon-minus .event-banner {
@@ -3313,8 +3314,9 @@ line-height: 17px;
     margin-bottom: 10px;
 	color:#58595b;
 	font-weight:bold;
-	
-}#pagecontent .viewcardlist {
+}
+
+#pagecontent .viewcardlist {
     margin: 20px auto;
     width: 90%;
 }
@@ -4057,5 +4059,477 @@ vertical-align:2px;margin-left:10px; font-size:16px; font-weight:bold !important
 .select-one  {
 border:none !important; background-color:#fff !important; border-bottom:1px solid #ccc !important; margin-bottom: 10px !important; font-size: 17px !important; color:#666 !important;
     text-shadow: none !important; font-weight:normal !important; padding-left:45px;
+}
+
+
+/*Added Apr18 Vikash*/
+ 
+#joinSocialWedding * {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+/* Arrow only buttons in the header. */
+
+.left-menu  {
+  margin-top:28px !important;  
+ }
+ 
+ .left-menu>li>a  {
+  background-color:#c51b28 !important;
+}
+
+.divider  {
+  background-color:#6c0512 !important;
+}
+
+/*By Dinesh April 26*/
+
+.chatIcon{
+	float: right !important;
+}
+
+
+/* vikash code added 18/4/2016 */
+
+.ui-icon-calendar {
+ margin-top:13px;
+}
+
+.deadline-date-btn  {
+  color:#9d9d9d !important;
+  font:14px Roboto;
+  height:37px !important;
+  margin-top:8px;
+  }
+  
+.deadline-date-btn img {
+  vertical-align:-2px;
+  margin-left:-2px;
+  }
+  
+.task-btns-bg {
+  width:100% !important; font:13px Roboto;
+}
+
+.task-btns-bg>.ui-controlgroup-controls  {
+  width:100% !important;
+}
+
+.task-btns {
+  width:31% !important; background:#fff !important; border:2px solid #cb6070 !important; color:#cb6070 !important;
+  padding:6px 1px; border-radius:0 !important;
+}
+
+.selected-task-tab  {
+  background:#cb6070 !important;
+  color:#fff !important;
+ }
+ 
+ .deadline-day-text  {
+   font:11px Roboto;
+   color:#e45760;
+   margin-top:-5px;
+   margin-bottom:5px;
+ }
+ 
+ .deadline-day-text img{
+   padding-right:7px;
+   vertical-align:-1px;
+ }
+ 
+.mark-complete-text  {
+  font:11px Roboto;
+  color:#8a8a8a;
+  margin-right:-15px;
+  margin-top:0;
+ }
+
+ .mark-complete-text  img {
+  padding-left:4px;
+  vertical-align:-3px;
+ }
+ 
+.name-of-task  {
+  color:#58595b !important;
+  font:bold 20px Roboto !important;
+  margin-top:0;
+  margin-right:0;
+ }
+ 
+ .name-of-task img  {
+  padding-left:7px;
+ }
+ 
+.task-details {
+  color:#999 !important;
+  font: 15px Roboto !important;
+   margin-top:-6px;
+ }
+ 
+.assign-to-text {
+  color:#999 !important;
+  font:12px Roboto !important;
+   margin-top:-19px;
+   margin-bottom:10px;
+ }
+ 
+ .assign-to-text span{
+  color:#bf3a4d !important;
+  font-weight:bold;
+  }
+  
+ .delete-assigned  {
+   float:right; margin-right:-7px; margin-top:1px;
+ }
+ 
+ .deadline-day-done  {
+   font:11px Roboto;
+   color:#999;
+   margin-top:-5px;
+   margin-bottom:5px;
+   text-decoration:line-through;
+ }
+ 
+ .deadline-day-done img{
+   padding-right:8px;
+   vertical-align:-2px;
+ }
+ 
+ .completed-text  {
+  font:11px Roboto;
+  color:#a0d405;
+  margin-right:-15px;
+  margin-top:0;
+ }
+
+ .completed-text  img {
+  padding-left:4px;
+  vertical-align:-3px;
+ }
+ 
+ .name-of-task-completed  {
+  color:#999 !important;
+  font:bold 20px Roboto !important;
+  margin-top:0;
+  margin-right:0;
+  text-decoration:line-through;
+ }
+ 
+ .task-details-completed {
+  color:#999 !important;
+  font: 15px Roboto !important;
+   margin-top:-6px;
+   text-decoration:line-through;
+ }
+ 
+ .assign-to-text-completed {
+  color:#999 !important;
+  font:12px Roboto !important;
+   margin-top:-19px;
+   margin-bottom:10px;
+   text-decoration:line-through;
+ }
+ 
+ .assign-to-text-completed span{
+  color:#999 !important;
+  font-weight:bold;
+  }
+  
+ .create-new-icon  {
+  padding-left:7px; margin-top:-1px; cursor:pointer;
+} 
+  
+  }#pagecontent .taskcardlist {
+    margin: 20px auto;
+    width: 90% ;
+}
+
+#pagecontent .taskcardlist h3 {
+    margin-bottom: 10px ;
+	color:#58595b;
+	font-weight:bold ;
+	
+}
+  
+ /* added 27/4/2016  */
+
+.search-task  {
+  text-align:center !important; 
+  }
+  
+ .button_back  {
+   padding:22px 23px 22px 16px;
+   background-color:#fff !important;
+   border-radius:0 !important;
+ }
+  
+ .cross-button  {
+   padding:22px 16px 22px 22px;
+   background:#fff !important;
+   border-left-width:0 !important;
+   margin-top:0px !important;
+   border-radius:0 !important;
+ }
+ 
+.search-task>.ui-controlgroup>.ui-controlgroup-controls {
+  text-align:center !important;
+}
+
+.search-task>.ui-controlgroup>.ui-controlgroup-controls>.ui-input-text  {
+  width:72.3% !important
+}
+
+@media only screen and (min-width: 361px)   {
+     .cross-button  {
+   margin-top:-42px !important;
+ }
+    }
+	  .controlgroup-textinput  {
+                padding:4px 0 5px;
+            }
+/* vikash code added 18/4/2016 */
+/* added 18/4/2016 */
+
+.ui-icon-calendar {
+ margin-top:13px;
+}
+
+.deadline-date-btn  {
+  color:#9d9d9d !important;
+  font:14px Roboto;
+  height:37px !important;
+  margin-top:8px;
+  }
+  
+.deadline-date-btn img {
+  vertical-align:-2px;
+  margin-left:-2px;
+  }
+  
+.task-btns-bg {
+  width:100% !important; font:13px Roboto;
+}
+
+.task-btns-bg>.ui-controlgroup-controls  {
+  width:100% !important;
+}
+
+.task-btns {
+  width:31% !important; background:#fff !important; border:2px solid #cb6070 !important; color:#cb6070 !important;
+  padding:6px 1px; border-radius:0 !important;
+}
+
+.selected-task-tab  {
+  background:#cb6070 !important;
+  color:#fff !important;
+ }
+ 
+ .deadline-day-text  {
+   font:11px Roboto;
+   color:#e45760;
+   margin-top:-5px;
+   margin-bottom:5px;
+ }
+ 
+ .deadline-day-text img{
+   padding-right:7px;
+   vertical-align:-1px;
+ }
+ 
+.mark-complete-text  {
+  font:11px Roboto;
+  color:#8a8a8a;
+  margin-right:-15px;
+  margin-top:0;
+ }
+
+ .mark-complete-text  img {
+  padding-left:4px;
+  vertical-align:-3px;
+ }
+ 
+.name-of-task  {
+  color:#58595b !important;
+  font:bold 20px Roboto !important;
+  margin-top:0;
+  margin-right:0;
+ }
+ 
+ .name-of-task img  {
+  padding-left:7px;
+ }
+ 
+.task-details {
+  color:#999 !important;
+  font: 15px Roboto !important;
+   margin-top:-6px;
+ }
+ 
+.assign-to-text {
+  color:#999 !important;
+  font:12px Roboto !important;
+   margin-top:-19px;
+   margin-bottom:10px;
+ }
+ 
+ .assign-to-text span{
+  color:#bf3a4d !important;
+  font-weight:bold;
+  }
+  
+ .delete-assigned  {
+   float:right; margin-right:-7px; margin-top:1px;
+ }
+ 
+ .deadline-day-done  {
+   font:11px Roboto;
+   color:#999;
+   margin-top:-5px;
+   margin-bottom:5px;
+   text-decoration:line-through;
+ }
+ 
+ .deadline-day-done img{
+   padding-right:8px;
+   vertical-align:-2px;
+ }
+ 
+ .completed-text  {
+  font:11px Roboto;
+  color:#a0d405;
+  margin-right:-15px;
+  margin-top:0;
+ }
+
+ .completed-text  img {
+  padding-left:4px;
+  vertical-align:-3px;
+ }
+ 
+ .name-of-task-completed  {
+  color:#999 !important;
+  font:bold 20px Roboto !important;
+  margin-top:0;
+  margin-right:0;
+  text-decoration:line-through;
+ }
+ 
+ .task-details-completed {
+  color:#999 !important;
+  font: 15px Roboto !important;
+   margin-top:-6px;
+   text-decoration:line-through;
+ }
+ 
+ .assign-to-text-completed {
+  color:#999 !important;
+  font:12px Roboto !important;
+   margin-top:-19px;
+   margin-bottom:10px;
+   text-decoration:line-through;
+ }
+ 
+ .assign-to-text-completed span{
+  color:#999 !important;
+  font-weight:bold;
+  }
+  
+ .create-new-icon  {
+  padding-left:7px; margin-top:-1px; cursor:pointer;
+} 
+  
+  
+  
+ /* added 27/4/2016  */
+
+.search-task  {
+  text-align:center !important; 
+  }
+  
+ .button_back  {
+   padding:22px 23px 22px 16px;
+   background-color:#fff !important;
+   border-radius:0 !important;
+ }
+  
+ .cross-button  {
+   padding:22px 16px 22px 22px;
+   background:#fff !important;
+   border-left-width:0 !important;
+   margin-top:-20px !important;
+   border-radius:0 !important;
+ }
+ 
+.search-task>.ui-controlgroup>.ui-controlgroup-controls {
+  text-align:center !important;
+}
+
+.search-task>.ui-controlgroup>.ui-controlgroup-controls>.ui-input-text  {
+  width:72.3% !important
+}
+
+@media only screen and (min-width: 361px)   {
+     .cross-button  {
+   margin-top:-42px !important;
+ }
+    }
+	  .controlgroup-textinput  {
+                padding:4px 0 5px;
+            }
+
+
+/* left panel 2/5/2016 */  
+
+.panel-top-bg  {
+  background: url(../img/setting-body-bg.png) ;
+ }
+ 
+.couple-pic-in-menu  {
+ border-radius:50%;
+ border:2px solid #fff;
+ display:block;
+ margin:10px auto 8px;
+}
+
+.couple-name-in-menu {
+  text-align:center;
+  font:bold 17px Roboto;
+  margin-bottom:-15px;
+  }
+  
+.left-menu > li  {
+   border:none;
+ }
+  
+.left-menu > li > a {
+   background: url(../img/bg-black.png) ;
+   background-repeat:repeat;
+ }
+ 
+.left-menu > .ui-li-has-thumb > .ui-btn  {
+ min-height:0 !important;
+   padding-left:3.5em !important;
+}
+
+.menu-icons  {
+  margin-top:10px;
+  margin-left:18px;
+}
+
+.left-menu > li > a.ui-btn   {
+ border-width:0;
+}
+
+.left-menu > li > a.ui-btn-icon-right::after  {
+
+background:transparent;
+}
+
+.left-menu > .ui-li-static  {
+  padding:0;
 }
 
