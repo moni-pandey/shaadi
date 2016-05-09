@@ -29,6 +29,11 @@ var dashboardMethods = {
         $(":mobile-pagecontainer").pagecontainer("change", "card_List.html", {
             showLoadMsg: false
         });
+    },    budgetCard: function() {
+        //To Show Manage Page to the Host
+        $(":mobile-pagecontainer").pagecontainer("change", "budget_wedding.html", {
+            showLoadMsg: false
+        });
     },
     showContact: function(normalOrOutstation) {
         //To Show Contacts page
@@ -41,7 +46,7 @@ var dashboardMethods = {
     },
     showContactForChat:function(){
         // To show list of friends contacts
-        $(":mobile-pagecontainer").pagecontainer("change", "friendscontacts.html", {
+        $(":mobile-pagecontainer").pagecontainer("change", "msgcontact.html", {
             showLoadMsg: false
         });
     },

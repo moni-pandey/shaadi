@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.LogicSquare.shaadi" version="0.0.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Vivek &amp; Elina</name>
+<widget id="com.LogicSquare.shaadi" version="0.0.3" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Manage My Shaadi</name>
     <description>
         Manage My Shaadi.
     </description>
@@ -71,6 +71,7 @@
         <splash height="2208" src="res/screen/ios/Default-736h.png" width="1242" />
         <splash height="1242" src="res/screen/ios/Default-Landscape-736h.png" width="2208" />
     </platform>
+    <!-- <preference name="phonegap-version" value="cli-6.0.0" /> -->
     <preference name="AutoHideSplashScreen" value="false" />
     <preference name="FadeSplashScreen" value="true" />
     <preference name="FadeSplashScreenDuration" value="5000" />
@@ -90,7 +91,7 @@
     <plugin name="cordova-plugin-dialogs" spec="~1.2.0" />
     <plugin name="cordova-plugin-contacts" spec="~2.0.1" />
     <plugin name="cordova-plugin-camera" spec="~2.1.1" />
-   <!-- <plugin name="com.apptentive.cordova" spec="https://github.com/apptentive/apptentive-cordova.git">
-        <variable name="ANDROID_API_KEY" value="23efef7fd9a9309b6c6e72017c89ad73ba832c4f228aa7d6f498798fda5edff4" />
-    </plugin>-->
+    <!-- <plugin name="com.apptentive.cordova" spec="https://github.com/apptentive/apptentive-cordova.git">
+        <param name="ANDROID_API_KEY" value="23efef7fd9a9309b6c6e72017c89ad73ba832c4f228aa7d6f498798fda5edff4" />
+    </plugin> -->
 </widget>

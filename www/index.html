@@ -35,7 +35,7 @@
             <li><a href="#" onclick="cm.rateus()">rate us</a></li>
         </ul>
     </div> -->
- <!--   <div data-role="panel" id="shaadiMenu" data-theme="b" data-display="overlay" style="background-color:#6c0512" data-position-fixed="true" data-position="left">
+    <!--   <div data-role="panel" id="shaadiMenu" data-theme="b" data-display="overlay" style="background-color:#6c0512" data-position-fixed="true" data-position="left">
         <ul data-role="listview" class="left-menu">
             <!-- <li><a href="#" >Messaging</a></li>/////
             <li onclick="dashboardMethods.showContact('normal');"><a href="#">Contacts</a></li>
@@ -54,38 +54,53 @@
             <!-- <li><a href="#" onclick="cm.rateus()">Rate us</a></li> ///
         </ul>
     </div>
-	
-	-->
-	
-		<div data-role="panel" id="shaadiMenu" data-theme="b" data-role='none'  class="panel-top-bg" >
-				    
-                    <img src="./img/couple-photo.png" class="couple-pic-in-menu" height="50" width="50">
-					<p class="couple-name-in-menu">Vivek & Elina</p>
-                    <ul data-role="listview" class="left-menu">
-					    <li data-icon="none" and data-iconpos="none"onclick="dashboardMethods.showStoryBoard();" ><a href="#"><img src="./img/story-board.png" class="menu-icons"> Story Board</a></li>
-						<li data-icon="none" and data-iconpos="none" onclick="dashboardMethods.showEvents();"><a href="#"><img src="./img/event.png" class="menu-icons"> Events </a></li>
-						<li data-icon="none" and data-iconpos="none" onclick="dashboardMethods.showGallery();"><a href="#"><img src="./img/gallery.png" class="menu-icons" style="margin-top:12px;"> Gallery</a></li>
-						<li data-icon="none" and data-iconpos="none" onclick="dashboardMethods.showContact('normal');"><a href="#"><img src="./img/contact-menu.png" class="menu-icons" > Contacts</a></li>
-						<li data-icon="none" and data-iconpos="none" onclick="dashboardMethods.showManager();"><a href="#"><img src="./img/travel.png" class="menu-icons" >Travel</a></li>
-						
-						<li class="divider"></li>
-						
-						<li data-icon="none" and data-iconpos="none" onclick="dashboardMethods.showTask();"><a href="#"><img src="./img/todo.png" class="menu-icons" >To Do</a></li>
-						<li data-icon="none" and data-iconpos="none" onclick="dashboardMethods.showWeddingCard();"><a href="#"><img src="./img/wedding.png" class="menu-icons" >Wedding Card</a></li>
-						
-						<li class="divider"></li>
-						
-						<li data-icon="none" and data-iconpos="none"><a href="#"><img src="./img/profile.png" class="menu-icons" >Profile</a></li>
-						<li data-icon="none" and data-iconpos="none"><a href="privacy_policy.html"><img src="./img/privacy-policy.png" class="menu-icons" >Privacy Policy</a></li>
-						<li data-icon="none" and data-iconpos="none"><a href="faq.html"><img src="./img/faq.png" class="menu-icons" >FAQ</a></li>
-						
-						<li class="divider"></li>
-						
-						<li data-icon="none" and data-iconpos="none"><a href="socialweddings.html"><img src="./img/switch.png" class="menu-icons" >Switch Wedding</a></li>
-					</ul>
-                
-				</div>
-	
+    
+    -->
+    <div data-role="panel" id="shaadiMenu" data-theme="b" class="panel-top-bg" data-position-fixed="true" data-display="overlay">
+        <img src="./img/couple-photo.png" class="couple-pic-in-menu" height="50" width="50">
+        <p class="couple-name-in-menu">Vivek & Elina</p>
+        <ul data-role="listview" class="left-menu">
+            <li data-icon="none" and data-iconpos="none" onclick="dashboardMethods.showStoryBoard();">
+                <a href="#"><img src="./img/story-board.png" class="menu-icons"> Story Board</a>
+            </li>
+            <li data-icon="none" and data-iconpos="none" onclick="dashboardMethods.showEvents();">
+                <a href="#"><img src="./img/event.png" class="menu-icons"> Events </a>
+            </li>
+            <li data-icon="none" and data-iconpos="none" onclick="dashboardMethods.showGallery();">
+                <a href="#"><img src="./img/gallery.png" class="menu-icons" style="margin-top:12px;"> Gallery</a>
+            </li>
+            <li data-icon="none" and data-iconpos="none" onclick="dashboardMethods.showContact('normal');">
+                <a href="#"><img src="./img/contact-menu.png" class="menu-icons"> Contacts</a>
+            </li>
+            <li data-icon="none" and data-iconpos="none" onclick="dashboardMethods.showManager();">
+                <a href="#"><img src="./img/travel.png" class="menu-icons">Travel</a>
+            </li>
+            <li class="divider"></li>
+            <li data-icon="none" and data-iconpos="none" onclick="dashboardMethods.showTask();">
+                <a href="#"><img src="./img/todo.png" class="menu-icons">To Do</a>
+            </li>
+            <li data-icon="none" and data-iconpos="none" onclick="dashboardMethods.showWeddingCard();">
+                <a href="#"><img src="./img/wedding.png" class="menu-icons">Wedding Card</a>
+            </li>
+			<li data-icon="none" and data-iconpos="none" onclick="dashboardMethods.budgetCard();">
+                <a href="#"><img src="./img/wedding.png" class="menu-icons">budget Module</a>
+            </li>
+            <li class="divider"></li>
+            <li data-icon="none" and data-iconpos="none">
+                <a href="#"><img src="./img/profile.png" class="menu-icons">Profile</a>
+            </li>
+            <li data-icon="none" and data-iconpos="none">
+                <a href="privacy_policy.html"><img src="./img/privacy-policy.png" class="menu-icons">Privacy Policy</a>
+            </li>
+            <li data-icon="none" and data-iconpos="none">
+                <a href="faq.html"><img src="./img/faq.png" class="menu-icons">FAQ</a>
+            </li>
+            <li class="divider"></li>
+            <li data-icon="none" and data-iconpos="none">
+                <a href="socialweddings.html"><img src="./img/switch.png" class="menu-icons">Switch Wedding</a>
+            </li>
+        </ul>
+    </div>
     <section data-role="page" id="first-page" class="redbgimg jqm-demos jqm-home">
         <header data-role="header" id="pageheader" class="jqm-header">
             <a href="#"><img src="img/wp_logo.png"></a>
@@ -132,12 +147,12 @@
                         $(":mobile-pagecontainer").pagecontainer("change", "socialweddings.html", {
                         showLoadMsg: false
                     });
-                    navigator.splashscreen.hide();
+                    // navigator.splashscreen.hide();
                 } else {
                     $(":mobile-pagecontainer").pagecontainer("change", "socialweddings.html", {
                         showLoadMsg: false
                     });
-                    navigator.splashscreen.hide();
+                    // navigator.splashscreen.hide();
                 }
 
             } else navigator.splashscreen.hide();

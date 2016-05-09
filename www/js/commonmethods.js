@@ -329,7 +329,7 @@ var cm = {
 };
 
 cm.parseInitializer();
-$(document).on("pageinit", "#first-page,#AccommodationPage,#allotAccommodation,#allotCab,#cabPage,#cardfilter,#cardlistpage,#viewCard,#commentsPage,#friendsContactsPage,#contactsPage,#conversationPage,#eviewcard,#eventsPage,#eventsGuestPage,#faqPage,#favouritespages,#filterContactsPage,#filterlistpage,#galleryPage,#guest,#importContactPage,#managePage,#newGuestPage,#newHostPage,#newOSGuestPage,#newWeddingRegistration,#osguestRequestPage,#outstationGuestsPage,#pictureCommentsPage,#picturePage,#privacyPage,#pickContactPage,#sendToMe,#sendToself,#weddingDetailsEdit", function(event) {
+$(document).on("pageinit", "#loadTask,#AccommodationPage,#allotAccommodation,#allotCab,#cabPage,#cardfilter,#cardlistpage,#viewCard,#commentsPage,#friendsContactsPage,#contactsPage,#conversationPage,#eviewcard,#eventsPage,#eventsGuestPage,#faqPage,#favouritespages,#filterContactsPage,#filterlistpage,#galleryPage,#guest,#importContactPage,#managePage,#newGuestPage,#newHostPage,#newOSGuestPage,#newWeddingRegistration,#osguestRequestPage,#outstationGuestsPage,#pictureCommentsPage,#picturePage,#privacyPage,#pickContactPage,#sendToMe,#sendToself,#weddingDetailsEdit", function(event) {
 
     $("#shaadiMenu").on("panelopen", function(event, ui) {
         //setting overflow : hidden and binding "touchmove" with event which returns false

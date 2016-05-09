@@ -85,6 +85,13 @@ var socialWeddingMethods = {
 
             }
         });
+    },checkWeddingCount:function(){
+        // To check whether only one wedding exist or having multiple
+        if(socialWeddingMethods.weddingDetailsArray.length==1){
+            console.warn("only one wedding found:"+socialWeddingMethods.weddingDetailsArray[0].wedId);
+            localStorage.joinedWedding=socialWeddingMethods.weddingDetailsArray[0].wedId;
+            socialWeddingMethods.selectWedding();
+        }else socialWeddingMethods.sortWeddings();
     },
     sortWeddings: function() {
         // To sort the array of weddings based on date of wedding
@@ -169,8 +176,10 @@ var socialWeddingMethods = {
             $("#weddingList").html(weddingHtml).trigger("create"); //.listview("refresh").trigger("create")
             if($(".social-wedding-list").length==1)
                 $(".social-wedding-list").trigger("click");
+            navigator.splashscreen.hide();
             $("body").removeClass("ui-loading");
         } else {
+            navigator.splashscreen.hide();
             cm.showToast("You are not having any active Wedding Invites");
             $("body").removeClass("ui-loading");
         }
@@ -303,7 +312,12 @@ var socialWeddingMethods = {
 
     },
     selectWedding: function(selectedWedding) {
-        //To Select a Wedding Directly from the wedding List
+        // To Select a Wedding Directly from the wedding List
+    /*    console.warn("selectedWedding:"+selectedWedding+"Type:"+typeof selectedWedding);
+        if(typeof selectedWedding=="undefined"){
+            $("body").removeClass("ui-loading");
+            return;
+        }*/
         localStorage.joinedWedding = $(selectedWedding).data('wid');
         console.log(localStorage.joinedWedding);
         if ($(selectedWedding).data('status') == "before")
@@ -372,11 +386,13 @@ var brideAndGroomName = $(selectedWedding).data('name');*/
                         if (rowObject.get("weddingID") == weddingId) {
                             console.log("Host man");
                             weddingDetailsObject.usertype = "host";
-							localStorage.taskusertype = "host";
+                            localStorage.taskusertype = "host";
                             weddingDetailsObject.relation = rowObject.get("relationToBrideGroom");
                             localStorage.weddingDetailsObject = JSON.stringify(weddingDetailsObject);
                             localStorage.userId = rowObject.get("hostID");
                             localStorage.userName = rowObject.get("hostName");
+							
+                            localStorage.brideorgroomside = rowObject.get("brideOrGroomSide");
                             rowObject.set("status", "Attending");
                             rowObject.save();
                             //break;
@@ -399,7 +415,7 @@ var brideAndGroomName = $(selectedWedding).data('name');*/
                                     if (rowObject.get("weddingID") == weddingId) {
                                         console.log("Guest man");
                                         weddingDetailsObject.usertype = "guest";
-										localStorage.taskusertype = "guest";
+                                        localStorage.taskusertype = "guest";
                                         localStorage.weddingDetailsObject = JSON.stringify(weddingDetailsObject);
                                         localStorage.userId = rowObject.get("guestID");
                                         localStorage.userName = rowObject.get("guestName");

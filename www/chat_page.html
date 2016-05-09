@@ -1,0 +1,56 @@
+
+<section data-role="page" class="jqm-demos jqm-home" style="background:#F4F4F4;" id="conversationPage">
+  <div id="pageheader" data-role="header" class="jqm-header"> <a href="" onclick="messagingMethods.gotoconversationlist()"><img src="img/Back_arrow.png"></a>
+    <p class="pagetitle">Chat</p>
+
+    <div class="topbartools" style="visibility:hidden">
+      <ul style="margin-right:10px;">
+        <li class="place-icon" style="padding-right:18px;"><img src="img/search-icon.png"></li>
+        <li class="share-icon"><img src="img/chat-group.png"></li>
+      </ul>
+    </div>
+  </div>
+    
+	<article id="pagecontent" role="main" class="jqm-content">
+	    
+		<div class="chatting_person_name">
+			    <img src="./img/chat-person.png" class="chatting_person_pic" height="45" width="45">
+				
+				<!-- drop down start -->
+				<span id="pname"><a href="#myPopup" data-rel="popup" data-transition="slideup" ><img src="./img/3-dot.png" class="chat-menu-icon"></a></span>
+				<div data-role="popup" id="myPopup" class="chat-dropdown" style="max-width: 160px; top: 62.6333px; right:-10px; padding:10px 15px 4px;">
+                    <p onclick="messagingMethods.addNewMember()">Add Member</p>
+					<p onclick="messagingMethods.leaveGroup()">Leave Group</p>
+                </div>
+				<!-- drop down end -->
+		</div>
+    
+        <div class="chat-screen" >
+		    <div id="conversationList" style="margin:0px">
+			
+			<!---   display conversation here -->
+		    </div>
+          
+        
+        
+            <div class="typehere">
+        	    <input type="text" id="messageBox" placeholder="Comment on this.....">
+                <input class="submitcommemt" type="submit" value="Send"  onclick="messagingMethods.addMessage()">
+            </div>
+        
+        </div>
+       
+    
+     </article>
+    
+	<div id="pagefooter" data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer"> </div>
+
+  <script type="text/javascript" src="js/newmessaging.js"></script>
+    <script type="text/javascript">
+    $("#conversationPage").ready(function() {
+       $('#pname').prepend(localStorage.guestname)    
+        
+       messagingMethods.fetchConversation();
+    });
+    </script>
+</section>

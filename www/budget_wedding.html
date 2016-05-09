@@ -1,0 +1,142 @@
+
+<section data-role="page" class="jqm-demos jqm-home" id="budgetmod">
+    
+	<div id="pageheader" data-role="header" class="jqm-header"> <a href="#"><img src="img/3-dot.png" style="margin-top:3px; margin-right:5px;"></a>
+        <p class="pagetitle">Wedding Budget</p>
+
+    </div>
+    
+	<article id="pagecontent" role="main" class="jqm-content ">
+	    
+		<div class="white-bg">
+		<h6 class="total-budget-text">Total Budget</h6>
+		 	<div class="ui-grid-a enter-budget-side-padding amounts">
+                <div class="ui-block-a" style="width:10%">
+		            <label for="fullname" class="rupee-sign">&#8377 </label>
+				</div>
+				<div class="ui-block-b" style="width:90%">
+                    <input type="text" data-wrapper-class="enter-budget" id="budamt">
+		        </div>
+			</div>
+			<button class="ui-btn save-budget"><img src="./img/save-white.png" id="saveimg" width="18" height="19" onclick="bm.addTotalBudget()">Save</button>
+			<div class="chart-img" id="circle">
+			    <!--<img src="./img/pie-chart-amount.png" height="155" width="155">-->
+				<img src="./img/edit-gray.png" height="17" width="21" style="margin-bottom:0;" onclick="bm.showHidetotalamt()">
+			</div>
+			<div class="ui-grid-a" style="padding-left:5px; padding-right:5px;">
+                
+				<div class="ui-block-a" style="padding-right:5px">
+		            
+					<div class="ui-grid-a budget-info-border">
+                        <div class="ui-block-a" style="width:14%">
+					        <img src="./img/red-circle.png" height="13" width="13" class="red-circle">
+						</div>
+						<div class="ui-block-b" style="width:86%">
+						    <p class="amount-spend " id="amtspnd">Actual Spend <br> &#8377  </p>
+						</div>
+					</div>
+				
+				</div>
+				<div class="ui-block-b" style="padding-left:5px">
+                    
+					<div class="ui-grid-a budget-info-border">
+                        <div class="ui-block-a" style="width:14%">
+					        <img src="./img/gray-circle.png" height="13" width="13" class="red-circle">
+						</div>
+						<div class="ui-block-b" style="width:86%">
+						    <p class="amount-spend">Balance Left <br> &#8377 2.5 Lakhs</p>
+						</div>
+					</div>
+		        
+				</div>
+			
+			</div>
+			
+			<button class="ui-btn see-breakup">See Breakup</button>
+	    
+		</div>
+		
+		<a href="#" class="ui-btn add-new-category"  onclick="bm.showAddcategory()"><img src="./img/create-New1.png" height="24" width="24">Add New Categories</a>
+		
+		<div class="white-bg addnewCategory" >
+		    <input type="text" data-wrapper-class="enter-new-category" placeholder="Title" id="catTitle">
+			
+			<div class="ui-grid-a " style="margin-top:20px;">
+                <div class="ui-block-a" style="padding-right:10px">
+				    <label class="label-estimated">Estimated </label>
+				    <input type="text" data-wrapper-class="enter-new-category" placeholder="&#8377 Amount" id="estimatedamt">
+				</div>
+			
+			    <div class="ui-block-b" style="padding-left:10px">
+				    <label class="label-actual">Actual </label>
+			        <input type="text" data-wrapper-class="enter-new-category" placeholder="&#8377 Amount">
+			     </div>
+		    </div>
+			
+			<hr style="color:#fff">
+			
+			<div class="ui-grid-a  subcatdiv" style="margin-top:20px;">
+                <div class="ui-block-a" style="padding-right:10px">
+				    <label class="label-subcategory">Subcategory </label>
+				    <input type="text" data-wrapper-class="enter-new-category" placeholder="Title" class="subtitle">
+				</div>
+			
+			    <div class="ui-block-b" style="padding-left:10px">
+				    <label class="label-amount">Amount </label>
+			        <input type="text" data-wrapper-class="enter-new-category" placeholder="&#8377 Amount" class="subamt">
+			     </div>
+		    </div>
+		    
+			<button class="ui-btn add-fields" id="subcategorybtn" onclick="bm.addsubcategory()"><img src="./img/create-New1.png" height="20" width="20" ></button>
+			
+			<div class="ui-grid-a" style="margin-top:5px;">
+                <div class="ui-block-a" style="padding-right:10px">
+				    <button class="ui-btn clear-category"><img src="./img/clear.png" height="15" width="15">Clear</button>
+				</div>
+			
+			    <div class="ui-block-b" style="padding-left:10px">
+				    <button class="ui-btn save-category" onclick="bm.addcategory()"><img src="./img/save-white.png" height="18" width="18">Save</button>
+			    </div>
+		    </div>
+			
+		</div>
+    <div style="margin:0px" class="appendcat">
+	</div>
+	</article>
+    
+	<div id="pagefooter" data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer"> </div>
+	
+
+   <script type="text/javascript" src="js/budget.js"></script>
+   <script type="text/javascript" src="js/circle-progress.js"></script>
+   <link href="http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+    <script type="text/javascript">
+    $("#budgetmod").ready(function() {
+        /*    $( "#progressbar-1" ).progressbar({
+               value: 30
+            });
+         });*/
+		 bm.getCategoryList()
+		$('.total-budget-text').hide()
+		$('.addnewCategory').hide()
+		$('.amounts').hide()
+		$('.save-budget').hide()
+		$('#saveimg').hide()
+		
+	 $('#circle').circleProgress({
+        value: 0.75,
+        size: 95,
+        fill: {
+            gradient: ["red", "orange"]
+        }
+    });
+	//$('#circle').circleProgress({ value: 0.5, fill: { color: 'orange' }});
+
+	bm.getTotalbudget() 
+	
+	});
+    </script>
+</section>
+<!-- /page -->

@@ -604,7 +604,7 @@
 			//pass tak id
 			var taskid = $(id).attr('id')
 			
-				var TaskManagementClass = Parse.Object.extend('TaskManagement');
+		var TaskManagementClass = Parse.Object.extend('TaskManagement');
 			var TaskManagementQuery = new Parse.Query(TaskManagementClass);
 			TaskManagementQuery.equalTo("taskID", taskid);
 		   TaskManagementQuery.find({

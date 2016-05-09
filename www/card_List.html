@@ -31,7 +31,7 @@
             </ul>
         </div>
     </header>
-    <article id="pagecontent" role="main" class="jqm-content">
+    <article id="pagecontent" data-role="content" class="jqm-content">
         <div class="cardlist">
             <h3>Top Sellers</h3>
             <div class="add-favourites">Favourites
@@ -67,7 +67,7 @@
     <!-- /page -->
     <script type="text/javascript" src="js/weddingCard.js"></script>
     <script type="text/javascript">
-    $("#cardlistpage").ready(function() {
+   $("#cardlistpage").ready(function() {
 
         weddingcard.getfavcount();
         weddingcard.fetchcardlist();

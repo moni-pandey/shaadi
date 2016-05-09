@@ -1,0 +1,59 @@
+<section data-role="page" class="jqm-demos jqm-home" style="background:#fff;" id="friendsListPage">
+  <div id="pageheader" data-role="header" class="jqm-header"> <a href="#"><img src="img/Back_arrow.png"></a>
+    <p class="pagetitle">Contact</p>
+
+	<div class="top-search-panel" >
+	    <img src="img/search-icon.png" class="find-icon" height="18" width="19">
+        <input type="email"  data-wrapper-class="search-contact" placeholder="Group Name..." id="enterartist">
+		<img src="img/closed.png" class="close-icon" height="13" width="12" onclick="messagingMethods.hideSearchbox()">
+	</div>
+	
+    <div class="topbartools">
+      <ul style="margin-right:10px;">
+        <li class="place-icon" style="padding-right:18px;"onclick="messagingMethods.showSearchbox()" ><img src="img/search-icon.png"></li>
+        <li class="share-icon" onclick="messagingMethods.gotogrouplist()"><img src="img/chat-group.png"></li>
+	
+      </ul>
+    </div>
+  </div>
+    
+	<article id="pagecontent" role="main" class="jqm-content">
+		
+            <div data-role="navbar">
+                <ul class="chat_nav-bar">
+                    <li onclick="messagingMethods.getConversationList();"><a href="#">Chat</a></li>
+                    <li onclick="messagingMethods.loadContacts()"><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            
+			<div data-role="main" class="ui-content">
+			    <ul data-role="listview" data-inset="true" class="chat-contact-list">
+                   
+                </ul>  
+            </div>
+
+            <div data-role="page" id="pagetwo">
+ 
+                <div data-role="navbar">
+                    <ul class="chat_nav-bar">
+                        <li><a href="#chat">Chat</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div data-role="main" class="ui-content">
+            </div>
+
+	</article>
+    
+	<div id="pagefooter" data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer"> </div>
+
+   <script type="text/javascript" src="js/newmessaging.js"></script>
+    <script type="text/javascript">
+    $("#friendsListPage").ready(function() {
+           $('.top-search-panel').hide()
+       messagingMethods.getConversationList();
+    });
+    </script>
+</section>
