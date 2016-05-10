@@ -1,0 +1,79 @@
+
+<section data-role="page" class="jqm-demos jqm-home" id="breakup">
+  <header id="pageheader" data-role="header" class="jqm-header"> <a href="" onclick="history.back()"><img src="img/Back_arrow.png"></a>
+  <a href="#shaadiMenu" data-rel="popup" data-transition="slideup" class="menuicon ui-btn ui-btn-inline"></a> 
+    <p class="pagetitle">See Breakup</p>
+
+  </header>
+  <style>
+
+  </style>
+    <article id="pagecontent" role="main" class="jqm-content">
+	    
+        <div class="white-bg">
+
+	<div id="chartdiv" style="width:400px;height:300px;text-align:left"></div>
+	<div id="graph_legend"></div>
+        
+		</div>
+	</article>
+    
+	<div id="pagefooter" data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer"> </div>
+
+<script language="javascript" type="text/javascript" src="js/flot/jquery.flot.min.js"></script>
+<script language="javascript" type="text/javascript" src="js/flot/jquery.flot.pie.js"></script>
+
+   <script type="text/javascript" src="js/budget.js"></script>
+  
+    <script type="text/javascript">
+    $("#breakup").ready(function() {
+  
+	var data = [
+			{ label: "nocategoryfound",  data: 100},
+		    
+		];
+	var piedata = JSON.parse(localStorage["pieData"])
+	 if(piedata.length)
+	 {
+  $.plot('#chartdiv', piedata, {
+    series: {
+        pie: {
+        show: true,                
+       
+    }
+    },legend: {
+        show: true,
+        noColumns:2,
+        container:$("#graph_legend")
+
+    }
+});
+}
+else
+{
+ $.plot('#chartdiv', data, {
+    series: {
+        pie: {
+        show: true,                
+       
+    }
+    },legend: {
+        show: true,
+        noColumns:2,
+        container:$("#graph_legend")
+
+    }
+});
+}
+   $('.flot-base').css({left:"-45px" })
+   //$('.flot-base').css({top:"105px" })
+  
+  // $('table').css('right', '')
+ 
+  
+});
+
+	
+    </script>
+</section>
+<!-- /page -->

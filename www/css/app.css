@@ -4893,11 +4893,11 @@ padding-right:13px;
 }
 
 .enter-budget, .enter-new-category  {
-  border-radius:0 ;
-  box-shadow:none ;
-  color:#999;
-  font-size:16px;
-  padding:4px;
+  border-radius:0 !important;
+  box-shadow:none!important ;
+  color:#999 !important;
+  font-size:16px !important;
+  padding:4px !important;
 }
 
 .enter-budget-side-padding  {
@@ -4927,6 +4927,7 @@ padding-right:13px;
    font:bold 13px Roboto;
    color:#59595b;
    margin-left:5px;
+   
    }
    
 .red-circle  {
@@ -4971,7 +4972,7 @@ border:1px solid #bababa; padding-left:10px; margin-top:25px;
 }
 
 .label-estimated, .label-actual, .label-subcategory, .label-amount, .label-groom, .label-bride  {
-  color:#999;
+  color:#999 !important;
   font:bold 13px Roboto !important;
 }
 
