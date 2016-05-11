@@ -532,9 +532,9 @@ categoryHTML+='<div class="ui-block-c" style="width:40%">'
 				categoryHTML+='</div>'
 				
 				categoryHTML+='<div style="margin-top:8px; margin-bottom:5px;">'
-				categoryHTML+='    <div id="progressbar-1" class="progress-line"></div> '
+				categoryHTML+='    <div id="'+catid+'progressbar" class="progress-line" ></div> '
 				categoryHTML+='</div>'
-		
+	        
 			categoryHTML+='</h1>'
         
 			categoryHTML+='<p>'
@@ -584,7 +584,7 @@ categoryHTML+='<div class="ui-block-c" style="width:40%">'
 		categoryHTML+='	</p>'
         
 		categoryHTML+='</div>'
-		
+		            		$( "#"+catid+'progressbar' ).progressbar()
 		            $('.appendcat').append(categoryHTML).enhanceWithin()		 
 		            var balance = bm .totalbudget - bm.totalsubCATbudget	
                     var k =    bm.nfFormatter(parseInt(balance) )               
@@ -605,8 +605,14 @@ categoryHTML+='<div class="ui-block-c" style="width:40%">'
 					 var value =  (parseInt(bm.totalsubCATbudget))/parseInt(bm .totalbudget)
 					$('#circle').circleProgress({ value: value, fill: { color: 'orange' }}); 
 				  }
-					
-					
+					var val  = (parseInt(bm.totalsubCATbudget) /parseInt(catBudget))*100
+				
+			
+				  $( "#"+catid+'progressbar' ).progressbar({
+               value: val
+            });
+
+				
 				},
 				error: function(error) {} 
 			});
