@@ -22,24 +22,28 @@
 		            <label for="fullname" class="rupee-sign">&#8377 </label>
 				</div>
 				<div class="ui-block-b" style="width:90%">
-                    <input type="text" data-wrapper-class="enter-budget" id="budamt">
+                    <input type="number" data-wrapper-class="enter-budget" id="budamt">
 		        </div>
 			</div>
 			<button class="ui-btn save-budget"><img src="./img/save-white.png" id="saveimg" width="18" height="19" onclick="bm.addTotalBudget()">Save</button>
 			<div class="chart-img" id="circle">
 			    <!--<img src="./img/pie-chart-amount.png" height="155" width="155">-->
 				<img src="./img/edit-gray.png" height="17" width="21" style="margin-bottom:0;" onclick="bm.showHidetotalamt()">
+				 
+				
 			</div>
-			<div class="ui-grid-a" style="padding-left:5px; padding-right:5px;">
-                
+			<div class="ui-grid-a" style="padding-left:5px; padding-right:5px">
+                <div class="ui-grid-a" style="width:100%;;margin-left: 70px;">
+						    <p class="amount-spend " id="amtspnd">Total Budget &#8377 0.0 </p>
+						</div>
 				<div class="ui-block-a" style="padding-right:5px">
 		            
 					<div class="ui-grid-a budget-info-border">
                         <div class="ui-block-a" style="width:14%">
 					        <img src="./img/red-circle.png" height="13" width="13" class="red-circle">
 						</div>
-						<div class="ui-block-b" style="width:86%">
-						    <p class="amount-spend " id="amtspnd">Actual Spend <br> &#8377  </p>
+						<div class="ui-block-b" style="width:86% ">
+						    <p class="amount-spend " id="amt">Actual Spend <br> &#8377 0.0 </p>
 						</div>
 					</div>
 				
@@ -51,7 +55,7 @@
 					        <img src="./img/gray-circle.png" height="13" width="13" class="red-circle">
 						</div>
 						<div class="ui-block-b" style="width:86%">
-						    <p class="amount-spend" id="amtleft">Balance Left <br> &#8377 </p>
+						    <p class="amount-spend" id="amtleft">Balance Left <br> &#8377 0.0 </p>
 						</div>
 					</div>
 		        
@@ -70,13 +74,13 @@
 		    
 			<div class="ui-grid-a " style="margin-top:20px;">
                 <div class="ui-block-a" style="padding-right:10px">
-				    <label class="label-subcategory">Subcategory </label>
+				    <label class="label-subcategory">Category </label>
 				    <input type="text" data-wrapper-class="enter-new-category" placeholder="Title"  id="catTitle" >
 				</div>
 			
 			    <div class="ui-block-b" style="padding-left:10px">
 				    <label class="label-amount">Amount </label>
-			        <input type="text" data-wrapper-class="enter-new-category" placeholder="&#8377 Amount"  id="estimatedamt">
+			        <input type="number" data-wrapper-class="enter-new-category" placeholder="&#8377 Amount"  id="estimatedamt">
 			     </div>
 		    </div>
 			
@@ -88,12 +92,12 @@
 			<div class="ui-grid-a " style="margin-top:20px;">
                 <div class="ui-block-a" style="padding-right:10px">
 				    <label class="label-estimated">Estimated </label>
-				    <input type="text" data-wrapper-class="enter-new-category" placeholder="&#8377 Amount"   class="subamt">
+				    <input type="number" data-wrapper-class="enter-new-category" placeholder="&#8377 Amount"   class="subamt">
 				</div>
 			
 			    <div class="ui-block-b" style="padding-left:10px">
 				    <label class="label-actual">Actual </label>
-			        <input type="text" data-wrapper-class="enter-new-category" placeholder="&#8377 Amount" class="spentamt">
+			        <input type="number" data-wrapper-class="enter-new-category" placeholder="&#8377 Amount" class="spentamt">
 			     </div>
 		    </div>
 		    </div>
@@ -113,7 +117,8 @@
 		    </div>
 			
 		</div>
-   
+   <div style="margin:0px" class="editcategory">
+	</div>
 	<div style="margin:0px" class="appendcat">
 	</div>
 	</article>
@@ -121,9 +126,11 @@
 	<div id="pagefooter" data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer"> </div>
 	
 
-     <link rel="stylesheet" href="css/jquery-ui.css">
+    <!-- <link rel="stylesheet" href="css/jquery-ui.css">-->
    <script type="text/javascript" src="js/circle-progress.js"></script>
-   <script type="text/javascript" src="js/jquery-ui.js"></script>
+   <script type="text/javascript" src="js/flot/gradient-progress-bar.js"></script>
+
+ <!--  <script type="text/javascript" src="js/jquery-ui.js"></script>-->
      <script type="text/javascript" src="js/budget.js"></script>
   
    
@@ -143,12 +150,13 @@
 		$('#saveimg').hide()
 		
 	 $('#circle').circleProgress({
-        value: 0.75,
+        value: 1,
         size: 95,
         fill: {
-            gradient: ["white", "white"]
+           color: 'orange' 
         }
     });
+
 
 
 	bm.getTotalbudget() 

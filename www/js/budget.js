@@ -69,7 +69,7 @@ var bm = {
 								bm.totalbudget=amt
 									var k =  bm.nfFormatter(parseInt(amt))
 										$('#amtspnd').html('')
-		                                $('#amtspnd').html('Actual Spend <br> &#8377 '+k+'')
+		                                $('#amtspnd').html('Total Budget &#8377 '+bm.totalbudget+'')
 			} ,
 			error : function(error){
 				
@@ -127,7 +127,7 @@ nFormatter : function(num) {
 	    $('.save-budget').hide() 
 	    $('#saveimg').hide() 
 		$('#amtspnd').html(' ')
-		$('#amtspnd').html('Actual Spend <br> &#8377 '+k+'')
+		$('#amtspnd').html('Total Budget  &#8377 '+num+'')
 	  
 	   
 },
@@ -209,12 +209,12 @@ nFormatter : function(num) {
 			  subHTML  +='<div class="ui-grid-a " style="margin-top:20px;">'
                 subHTML  +='  <div class="ui-block-a" style="padding-right:10px">'
 				   subHTML  +='   <label class="label-estimated">Estimated </label>'
-				   subHTML  +='   <input type="text" data-wrapper-class="enter-new-category" placeholder="&#8377 Amount"   class="subamt">'
+				   subHTML  +='   <input type="number" data-wrapper-class="enter-new-category" placeholder="&#8377 Amount"   class="subamt">'
 			  subHTML  +='	</div>'
 			
 			    subHTML  +='  <div class="ui-block-b" style="padding-left:10px">'
 				      subHTML  +='<label class="label-actual">Actual </label>'
-			        subHTML  +='  <input type="text" data-wrapper-class="enter-new-category" placeholder="&#8377 Amount" class="spentamt">'
+			        subHTML  +='  <input type="number" data-wrapper-class="enter-new-category" placeholder="&#8377 Amount" class="spentamt">'
 			     subHTML  +='  </div>'
 		     subHTML  +=' </div>'
 		     subHTML  +=' </div>'
@@ -294,7 +294,7 @@ nFormatter : function(num) {
                  $("body").removeClass("ui-loading");
 				 
 		       bm.pieData.length=0
-			 
+			
 				 
 				 for(var i = 0 ;i <results.length ;i++)
 				 {
@@ -407,7 +407,8 @@ nFormatter : function(num) {
 		    editHTML +='</div>'
 		 
 		
-		 $('.appendcat').before(editHTML).trigger('create')
+		 $('.editcategory').append(editHTML).trigger('create')
+		 
 } , 
 				error : function(error){
 					cm.showAlert(error)
@@ -495,6 +496,7 @@ nFormatter : function(num) {
 	{
 		$('.appendcat').html('')
 		var spent = 0 
+		bm.totalsubCATbudget=0
 		 var weddingDetailsObject = JSON.parse(localStorage.weddingDetailsObject);
 			var TaskManagementClass = Parse.Object.extend("ExpenseSubCategory");
 			var TaskManagementQuery = new Parse.Query(TaskManagementClass);
@@ -584,9 +586,11 @@ categoryHTML+='<div class="ui-block-c" style="width:40%">'
 		categoryHTML+='	</p>'
         
 		categoryHTML+='</div>'
-		            		$( "#"+catid+'progressbar' ).progressbar()
+		            	//	$( "#"+catid+'progressbar' ).progressbar()
 		            $('.appendcat').append(categoryHTML).enhanceWithin()		 
 		            var balance = bm .totalbudget - bm.totalsubCATbudget	
+					var k1 =  bm.nfFormatter(parseInt(bm.totalsubCATbudget))
+					$('#amt').html('Actual Spend <br> &#8377 '+k1+'')
                     var k =    bm.nfFormatter(parseInt(balance) )               
 					 $('#amtleft').html('')
 		            $('#amtleft').html('Balance Left <br> &#8377 '+k+'')	
@@ -596,7 +600,7 @@ categoryHTML+='<div class="ui-block-c" style="width:40%">'
 					  $('#circle').circleProgress({ value: 1.0, fill: { color: 'red' }});
 			                      
 					 $('#amtleft').html('')
-		            $('#amtleft').html('Balance Left <br> &#8377 0')	
+		            $('#amtleft').html('Balance Left <br> &#8377 0.0')	
 			      }
 				  else
 				  {
@@ -604,13 +608,28 @@ categoryHTML+='<div class="ui-block-c" style="width:40%">'
 		            $('#amtleft').html('Balance Left <br> &#8377 '+k+'')	
 					 var value =  (parseInt(bm.totalsubCATbudget))/parseInt(bm .totalbudget)
 					$('#circle').circleProgress({ value: value, fill: { color: 'orange' }}); 
+					
+
+
+					
+					
 				  }
-					var val  = (parseInt(bm.totalsubCATbudget) /parseInt(catBudget))*100
+					var val  = (parseInt(bm.totalsubCATbudget) /parseInt(catBudget))//*100
 				
 			
-				  $( "#"+catid+'progressbar' ).progressbar({
+				 /* $( "#"+catid+'progressbar' ).progressbar({
                value: val
-            });
+            });*/
+			$("#"+catid+'progressbar').gradientProgressBar({
+					 value: val, // percentage
+					 size : 294.0,
+					fill: { // gradient fill
+					color: 'red'
+					 // gradient: ["#d1d1d1", "#d1d1d1", "#d1d1d1"]
+					}
+
+					});
+
 
 				
 				},
