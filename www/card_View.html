@@ -74,13 +74,21 @@
                 <a href="#" class="add-to-my-fav-btn subpagejoin ui-btn ui-mini addtofav" data-like="liked" onclick="weddingcard.likeprod(this)"><img src="img/fav-white.png" class="fav-white "> Add to my Favourite</a>
             </div>
             <p class="quantity-text">Quantity</p>
-            <div data-role="controlgroup" data-type="horizontal">
+			
+        <div data-role="controlgroup" data-type="horizontal" class="card-quantity-input">
             
-                <button class="quantity-decrease-btn" id="minus" onclick="weddingcard.calQuantity(this)">-</button>
+                <button class="quantity-decrease-btn" id="minus"  style="height:17px" onclick="weddingcard.calQuantity(this)">-</button>
             
                 <input class="input-card-quantity" type="number" data-wrapper-class="controlgroup-textinput ui-btn">
-                <button class="quantity-increase-btn " onclick="weddingcard.calQuantity(this)" id="plus">+</button>
+                <button class="quantity-increase-btn " onclick="weddingcard.calQuantity(this)" style="height:17px" id="plus">+</button>
             </div>
+			
+			<!-- <div data-role="controlgroup" data-type="horizontal" class="card-quantity-input">
+                             <button class="quantity-decrease-btn" id="minus" onclick="weddingcard.calQuantity(this)">-</button>
+                             <input class="input-card-quantity" type="number" data-wrapper-class="controlgroup-textinput ui-btn">
+                             <button class="quantity-increase-btn" onclick="weddingcard.calQuantity(this)">+</button>
+                        </div>-->
+			
             <p class="cards-mrp">Price of Cards<span style="" class="totalamtt">&#8377 3,500</span>
                 <h6 class="conditions">*shipping charges extra</h6>
             </p>

@@ -1,7 +1,9 @@
 	var taskmthds= {
-		 
+		 taskid : 0,
 		loadhosttask : function() {
-			 $('.cardlist').html('')
+			
+			$('#all').bind('click',getAll); 
+			 $('.cardlist').html(' ')
 		    $('#all').addClass('selected-task-tab')
 			if($('#pending').hasClass('selected-task-tab'))
 				$('#pending').removeClass('selected-task-tab')
@@ -92,8 +94,9 @@
 			})
 			
 		},loadguesttask : function() {
-			
-			 $('.cardlist').html('')
+			//alert('calling guest')
+			$('#all').bind('click',getAll); 
+			 $('.cardlist').html(' ')
 		    $('#all').addClass('selected-task-tab')
 			if($('#pending').hasClass('selected-task-tab'))
 				$('#pending').removeClass('selected-task-tab')
@@ -231,7 +234,7 @@
 						taskhtml+=' <div class="profile-detail fbbox" style="padding-bottom:1px" id="'+rowObj.get('taskID')+'profile">'
 						taskhtml+=' <h6 class="deadline-day-text"><img src="img/task-date.png">Deadline '+day_date+' '+monthNames[month]+' '+year+' '
 						taskhtml+='    <span style="float:right;">'
-						taskhtml+='    <h6 class="mark-complete-text">Mark Complete <img data-mark="incomplete"  src="img/mark-complete.png"></h6>'
+						taskhtml+='    <h6 class="mark-complete-text">Mark Complete <img data-id="'+rowObj.get('taskID')+'" data-mark="incomplete" onclick="taskmthds.changependingstatus(this)" data-mark="incomplete"  src="img/mark-complete.png"></h6>'
 						taskhtml+='</span>'
 						taskhtml+='	</h6>'
 						taskhtml+='	<h3 class="name-of-task taskname">'+rowObj.get('taskTitle') +'<img src="img/edit-task.png"></h3>'
@@ -567,9 +570,18 @@
 		deletetask : function(id) {
 			//delete task n update list 
 			//pass tak id
-			var taskid = $(id).attr('id')
 			
-				var TaskManagementClass = Parse.Object.extend('TaskManagement');
+					//pass tak id
+			var taskid = $(id).attr('id')
+			taskmthds.taskid=0
+	taskmthds.taskid=taskid
+  navigator.notification.confirm(
+        'Do you want to delete Task.Press Ok to continue.', 
+        deletecat, // <-- no brackets
+        'Delete Task',
+        ['Ok','Cancel']
+    );
+		/*		var TaskManagementClass = Parse.Object.extend('TaskManagement');
 			var TaskManagementQuery = new Parse.Query(TaskManagementClass);
 			TaskManagementQuery.equalTo("taskID", taskid);
 		   TaskManagementQuery.find({
@@ -591,7 +603,7 @@
 					
 					cm.showAlert("error");
 				}
-			})
+			})*/
 	
 			
 		},
@@ -603,30 +615,13 @@
 			//delete task n update list 
 			//pass tak id
 			var taskid = $(id).attr('id')
-			
-		var TaskManagementClass = Parse.Object.extend('TaskManagement');
-			var TaskManagementQuery = new Parse.Query(TaskManagementClass);
-			TaskManagementQuery.equalTo("taskID", taskid);
-		   TaskManagementQuery.find({
-				success:function(foundWish){
-				
-					foundWish[0].destroy({
-						success:function(deletedWishSuccess){
-						cm.showAlert('deleted')
-						$('#'+taskid+"profile").hide()
-						//taskmthds.pendingList()
-						},
-						error:function(deleteWishError){
-							
-							cm.showAlert(deleteWishError);
-						}
-					})
-				},
-				error:function(wishError){
-					
-					cm.showAlert("error");
-				}
-			})
+	taskmthds.taskid=taskid
+  navigator.notification.confirm(
+        'Do you want to delete Task.Press Ok to continue.', 
+        deletecat, // <-- no brackets
+        'Delete Task',
+        ['Ok','Cancel']
+    );
 			
 		},
 		
@@ -649,6 +644,33 @@
 
 										results.save();
 										taskmthds.loadhosttask()
+										//$(id).attr('src' ,'img/completed.png' )
+										
+									}
+								});
+						
+					  },
+					  error: function(point, error) {
+						 cm.showAlert(error)
+						
+					  }
+			});
+		},changependingstatus : function(id) {
+			var taskid = $(id).data('id')
+			var TaskManagementClass = Parse.Object.extend('TaskManagement');
+			var TaskManagementQuery = new Parse.Query(TaskManagementClass);
+			TaskManagementQuery.equalTo("taskID", taskid);
+			TaskManagementQuery.first( {
+					  success: function(results) {
+						  
+					results.save(null, {
+									success: function (results) {
+
+									   results.set("status", 'complete');
+
+										results.save();
+										$('#'+taskid+'profile').hide();
+										//taskmthds.loadhosttask()
 										//$(id).attr('src' ,'img/completed.png' )
 										
 									}
@@ -821,7 +843,7 @@
 	
 	
 	
-$(document).on("keyup", "#enterartist",function() {
+$(document).on("keyup", "#entertask",function() {
     var g = $(this).val().toLowerCase();
     $(".fbbox .taskname").each(function(index) {
 		  console.log(index)
@@ -833,7 +855,7 @@ $(document).on("keyup", "#enterartist",function() {
 
 
 	$(document).on('click' , '#hidebtn', function () {
-          $('#enterartist').val(' ');
+          $('#entertask').val(' ');
            $('.search-task').hide();
          
 		   
@@ -849,13 +871,84 @@ $(document).on("keyup", "#enterartist",function() {
 	  });
 	  
 	  	$(document).on('click' , '#clearbtn', function () {
-          $('#enterartist').val(' ');
+          $('#entertask').val(' ');
 		        $(".fbbox").each(function() {
         if($(this).hide())
 		     $(this).show();
-            $('#enterartist').focus();
+            $('#entertask').focus();
 		   //$('.search').slideUp();
         
     });
       
 	  }); 
+	  
+	/* $(document).on('click', '#all', function() {
+            $('.cardlist').html(' ')
+			alert('allclicked')
+			$(this).on("click",function(){return false;});
+			//$('#all').addClass('disabled')
+            if (localStorage.taskusertype == 'host') {
+                taskmthds.loadhosttask();
+            } else {
+                taskmthds.loadguesttask();
+            }
+		
+        });
+	/*	$('#all').bind('click', function() {
+            $('.cardlist').html(' ')
+			alert('allclicked')
+			$('#all').unbind("click");
+			//$('#all').addClass('disabled')
+            if (localStorage.taskusertype == 'host') {
+                taskmthds.loadhosttask();
+            } else {
+                taskmthds.loadguesttask();
+            }
+		
+        });  */
+
+			$('#all').bind('click',getAll); 
+	  
+function deletecat(buttonIndex)
+{
+	if(buttonIndex=='1')
+	{
+	$("body").addClass("ui-loading");
+				
+		var TaskManagementClass = Parse.Object.extend('TaskManagement');
+			var TaskManagementQuery = new Parse.Query(TaskManagementClass);
+			TaskManagementQuery.equalTo("taskID", taskmthds.taskid);
+		   TaskManagementQuery.find({
+				success:function(foundWish){
+				
+					foundWish[0].destroy({
+						success:function(deletedWishSuccess){
+							$("body").removeClass("ui-loading");
+						cm.showToast('deleted')
+						$('#'+taskmthds.taskid+"profile").hide()
+						//taskmthds.pendingList()
+						},
+						error:function(deleteWishError){
+							
+							cm.showAlert(deleteWishError);
+						}
+					})
+				},
+				error:function(wishError){
+					$("body").removeClass("ui-loading");
+					cm.showAlert("error");
+				}
+			})
+	}
+}
+
+function  getAll() {
+  //alert('train is clicked');
+  //do some stuff
+  $('#all').unbind('click',getAll); 
+   if (localStorage.taskusertype == 'host') {
+                taskmthds.loadhosttask();
+            } else {
+                taskmthds.loadguesttask();
+            }
+}

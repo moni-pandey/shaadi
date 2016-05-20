@@ -28,8 +28,9 @@
 					}
 					else{
 						
-						cm.showToast('no conversation found')
+						//cm.showToast('no conversation found')
 						messagingMethods.loadContacts()
+						$("body").removeClass("ui-loading");
 						
 					}
 				},
@@ -190,7 +191,7 @@
 						for (var k = 0; k < foundGuests.length; k++) {
 								console.log( foundGuests[k].get('guestName'))
 							//$('.chat-contact-list').append('<option value="' + foundGuests[k].get('guestID') + '">' + foundGuests[k].get('guestName') + '</option>');
-							$('.chat-contact-list').append(' <li data-icon="none" and data-iconpos="none" onclick="messagingMethods.checkParticipantExistance(this)" data-gid="' + foundGuests[k].get('guestID') + '" data-gname=" ' + foundGuests[k].get('guestName') + '" id="' + foundGuests[k].get('guestID') + '"><a href="#"><img src="./img/chat-person.png" width="43" height="43" class="chat-contact-img"> ' + foundGuests[k].get('guestName') + '</a></li>');
+							$('.chat-contact-list').append(' <li data-icon="none" and data-iconpos="none" class="fbbox" onclick="messagingMethods.checkParticipantExistance(this)" data-gid="' + foundGuests[k].get('guestID') + '" data-gname=" ' + foundGuests[k].get('guestName') + '" id="' + foundGuests[k].get('guestID') + '"><a href="#"><img src="./img/chat-person.png" width="43" height="43" class="chat-contact-img"> ' + foundGuests[k].get('guestName') + '</a></li>');
 						  
 						}
 						 $('.chat-contact-list').listview().listview("refresh");
@@ -558,6 +559,7 @@
 			var chatMessageHtml = "";
 			var weddingDetailsObject = JSON.parse(localStorage.weddingDetailsObject);
 			chatMessageQuery.equalTo("conversationId", localStorage.convid);
+			chatMessageQuery.addAscending("createdAt");
 		   
 			chatMessageQuery.find({
 				success: function(chatFound) {
@@ -752,6 +754,8 @@
 		{
 			$('.top-search-panel').hide();
 			$('.place-icon').show();
+			$('#enterartist').val(' ');
+			
 			   $(".fbbox").each(function() {
         if($(this).hide())
 		     $(this).show();

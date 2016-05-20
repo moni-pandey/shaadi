@@ -507,7 +507,8 @@ var weddingcard = {
    
 	},
 	ordersamples : function() {
-		
+		//alert($('.enter-address').val())
+		//alert($('textarea#paddress').val())
 		if($('#fname').val()=="")
 			 cm.showAlert('Enter first name')
 		else if($('#lname').val()=="")
@@ -518,7 +519,7 @@ var weddingcard = {
 			 cm.showAlert('Enter address')
 		 else if($('#number').val()=="")
 			 cm.showAlert('Enter pincode')
-		 else if($('.enter-address').val()=="")
+		 else if($('textarea#paddress').val()=="")
 			 cm.showAlert('Enter address')
 		  else if (cm.isValidEmail($("#email").val()))
             cm.showAlert("Please enter valid Email");
@@ -530,6 +531,7 @@ var weddingcard = {
 			 var lname = $('#lname').val()
 			 var email = $('#email').val()
 			 var number = $('#number').val()
+			 
 			 var address = $('.enter-address').val()
 			 var name = fname +" "+ lname 
 			 console.log(name)
@@ -769,8 +771,10 @@ var weddingcard = {
 		else
 		{
 			value = $('.input-card-quantity').val()
-			if(value==0)
-				$('.input-card-quantity').val(value)
+			if(value==0 || value=="")
+			{
+				value=0
+				$('.input-card-quantity').val(value)}
 			else
 			{value--
 			$('.input-card-quantity').val(value)}
@@ -780,7 +784,14 @@ var weddingcard = {
 		$('.totalamtt').html('<span>&#8377</span>' + total)
 	},
 	yourorder:function()
-	{  var value=0
+	{ 
+if($('.input-card-quantity').val()=='' ||$('.input-card-quantity').val()=='0')
+{
+	cm.showToast('please select quantity>0')
+	return;
+}
+else
+{	var value=0
 	value = $('.input-card-quantity').val()
 	  var total = parseInt(value) * parseInt(localStorage.price)
 	  localStorage.totalamt=parseInt(value)* parseInt(localStorage.price)
@@ -790,7 +801,7 @@ var weddingcard = {
 		 $(":mobile-pagecontainer").pagecontainer("change", "your_Order-detail.html", {
             showLoadMsg: false
         });
-		
+	}	
 	},
 	
 	sendtoguest : function()
@@ -842,7 +853,11 @@ var weddingcard = {
 	},
 	ordercard()
 	{
-		
+		if($('.enter-address').val().length=='0')
+		{cm.showAlert('Enter address')
+	      return;
+		  }
+	
 		if($('#fname').val()=="")
 			 cm.showAlert('Enter first name')
 		else if($('#lname').val()=="")
@@ -853,9 +868,9 @@ var weddingcard = {
 			 cm.showAlert('Enter address')
 		 else if($('#number').val()=="")
 			 cm.showAlert('Enter pincode')
-		 else if($('.enter-address').val()=="")
+		 else if($('.enter-address').val()==" ")
 			 cm.showAlert('Enter address')
-		  else if (cm.isValidEmail($("#email").val()))
+		  else if(cm.isValidEmail($("#email").val()))
             cm.showAlert("Please enter valid Email");
 		 else 
 		 {
@@ -945,7 +960,9 @@ var weddingcard = {
 	}//send to selected contacts 
 	,
 	updateDB : function()
-	{
+	{ 
+	
+	$("body").addClass("ui-loading");
 		var typelist =''
 		var contact= false
 		if(weddingcard.listform =='file')
@@ -989,6 +1006,7 @@ var weddingcard = {
                 success: function(wishResults) {
 				console.log(wishResults.id)
 				//alert('yooyooyoyo')
+				$("body").removeClass("ui-loading");
             sampleorderObj.set("orderID",wishResults.id );
 				 sampleorderObj.save();
 			     weddingcard.saveRecipient(wishResults.id )
@@ -997,6 +1015,7 @@ var weddingcard = {
                },
                 error: function(gameScore, error) {
                      cm.showAlert(error);
+					 $("body").removeClass("ui-loading");
                 }
             })		
 		 }, function(error) {
@@ -1022,6 +1041,7 @@ var weddingcard = {
 			  sampleorderObj.save(null, {
                 success: function(wishResults) {
 				console.log(wishResults.id)
+				$("body").removeClass("ui-loading");
 				//alert('yooyooyoyo')
                 sampleorderObj.set("orderID",wishResults.id );
 				 sampleorderObj.save();
@@ -1033,6 +1053,7 @@ var weddingcard = {
                },
                 error: function(gameScore, error) {
                      cm.showAlert(error);
+					 $("body").removeClass("ui-loading");
                 }
 			 
 				});
@@ -1056,7 +1077,7 @@ var weddingcard = {
 			  sampleorderObj.save(null, {
                 success: function(wishResults) {
 				console.log(wishResults.id)
-			
+			$("body").removeClass("ui-loading");
                 sampleorderObj.set("orderID",wishResults.id );
 				 sampleorderObj.save();
 				// for(var i=0 ;i<weddingcard.guestListArray.length ;i++)
@@ -1070,6 +1091,7 @@ var weddingcard = {
                },
                 error: function(gameScore, error) {
                      cm.showAlert(error);
+					 $("body").removeClass("ui-loading");
                 }
 			 
 				});

@@ -2046,7 +2046,8 @@ div.hasDatepicker {
 	margin: 20px auto;
 }
 .filter-search .ui-flipswitch {
- background-color: #DED5D5 text-indent: -9999px;
+ background-color: #DED5D5 ;
+ text-indent: -9999px;
 	width: 40px;
 	height: 24px;
 	border-radius: 20px;
@@ -4461,7 +4462,7 @@ border:none !important; background-color:#fff !important; border-bottom:1px soli
    padding:22px 16px 22px 22px;
    background:#fff !important;
    border-left-width:0 !important;
-   margin-top:-20px !important;
+   margin-top:0px !important;
    border-radius:0 !important;
  }
  
@@ -5208,4 +5209,41 @@ border-top: 1px solid #e0e0e0;
 #circle canvas {
 	 display:block;
   margin:5px auto 20px;
+
+  }
+
+
+#pagecontent .contact-toolbar {
+    display: inline-block;
+background: #575757;
+position: fixed;
+top: 8.01%;
+margin: auto;
+z-index: 998;
+width: 100%;
 }
+.contact-typehere {
+	
+	    position: fixed ;
+    top: 13%;
+    /* margin: auto; */
+    z-index: 998;
+    width: 100%;
+}
+
+/* added 16th may 2016 */
+	
+	/* issue no. 29 */
+	.card-quantity-input  {
+	width: 50%;
+    padding-left: 75px;
+    display: block;
+    margin: 2px auto;}
+   
+   .card-quantity-input>.ui-controlgroup-controls .ui-corner-all  {
+    width:30%;
+}
+
+
+
+

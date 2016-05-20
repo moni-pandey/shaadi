@@ -4,17 +4,20 @@ var bm = {
 	totalCATbudget : 0,
 	totalsubCATbudget : 0,
 	pieData : [],
+	catid : 0,
 	addTotalBudget : function() {
-		
+			$("body").addClass("ui-loading");
 		if($('#budamt').val()==" ")
-		{$('#circle').show()
+			
+		{
+	   $('#circle').show()
 		$('.total-budget-text').hide()
 		$('.amounts').hide()
 		$('.save-budget').hide()
 		}
 		else
 		{
-			 $("body").addClass("ui-loading");
+	   $("body").addClass("ui-loading");
 		 var weddingDetailsObject = JSON.parse(localStorage.weddingDetailsObject);
 		  var WeddingClass = Parse.Object.extend('Wedding');
 			var WeddingQuery = new Parse.Query(WeddingClass);
@@ -24,6 +27,7 @@ var bm = {
 						   $("body").removeClass("ui-loading");
 					results.save(null, {
 									success: function (results) {
+										console.log(results)
                                       if (localStorage.taskusertype == 'host')
 									  { 
 								       if(localStorage.brideorgroomside=='Bride')
@@ -140,31 +144,87 @@ nFormatter : function(num) {
 		$('#saveimg').show()
 	},
 	showAddcategory : function() {
+	
 		$('.addnewCategory').show()
+		var addHTML = ''
+		 addHTML +='<div class="addsubcat" style="margin:0px" >'
+		  addHTML+='<div class="ui-grid-a " style="margin-top:20px;">'
+               addHTML+=' <div class="ui-block-a" style="padding-right:10px">'
+				addHTML+='    <label class="label-subcategory">Category </label>'
+				   addHTML+=' <input type="text" data-wrapper-class="enter-new-category" placeholder="Title"  id="catTitle" >'
+				addHTML+='</div>'
+		
+			   addHTML+=' <div class="ui-block-b" style="padding-left:10px">'
+				  addHTML+='  <label class="label-amount">Amount </label>'
+			      addHTML+='  <input type="number" data-wrapper-class="enter-new-category" placeholder="&#8377 Amount"  id="estimatedamt">'
+			    addHTML+=' </div>'
+		   addHTML+=' </div>'
+			
+		addHTML+='<hr style="color:#fff">'
+		
+		addHTML+=' <div class=" subcatdiv" style="margin:0px;">'
+		  addHTML+='  <input type="text" data-wrapper-class="enter-new-category" placeholder="Title" class="subtitle" >'
+		
+			addHTML+='<div class="ui-grid-a " style="margin-top:20px;">'
+                addHTML+='<div class="ui-block-a" style="padding-right:10px">'
+				   addHTML+=' <label class="label-estimated">Estimated </label>'
+				   addHTML+=' <input type="number" data-wrapper-class="enter-new-category" placeholder="&#8377 Amount"   class="subamt">'
+				addHTML+='</div>'
+		 addHTML+='<div class="ui-block-b" style="padding-left:10px">'
+				    addHTML+='<label class="label-actual">Actual </label>'
+			      addHTML+='  <input type="number" data-wrapper-class="enter-new-category" placeholder="&#8377 Amount" class="spentamt">'
+			    addHTML+=' </div>'
+		   addHTML+=' </div>'
+		    addHTML+='</div>'
+		    addHTML+='</div><button class="ui-btn add-fields" id="subcategorybtn" onclick="bm.addsub()"><img src="./img/create-New1.png" height="20" width="20" ></button>'
+			
+			addHTML+='<div class="ui-grid-a " style="margin-top:5px;">'
+                addHTML+='<div class="ui-block-a" style="padding-right:10px">'
+				  addHTML+='  <button class="ui-btn clear-category" onclick="bm.hideAddcategory()"><img src="./img/clear.png" height="15" width="15">Clear</button>'
+			addHTML+='	</div>'
+			
+			    addHTML+='<div class="ui-block-b" style="padding-left:10px">'
+				  addHTML+='  <button class="ui-btn save-category" onclick="bm.addcategory()"><img src="./img/save-white.png" height="18" width="18">Save</button>'
+			  addHTML+='  </div>'
+		 addHTML+=' </div>'
+		
+	$('.addnewCategory').append(addHTML).trigger('create')
+		//$('').show()
 	},hideAddcategory : function() {
-		$('.addnewCategory').hide()
+		$('.addnewCategory').html('')
+				$('.addnewCategory').hide()
 	},
 	addcategory : function()
 	{   
 	var flag = false ;
-	
-	//$('.subcatdiv').each(function(index) {
-            // var amt = $(this).find('.subamt').val()			
-		/*	if(amt >  $('#estimatedamt').val() )
-			{
-				flag=false 
-				
-				
-			}
-			 else
-			 {
-				 flag =true
-			 }				 
-			     var spentamt = $(this).find('.spentamt').val() 
-				 
-	});
-	    if(flag)
-		{*/
+	var nflag = false ;
+	if($('#catTitle').val()=="" || $('#estimatedamt').val()=="")
+	{ 
+       cm.showToast('all fields are mandatory')
+		return;
+	}
+	else{
+		flag=true
+	}
+	$('.subcatdiv').each(function(index) {
+			console.log(index)
+			   var title = $(this).find('.subtitle').val()
+			   var amt = $(this).find('.subamt').val()
+			   var spentamt = $(this).find('.spentamt').val()
+			    
+				 if(title=="" || amt =="" || spentamt=="")
+				 {
+					 cm.showToast('all fields are mandatory')
+					 return;
+				 }
+				  else{
+					  nflag=true
+				  }
+		
+			 
+		});
+		if(flag&&nflag)
+		{
 		 $("body").addClass("ui-loading");
 						
 		       var ExpenseCategoryClass = Parse.Object.extend('ExpenseCategory');
@@ -188,7 +248,7 @@ nFormatter : function(num) {
 						
 					}
 				})
-				
+		}	
 	/*	}
 		else
 			cm.showAlert('subcategory budget should be less then category estimate') */
@@ -196,14 +256,46 @@ nFormatter : function(num) {
 	
 		
 	},
-	addsubcategory : function()
+	addsubcategory : function(id)
 	{
-	
+	  var catid = $(id).data('catid')
 		//var subcategoriesList = new Array() 
 		var subHTML=""
          
 		  subHTML  +='  <hr style="color:#fff">'
-		  subHTML  +='  <div class="ui-grid-a subcatdiv" style="margin:0px;">'
+		  subHTML  +='  <div class="subcatdiv  abc" style="margin:0px;" >'
+		     subHTML  +=' <input type="text" data-wrapper-class="enter-new-category" placeholder="Title" class="subtitle" >'
+			
+			  subHTML  +='<div class="ui-grid-a " style="margin-top:20px;">'
+                subHTML  +='  <div class="ui-block-a" style="padding-right:10px">'
+				   subHTML  +='   <label class="label-estimated">Estimated </label>'
+				   subHTML  +='   <input type="number" data-wrapper-class="enter-new-category" placeholder="&#8377 Amount"   class="subamt">'
+			  subHTML  +='	</div>'
+			
+			    subHTML  +='  <div class="ui-block-b" style="padding-left:10px">'
+				      subHTML  +='<label class="label-actual">Actual </label>'
+			        subHTML  +='  <input type="number" data-wrapper-class="enter-new-category" placeholder="&#8377 Amount" class="spentamt">'
+			     subHTML  +='  </div>'
+		     subHTML  +=' </div>'
+		     subHTML  +=' </div>'
+		 
+		 
+	//$('#subcategorybtn').prepend(subHTML)
+	 
+		
+	$('.addsubcat').append(subHTML).trigger('create')
+
+	
+		
+	},
+	addsub : function()
+	{
+	 
+		//var subcategoriesList = new Array() 
+		var subHTML=""
+         
+		  subHTML  +='  <hr style="color:#fff">'
+		  subHTML  +='  <div class="subcatdiv " style="margin:0px;">'
 		     subHTML  +=' <input type="text" data-wrapper-class="enter-new-category" placeholder="Title" class="subtitle" >'
 			
 			  subHTML  +='<div class="ui-grid-a " style="margin-top:20px;">'
@@ -242,16 +334,22 @@ nFormatter : function(num) {
 			   var amt = $(this).find('.subamt').val()
 			   var obj = {'title': title , 'amount': amt}
 			  subcategoriesList.push(obj)
-			
+			 
 		});
 		
 			console.log(subcategoriesList)
-			
+			var refresh = false
 			$('.subcatdiv').each(function(index) {
+				console.log('index')
+				console.log(index)
+				if(index== subcategoriesList.length -1 )
+					refresh=true
 				 var title = $(this).find('.subtitle').val()
 			     var amt = $(this).find('.subamt').val()
 			     var spentamt = $(this).find('.spentamt').val()
-			
+			   console.log(title)
+			   console.log(spentamt)
+			   console.log(amt)
 			    var ExpenseCategoryClass = Parse.Object.extend('ExpenseSubCategory');
 				var ExpenseCategoryObj = new ExpenseCategoryClass();
 				ExpenseCategoryObj.set("subcategoryName",title)
@@ -276,13 +374,14 @@ nFormatter : function(num) {
 				}) 	
 				
 			});
-		
+		 if(refresh){
+				$('.addnewCategory').html('')
 				$('.addnewCategory').hide()
 				bm.getCategoryList() 
-		
+		 }
 	},
 	getCategoryList : function()
-	{
+	{   $('.appendcat').html('')
 		 var weddingDetailsObject = JSON.parse(localStorage.weddingDetailsObject);
 			var TaskManagementClass = Parse.Object.extend("ExpenseCategory");
 			var TaskManagementQuery = new Parse.Query(TaskManagementClass);
@@ -319,7 +418,7 @@ nFormatter : function(num) {
 			});
 	},
 	editCategory: function(id)
-	{
+	{   //alert('yo edit ')
 		var catid =$(id).data('catid')
 		 var weddingDetailsObject = JSON.parse(localStorage.weddingDetailsObject);
 		var TaskManagementClass = Parse.Object.extend("ExpenseCategory");
@@ -332,7 +431,9 @@ nFormatter : function(num) {
                  $("body").removeClass("ui-loading");
 				 var catname = results[0].get('categoryName')
 				 var catid = results[0].get('categoryID')
-				
+				console.log('editcat')
+				console.log(catname)
+				console.log(catid)
 				 var budget = results[0].get('budget')
 				 bm.subCategorydetails(catname , catid , budget)
 				},
@@ -345,7 +446,7 @@ nFormatter : function(num) {
 	},
 	subCategorydetails : function(catname , catid , budget)
 	{
-	
+	  var sid=0
 		 var weddingDetailsObject = JSON.parse(localStorage.weddingDetailsObject);
 			var TaskManagementClass = Parse.Object.extend("ExpenseSubCategory");
 			var TaskManagementQuery = new Parse.Query(TaskManagementClass);
@@ -356,7 +457,7 @@ nFormatter : function(num) {
 				success:function(results){
               $("body").removeClass("ui-loading");
               var editHTML =""
-               editHTML +='<div class="white-bg addnewCategory" >'
+               editHTML +='<div class="white-bg  '+catid+'edited" >'
                editHTML +='<div class="addsubcat" style="margin:0px"  >'
 		    
 			   editHTML +='<div class="ui-grid-a " style="margin-top:20px;">'
@@ -377,7 +478,8 @@ nFormatter : function(num) {
 			{
 				var rowOBJ = results[k]
 				console.log(rowOBJ)
-		 editHTML +=' <div class=" subcatdiv" style="margin:0px;"  data-subid="'+rowOBJ.get('subcategoryID')+'">'
+				
+		 editHTML +=' <div class="oldsubcat" style="margin:0px;"  data-subid="'+rowOBJ.get('subcategoryID')+'">'
 		 editHTML +='    <input type="text" data-wrapper-class="enter-new-category" class="subtitle" id="'+rowOBJ.get('subcategoryID')+'name"  value="'+rowOBJ.get('subcategoryName')+'">'
 	     editHTML +='<div class="ui-grid-a " style="margin-top:20px;">'
                editHTML +='  <div class="ui-block-a" style="padding-right:10px">'
@@ -394,19 +496,19 @@ nFormatter : function(num) {
 		  
 		}
 		  editHTML +='   </div>'
-		 editHTML +='  <button class="ui-btn add-fields" id="subcategorybtn" onclick="bm.addsubcategory()"><img src="./img/create-New1.png" height="20" width="20" ></button>'
+		 editHTML +='  <button class="ui-btn add-fields" id="subcategorybtn" data-catid="'+catid+'" onclick="bm.addsubcategory(this)"><img src="./img/create-New1.png" height="20" width="20" ></button>'
 			
 		 editHTML +='	<div class="ui-grid-a " style="margin-top:5px;">'
             editHTML +='     <div class="ui-block-a" style="padding-right:10px">'
-			 editHTML +='	    <button class="ui-btn clear-category" onclick="bm.hideAddcategory()"><img src="./img/clear.png" height="15" width="15">Clear</button>'
+			 editHTML +='	    <button class="ui-btn clear-category" onclick="bm.hideditcategory(this)"  data-id="'+catid+'"><img src="./img/clear.png" height="15" width="15">Clear</button>'
 			 editHTML +='	</div>'
 			 editHTML +='    <div class="ui-block-b" style="padding-left:10px">'
-			editHTML +='	    <button class="ui-btn save-category" onclick="bm.updateCatDB(this)" data-cid="'+catid+'" ><img src="./img/save-white.png" height="18" width="18">Save</button>'
+			editHTML +='	    <button class="ui-btn save-category" onclick="bm.updateCatDB(this)" data-cid="'+catid+'" data-sid="'+results[0].get('subcategoryID')+'"><img src="./img/save-white.png" height="18" width="18">Save</button>'
 			editHTML +='   </div>'
 		    editHTML +=' </div>'
 		    editHTML +='</div>'
 		 
-		
+			$('.editcategory').show();
 		 $('.editcategory').append(editHTML).trigger('create')
 		 
 } , 
@@ -415,11 +517,72 @@ nFormatter : function(num) {
 				}
 			});
 	},
+	hideditcategory : function(id) {
+		$('.editcategory').html('')
+		$('.editcategory').hide();
+		//var b = $(id).data('id')
+		//var c ='.'+b+'edited'
+		
+		  // $(c).hide()
+	},
 	updateCatDB : function(id)
 	{
+	var flag= false
+	var nflag= false
+	var cflag= false
+	var catid = $(id).data('cid')
+
+	if($('#'+catid+'name').val()="" ||$('#'+catid+'budget').val()==""  ) 
+	{
+	cm.showToast('all fields are mandatory')
+	return;
+}else{ cflag=true
+}
+		$(".oldsubcat").each(function(index) {
+			     var title = $(this).find('.subtitle').val()
+			     var amt = $(this).find('.subamt').val()
+			     var spentamt = $(this).find('.spentamt').val()
+				 
+				 if(title=="" || amt =="" || spentamt=="")
+				 {
+					 cm.showToast('all fields are mandatory')
+					 return;
+				 }
+				  else{
+					  flag=true
+				  }
+				 
+			});
+
+			if($(".abc").length)
+			{
+			$(".abc").each(function(index) {
+			     var title = $(this).find('.subtitle').val()
+			     var amt = $(this).find('.subamt').val()
+			     var spentamt = $(this).find('.spentamt').val()
+				 if(title=="" || amt =="" || spentamt=="")
+				 {
+					 cm.showToast('all fields are mandatoryy')
+					 return;
+				 }
+				 else{
+					 nflag=true
+				 }
+				 
+			});
+	       }
+		   else
+		   {
+			  nflag=true  
+		   }
 		
-		var catid = $(id).data('cid')
-	
+		
+		
+		if(flag&&nflag&&cflag)
+		{
+		
+		var sid = $(id).data('sid')
+
 		var catname = $('#'+catid+'name').val()
 		var budget = $('#'+catid+'budget').val()
 		
@@ -434,9 +597,9 @@ nFormatter : function(num) {
 
 									   results.set("categoryName", catname);
 									   results.set("budget", budget);
-
+                                       console.log('saving category')
 										results.save();
-										bm.updateSubCatDB()
+										bm.updateSubCatDB(catid , sid)
 										//$(id).attr('src' ,'img/completed.png' )
 										
 									}
@@ -448,20 +611,30 @@ nFormatter : function(num) {
 						
 					  }
 			});
-		
+		}
 	},
-	updateSubCatDB :  function()
+	updateSubCatDB :  function(catid , sid)
 	{
-		
-			$('.subcatdiv').each(function(index) {
-				var subid = $(this).data('subid')
+
+var flag = false
+var refreshList= false	  
+	var total = $(".oldsubcat").length;
+
+			$(".oldsubcat").each(function(index) {
+				console.log('.subcatdiv')
+			
+				 if(index == total - 1) {
+        flag = true
+		console.log('last element ')
+    }            var subid = $(this).data('subid')
 				 var title = $(this).find('.subtitle').val()
 			     var amt = $(this).find('.subamt').val()
 			     var spentamt = $(this).find('.spentamt').val()
+			
 				var TaskManagementClass = Parse.Object.extend('ExpenseSubCategory');
-			var TaskManagementQuery = new Parse.Query(TaskManagementClass);
-			TaskManagementQuery.equalTo("subcategoryID", subid);
-			TaskManagementQuery.first( {
+		       	var TaskManagementQuery = new Parse.Query(TaskManagementClass);
+			  TaskManagementQuery.equalTo("subcategoryID", subid);
+			       TaskManagementQuery.first( {
 					  success: function(results) {
 						  
 					results.save(null, {
@@ -470,9 +643,8 @@ nFormatter : function(num) {
 									   results.set("subcategoryName", title);
 									   results.set("budget", amt);
 									   results.set("spent", spentamt);
-
-										results.save();
-										
+                          results.save();
+										console.log(results)
 									}
 								});
 						
@@ -487,15 +659,77 @@ nFormatter : function(num) {
 		
 			
 			});
+			
+			console.log($(".abc"))
+			console.log($(".abc").length)
+			
+			if($(".abc").length)
+			{
+			var newsubcat =$(".abc").length
+			if(flag)
+			{
+				flag=false
+			$(".abc").each(function(index) {
+				console.log('.abc')
+				
+				
+	if (index == newsubcat - 1) {
+        refreshList = true
+		console.log('last element ')
+    }
+				 var title = $(this).find('.subtitle').val()
+			     var amt = $(this).find('.subamt').val()
+			     var spentamt = $(this).find('.spentamt').val()
+				
+			 var ExpenseCategoryClass = Parse.Object.extend('ExpenseSubCategory');
+				var ExpenseCategoryObj = new ExpenseCategoryClass();
+				ExpenseCategoryObj.set("subcategoryName",title)
+				ExpenseCategoryObj.set("spent", spentamt)
+				ExpenseCategoryObj.set("budget", amt)
+				ExpenseCategoryObj.set('paidBy',localStorage.brideorgroomside);
+				ExpenseCategoryObj.set("categoryID", catid);
+				
+				 ExpenseCategoryObj.save(null, {
+					success: function(wishResults) {
+						 $("body").removeClass("ui-loading");
+					  ExpenseCategoryObj.set("subcategoryID", wishResults.id);
+					  ExpenseCategoryObj.save();
+					
+			
+				   
+				   },
+					error: function(gameScore, error) {
+						 $("body").removeClass("ui-loading");
+						 cm.showAlert(error);
+					}
+				}) 	
 		
-		$('.addnewCategory').hide()
+			
+			});
+	}
+		
+			}
+			
+			else{
+				//refreshList=true
+				console.log('dznt exist')
+					$('.'+catid+'edited').html('')
+		$('.'+catid+'edited').hide()
 		bm.getCategoryList() 
-		
+			}
+		if(refreshList)	
+		{
+			refreshList=false
+		$('.'+catid+'edited').html('')
+		$('.'+catid+'edited').hide()
+		bm.getCategoryList() 
+		}
 	},
 	getSubcatergory : function(catname , catid ,catBudget)
 	{
 		$('.appendcat').html('')
 		var spent = 0 
+		//var cbudgt = bm.nfFormatter(catBudget)
 		bm.totalsubCATbudget=0
 		 var weddingDetailsObject = JSON.parse(localStorage.weddingDetailsObject);
 			var TaskManagementClass = Parse.Object.extend("ExpenseSubCategory");
@@ -522,14 +756,14 @@ nFormatter : function(num) {
 				categoryHTML+='<div class="ui-grid-b" style="margin-top:5px;">'
                  categoryHTML+='   <div class="ui-block-a" style="width:44%">'
 					categoryHTML+='    <label class="label-actual">Actual </label>' 
-					categoryHTML+='	<h6 class="actual-amount" id="'+catid+'spend">&#8377 70,000</h6>'
+					categoryHTML+='	<h6 class="actual-amount" id="'+catid+'spend">&#8377 </h6>'
 					categoryHTML+='</div>'
 					categoryHTML+='<div class="ui-block-b" style="width:16%">'
 					categoryHTML+='    <button class="ui-btn split-active"><img src="./img/split-icon.png" height="16" width="20"></button>'
 					categoryHTML+='</div>'
-categoryHTML+='<div class="ui-block-c" style="width:40%">'
+                      categoryHTML+='<div class="ui-block-c" style="width:40%">'
 					  categoryHTML+='  <label class="label-estimated" style="text-align:right">Estimated </label>'
-						categoryHTML+='<h6 class="estimated-amount">&#8377 '+catBudget+'</h6>'
+						categoryHTML+='<h6 class="estimated-amount" id="'+catid+'estimated-amount">&#8377 '+catBudget+'</h6>'
 					categoryHTML+='</div>'
 				categoryHTML+='</div>'
 				
@@ -563,7 +797,8 @@ categoryHTML+='<div class="ui-block-c" style="width:40%">'
 					 
 				 }
 				 $('#'+catid+'spend').html('')
-				 $('#'+catid+'spend').html('&#8377 '+spent+'')
+				$('#'+catid+'spend').html('&#8377 '+spent+'')
+				
 				categoryHTML+='</tbody>'
 				categoryHTML+='</table>'
 				
@@ -587,10 +822,14 @@ categoryHTML+='<div class="ui-block-c" style="width:40%">'
         
 		categoryHTML+='</div>'
 		            	//	$( "#"+catid+'progressbar' ).progressbar()
-		            $('.appendcat').append(categoryHTML).enhanceWithin()		 
+		            $('.appendcat').append(categoryHTML).enhanceWithin()	
+                  //  $('#'+catid+'estimated-amount').html('')
+				  //  $('#'+catid+'spend').html('&#8377 '+spent+'')					
 		            var balance = bm .totalbudget - bm.totalsubCATbudget	
 					var k1 =  bm.nfFormatter(parseInt(bm.totalsubCATbudget))
 					$('#amt').html('Actual Spend <br> &#8377 '+k1+'')
+				$('#'+catid+'spend').html('')
+				  $('#'+catid+'spend').html('&#8377 '+bm.totalsubCATbudget+'')	
                     var k =    bm.nfFormatter(parseInt(balance) )               
 					 $('#amtleft').html('')
 		            $('#amtleft').html('Balance Left <br> &#8377 '+k+'')	
@@ -606,7 +845,7 @@ categoryHTML+='<div class="ui-block-c" style="width:40%">'
 				  {
 					$('#amtleft').html('')
 		            $('#amtleft').html('Balance Left <br> &#8377 '+k+'')	
-					 var value =  (parseInt(bm.totalsubCATbudget))/parseInt(bm .totalbudget)
+					 var value =  bm.totalsubCATbudget/bm .totalbudget
 					$('#circle').circleProgress({ value: value, fill: { color: 'orange' }}); 
 					
 
@@ -614,8 +853,12 @@ categoryHTML+='<div class="ui-block-c" style="width:40%">'
 					
 					
 				  }
-					var val  = (parseInt(bm.totalsubCATbudget) /parseInt(catBudget))//*100
 				
+					var val  = parseInt(bm.totalsubCATbudget) / parseInt(catBudget) //*100
+			          
+					
+					 
+					  
 			
 				 /* $( "#"+catid+'progressbar' ).progressbar({
                value: val
@@ -639,16 +882,32 @@ categoryHTML+='<div class="ui-block-c" style="width:40%">'
 	}
 	,
 	deleteCategory :function(id){
-		var catid = $(id).data('catid')
+var catid = $(id).data('catid')
+cm.catid=catid
+  navigator.notification.confirm(
+        'Do you want to delete Category.Press Ok to continue.', 
+        deletecat, // <-- no brackets
+        'Delete Category',
+        ['Ok','Cancel']
+    );
+		
+		
+}};
+
+function deletecat(buttonIndex)
+{
+	if(buttonIndex=='1')
+	{
+	$("body").addClass("ui-loading");
 		var TaskManagementClass = Parse.Object.extend('ExpenseCategory');
 			var TaskManagementQuery = new Parse.Query(TaskManagementClass);
-			TaskManagementQuery.equalTo("categoryID", catid);
+			TaskManagementQuery.equalTo("categoryID", cm.catid);
 		   TaskManagementQuery.find({
 				success:function(foundWish){
-				
+				$("body").removeClass("ui-loading");
 					foundWish[0].destroy({
 						success:function(deletedWishSuccess){
-						cm.showAlert('deleted')
+						cm.showToast('deleted')
 						//$('#'+catid+"profile").hide()
 						bm.getCategoryList()
 						//taskmthds.pendingList()
@@ -660,9 +919,9 @@ categoryHTML+='<div class="ui-block-c" style="width:40%">'
 					})
 				},
 				error:function(wishError){
-					
-					cm.showAlert("error");
+					$("body").removeClass("ui-loading");
+					cm.showAlert(error);
 				}
 			})
-		
-}};
+	}
+}

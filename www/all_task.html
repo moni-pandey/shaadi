@@ -15,7 +15,7 @@
         <div class="search-task">
             <div data-role="controlgroup" data-type="horizontal" style="margin:20px auto 0;">
                 <button class="ui-btn ui-icon-arrow-l ui-btn-icon-left button_back" id="hidebtn"></button>
-                <input type="text" data-wrapper-class="controlgroup-textinput ui-btn" id="enterartist">
+                <input type="text" data-wrapper-class="controlgroup-textinput ui-btn" id="entertask">
                 <button class="ui-btn ui-icon-delete ui-btn-icon-right cross-button" id="clearbtn"></button>
             </div>
         </div>
@@ -80,21 +80,15 @@
     <script type="text/javascript">
     $("#loadTask").ready(function() {
         $('.search-task').hide();
-
+  
+	     $('#all').unbind('click',getAll); 
         if (localStorage.taskusertype == 'host') {
             taskmthds.loadhosttask();
         } else {
             taskmthds.loadguesttask();
         }
         $("#shaadiMenu").panel().enhanceWithin();
-        $(document).on('click', '#all', function() {
-            $('.cardlist').html(' ')
-            if (localStorage.taskusertype == 'host') {
-                taskmthds.loadhosttask();
-            } else {
-                taskmthds.loadguesttask();
-            }
-        });
+       
 
     });
     </script>

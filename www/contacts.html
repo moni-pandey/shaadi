@@ -5,7 +5,7 @@
         <p class="pagetitle">All Contacts</p>
         <div class="topbartools">
             <ul>
-                <li class="place-icon"><img src="img/search-icon.png"></li>
+               <!-- <li style="display:"class="place-icon"><img src="img/search-icon.png"></li>-->
                 <li class="share-icon" id="addContactBtn">
                     <a href="importcontacts.html"><img src="img/add-guests-icon.png"></a>
                 </li>
@@ -43,8 +43,10 @@
                 <a href="#" class="ui-btn ui-btn-inline "><img src="img/toolbar-delete-icon.png" onclick="contactsMethods.configureForDelete()"></a>
                 <!-- <a href="#" class="ui-btn ui-btn-inline "><img src="img/share_icon.png" onclick=""></a> -->
             </div>
+			<div class="contact-typehere">
             <input type="text" id="contactSearchBox" data-role="search" placeholder="Search Contact">
-            <ul data-role="listview" id="contactList" data-inset="true" data-input="#contactSearchBox" data-filter="true"></ul>
+			</div>
+            <ul data-role="listview" id="contactList" data-inset="true" data-input="#contactSearchBox" data-filter="true" style="margin-top:75px;"></ul>
         </div>
     </article>
     <script type="text/javascript" src="js/contacts.js"></script>
