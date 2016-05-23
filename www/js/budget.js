@@ -532,7 +532,7 @@ nFormatter : function(num) {
 	var cflag= false
 	var catid = $(id).data('cid')
 
-	if($('#'+catid+'name').val()="" ||$('#'+catid+'budget').val()==""  ) 
+	if($('#'+catid+'name').val()=="" ||$('#'+catid+'budget').val()==""  ) 
 	{
 	cm.showToast('all fields are mandatory')
 	return;
@@ -885,7 +885,7 @@ var refreshList= false
 var catid = $(id).data('catid')
 cm.catid=catid
   navigator.notification.confirm(
-        'Do you want to delete Category.Press Ok to continue.', 
+	'Do you want to delete this category?', 
         deletecat, // <-- no brackets
         'Delete Category',
         ['Ok','Cancel']

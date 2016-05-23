@@ -576,7 +576,7 @@
 			taskmthds.taskid=0
 	taskmthds.taskid=taskid
   navigator.notification.confirm(
-        'Do you want to delete Task.Press Ok to continue.', 
+        'Do you want to delete this task ?', 
         deletecat, // <-- no brackets
         'Delete Task',
         ['Ok','Cancel']

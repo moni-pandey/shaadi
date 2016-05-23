@@ -773,7 +773,7 @@ var weddingcard = {
 			value = $('.input-card-quantity').val()
 			if(value==0 || value=="")
 			{
-				value=0
+				value=1
 				$('.input-card-quantity').val(value)}
 			else
 			{value--
@@ -787,7 +787,7 @@ var weddingcard = {
 	{ 
 if($('.input-card-quantity').val()=='' ||$('.input-card-quantity').val()=='0')
 {
-	cm.showToast('please select quantity>0')
+	cm.showToast(' Please select quantitygreater than zero')
 	return;
 }
 else
@@ -854,70 +854,94 @@ else
 	ordercard()
 	{
 		if($('.enter-address').val().length=='0')
-		{cm.showAlert('Enter address')
-	      return;
-		  }
+		{cm.showAlert('Please enter a valid address')
+	      return ;
+		 }
 	
 		if($('#fname').val()=="")
-			 cm.showAlert('Enter first name')
-		else if($('#lname').val()=="")
-			 cm.showAlert('Enter last name')
-	    else if($('#email').val()=="")
-			 cm.showAlert('Enter email')
-		  else if($('#addr').val()==" ")
-			 cm.showAlert('Enter address')
-		 else if($('#number').val()=="")
-			 cm.showAlert('Enter pincode')
-		 else if($('.enter-address').val()==" ")
-			 cm.showAlert('Enter address')
-		  else if(cm.isValidEmail($("#email").val()))
-            cm.showAlert("Please enter valid Email");
-		 else 
-		 {
-			
-			 var pincode = $('#addr').val()
-		     var fname = $('#fname').val()
-			 var lname = $('#lname').val()
-			 var email = $('#email').val()
-			 var number = $('#number').val()
-			 var address = $('.enter-address').val()
-			 var name = fname +" "+ lname 
-			 console.log(name)
-			 console.log(number)
-			 console.log(pincode)
-			 console.log(email)
-			 console.log(address)
-			 
-			 var weddingDetailsObject = JSON.parse(localStorage.weddingDetailsObject);
-		     var sc =parseInt(localStorage.quantity)*10
-			 var sampleorder = Parse.Object.extend("order");
-             var sampleorderObj = new sampleorder();
-			 // sampleorderObj.set("sampleOrderID",weddingcard.sampleorderid);
-			 sampleorderObj.set("shipTo", "self")
-			 //sampleorderObj.set("file", "");
-			 sampleorderObj.set("noOfItems", parseInt(localStorage.quantity));
-			 sampleorderObj.set("cardID", localStorage.cardid);
-			 sampleorderObj.set("weddingID", weddingDetailsObject.weddingId);
-			 sampleorderObj.set("shippingCost",parseInt(sc ));
-			 sampleorderObj.set("totalAmt",parseInt(localStorage.totalamt) );
-			 sampleorderObj.set("orderBy",localStorage.userId );
-			  sampleorderObj.save(null, {
-                success: function(wishResults) {
-				console.log(wishResults.id)
-				
-            sampleorderObj.set("orderID",wishResults.id );
-				 sampleorderObj.save();
-			     weddingcard.saveRecipient(wishResults.id )
-		        
-			  
-               },
-                error: function(gameScore, error) {
-                     cm.showAlert(error);
-                }
-            })
+		{ cm.showAlert('Enter first name')
+		return 
 		
+		}
+
+else {			 if($('#lname').val()=="")
+			     { cm.showAlert('Enter last name') 
+			          return ;
+				  }
+					else {  
+					 if($('#email').val()=="")
+						 { cm.showAlert('please enter email')
+                           return;					 }
+					     else
+						 {
+		                   if($('#number').val().length=='0')
+						   {  cm.showAlert('Please enter a valid phone number')
+					            return ;
+						   } else
+						   {   
+						   if($('#addr').val().length=='0')
+						   {  cm.showAlert('Please enter a valid pincode')
+					            return ;
+						   }
+						   
+						   else
+						   {   
+                                 					   
+		                          if(cm.isValidEmail($("#email").val()))
+								  {    cm.showAlert("Please enter valid Email");}
+							 else 
+							 {
+								
+								 var pincode = $('#addr').val()
+								 var fname = $('#fname').val()
+								 var lname = $('#lname').val()
+								 var email = $('#email').val()
+								 var number = $('#number').val()
+								 var address = $('.enter-address').val()
+								 var name = fname +" "+ lname 
+								 console.log(name)
+								 console.log(number)
+								 console.log(pincode)
+								 console.log(email)
+								 console.log(address)
+								 
+								 var weddingDetailsObject = JSON.parse(localStorage.weddingDetailsObject);
+								 var sc =parseInt(localStorage.quantity)*10
+								 var sampleorder = Parse.Object.extend("order");
+								 var sampleorderObj = new sampleorder();
+								 // sampleorderObj.set("sampleOrderID",weddingcard.sampleorderid);
+								 sampleorderObj.set("shipTo", "self")
+								 //sampleorderObj.set("file", "");
+								 sampleorderObj.set("noOfItems", parseInt(localStorage.quantity));
+								 sampleorderObj.set("cardID", localStorage.cardid);
+								 sampleorderObj.set("weddingID", weddingDetailsObject.weddingId);
+								 sampleorderObj.set("shippingCost",parseInt(sc ));
+								 sampleorderObj.set("totalAmt",parseInt(localStorage.totalamt) );
+								 sampleorderObj.set("orderBy",localStorage.userId );
+								  sampleorderObj.save(null, {
+									success: function(wishResults) {
+									console.log(wishResults.id)
+									
+								sampleorderObj.set("orderID",wishResults.id );
+									 sampleorderObj.save();
+									 weddingcard.saveRecipient(wishResults.id )
+									
+								  
+								   },
+									error: function(gameScore, error) {
+										 cm.showAlert(error);
+									}
+								})
+							
 		
-	}},
+	                          }//else
+								  
+								  }
+						 }
+						 }
+}}
+	
+	},
 	saveRecipient(id)
 	{
 		 var pincode = $('#addr').val()
