@@ -7,7 +7,9 @@
     <title>Manage your Shaadi</title>
     <link rel="stylesheet" href="css/themes/default/jquery.mobile-1.4.5.min.css">
     <link rel="stylesheet" href="css/intlTelInput.css">
+	<link href="css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/app.css">
+	<!--<link href="css/font-awesome.min.css" rel="stylesheet">-->
 	<script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript">
     $(document).on("mobileinit", function() {
@@ -64,13 +66,13 @@
                 <a href="#"><img src="./img/story-board.png" class="menu-icons"> Story Board</a>
             </li>
             <li data-icon="none" and data-iconpos="none" onclick="dashboardMethods.showEvents();">
-                <a href="#"><img src="./img/event.png" class="menu-icons"> Events </a>
+                <a href="#"><i class="fa fa-calendar-plus-o fa-icons"></i> Events </a>
             </li>
             <li data-icon="none" and data-iconpos="none" onclick="dashboardMethods.showGallery();">
                 <a href="#"><img src="./img/gallery.png" class="menu-icons" style="margin-top:12px;"> Gallery</a>
             </li>
             <li data-icon="none" and data-iconpos="none" onclick="dashboardMethods.showContact('normal');">
-                <a href="#"><img src="./img/contact-menu.png" class="menu-icons"> Contacts</a>
+                <a href="#"><i class="fa fa-mobile-phone fa-icons contact-fa-icon"></i>Contacts</a>
             </li>
             <li data-icon="none" and data-iconpos="none" onclick="dashboardMethods.showManager();">
                 <a href="#"><img src="./img/travel.png" class="menu-icons">Travel</a>
@@ -80,12 +82,12 @@
                 <a href="#"><img src="./img/todo.png" class="menu-icons">To Do</a>
             </li>
             <li data-icon="none" and data-iconpos="none" onclick="dashboardMethods.showWeddingCard();">
-                <a href="#"><img src="./img/wedding.png" class="menu-icons">Wedding Card</a>
+                <a href="#"><i class="fa fa-gratipay fa-icons wed-card-fa-icon"></i> Wedding Card</a>
             </li>
 			
             <li class="divider"></li>
 			<li data-icon="none" and data-iconpos="none" onclick="dashboardMethods.budgetCard();">
-                <a href="#"><img src="./img/wedding.png" class="menu-icons">Budget</a>
+                <a href="#"><i class="fa fa-inr fa-icons inr-fa-icon"></i> Budget</a>
             </li>
             <li data-icon="none" and data-iconpos="none">
                 <a href="#"><img src="./img/profile.png" class="menu-icons">Profile</a>

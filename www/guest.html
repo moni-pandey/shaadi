@@ -22,7 +22,7 @@
         <a href="#shaadiMenu" data-rel="popup" data-transition="slideup" class="menuicon ui-btn ui-btn-inline"></a>
         <a href=""><img onclick="history.back()" src="img/Back_arrow.png"></a>
         <p class="pagetitle">Invitation Cards</p>
-        <a href="#" class="chatIcon" onclick="dashboardMethods.showContactForChat();"><img src="img/chat.png" /></a>
+        <a href="#" class="chatIcon" onclick="dashboardMethods.showContactForChat();"> <i class="fa fa-comments contact-toolbar" ></i></a>
     </div>
     <div id="pagecontent" data-role="content" class="jqm-content">
         <div class="cardlist">
@@ -35,13 +35,14 @@
                     </div>
                     <div class="ui-block-b" style="padding:13px 0 0 5px">
                         <input type="file" data-role="none" style="display:none;" id="profilePhotoFileUpload" onchange="weddingcard.uploadfile()" />
-                        <div href="" onclick="$('#profilePhotoFileUpload').click();" class="upload-content-btn"><img src="img/upload.png" class="upload-icon">Upload File</div>
+                        <div href="" onclick="$('#profilePhotoFileUpload').click();" class="upload-content-btn"><i class="fa fa-cloud-upload  upload-icon"></i>Upload File</div>
                     </div>
                 </div>
             </div>
             <h6 class="or-text" style="margin:12px auto -4px;">_____________________<span>or</span>_____________________</h6>
             <div class="profile-detail">
-                <a href="#" class="select-from-contact-btn subpagejoin ui-btn ui-mini"><img src="img/contact-list.png" class="contact-list-icon">Select From Contact</a>
+               <a href="#" class="select-from-contact-btn subpagejoin ui-btn ui-mini orangebckground"><i class="fa fa-mobile-phone  contact-list-icon"></i>Select From Contact</a>
+               
                 <a href="#" class="select-all-contact-btn subpagejoin ui-btn ui-mini"><img src="img/tickmark.png" class="tick-list-icon" onclick="weddingcard.selectAll()">Select All</a>
                 <div class="contact-list">
                     <ul data-role="listview" id="contactList" data-inset="true" style="box-shadow:none !important; border-radius:0 !important;">
